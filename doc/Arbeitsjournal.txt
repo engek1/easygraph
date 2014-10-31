@@ -4,16 +4,27 @@ Arbeitsjournal - Projekt1 - easyGraph - Team WEW
 
 
 
+
+============================================================================
+31.10.2014	wengm17
+
+Individuelles Durcharbeiten eines passenden JAVAFX8 Tutorials.
+Grundfähigkeiten von JAVAFX8 kennen lernen. 
+
+Link:	http://code.makery.ch/java/javafx-8-tutorial-intro/
+============================================================================
+29.10.2014	wengm17
+
+Suche im Internet nach geeigneten JAVAFX8 Tutorials.
 ============================================================================
 22.10.2014	wengm17
 
 Präsentation des Klassen-Diagramms.
 Bestimmen der gewünschten Funktionalitäten und deren Verwendung. 
 Besprechen der erarbeiteten Lösung und der erforderlichen Anpassungen auf 
-seiten der graphLip.jar. 
+Seiten der graphLip.jar. 
 
-Auftrag:  Repository erstellen und Peter Schwab "read" Rechte vergeben. 
-	
+Auftrag:  Repository erstellen und Peter Schwab "read" Rechte vergeben. 	
 ============================================================================
 17.10.2014	wengm17
 
