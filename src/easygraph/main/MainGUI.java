@@ -3,10 +3,15 @@ package easygraph.main;
 import java.io.IOException;
 
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 public class MainGUI extends Application {
@@ -17,9 +22,9 @@ public class MainGUI extends Application {
     @Override
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
-        this.primaryStage.setTitle("easygrahp");
+        this.primaryStage.setTitle("EasyGraph - Editor View");
         initRootLayout();
-        showEditorView();
+        showEditor();
     }
     
     /**
@@ -44,15 +49,41 @@ public class MainGUI extends Application {
     /**
      * Shows the person overview inside the root layout.
      */
-    public void showEditorView() {
+    public void showEditor() {
         try {
-            // Load person overview.
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainGUI.class.getResource("../view/EditorView.fxml"));
-            AnchorPane editorView = (AnchorPane) loader.load();
+        	FXMLLoader leftLoader = new FXMLLoader();
+            leftLoader.setLocation(MainGUI.class.getResource("../view/ToolboxView.fxml"));
+            AnchorPane toolboxView = (AnchorPane) leftLoader.load();
 
-            // Set person overview into the center of root layout.
-            rootLayout.setCenter(editorView);
+            FXMLLoader centerLoader = new FXMLLoader();
+            centerLoader.setLocation(MainGUI.class.getResource("../view/DrawView.fxml"));
+            AnchorPane drawView = (AnchorPane) centerLoader.load();
+            drawView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+				@Override
+				public void handle(MouseEvent event) {
+					System.out.println("Pane coordinates: X = " + event.getX() + ", Y = " + event.getY());
+				}
+            });
+            
+            Rectangle r = new Rectangle(10, 20, 50, 100);
+            r.setFill(Color.YELLOW);
+            r.setOnMouseClicked(new EventHandler<MouseEvent>() {
+				@Override
+				public void handle(MouseEvent event) {
+					System.out.println("RECTANGLE clicked.");
+					event.consume();
+				}
+            });
+            drawView.getChildren().add(r);
+
+            FXMLLoader rightLoader = new FXMLLoader();
+            rightLoader.setLocation(MainGUI.class.getResource("../view/PropertiesView.fxml"));
+            AnchorPane propertiesView = (AnchorPane) rightLoader.load();
+            
+            rootLayout.setLeft(toolboxView);
+            rootLayout.setCenter(drawView);
+            rootLayout.setRight(propertiesView);
+            
         } catch (IOException e) {
             e.printStackTrace();
         }
