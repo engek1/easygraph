@@ -10,15 +10,6 @@ import javax.management.RuntimeErrorException;
 
 
 public class GraphExamples<V,E> {
-	
-	static final Object VISITED = new Object();
-	static final Object NUMBER = new Object();
-	static final Object INCOUNT = new Object();
-	static final Object DISTANCE = new Object();
-	static final Object PQLOCATOR = new Object();
-	static final Object WEIGHT = new Object();
-	static final Object MSF = new Object();
-	
 
 	final int kruskal(Graph<V,E> g){
 		if (g.isDirected()) throw new RuntimeException("We need an undirected graph!");
@@ -39,14 +30,14 @@ public class GraphExamples<V,E> {
 			Vertex<V> v = it.next();
 			clusters[num].add(v);
 			v.set(CLUSTER,clusters[num++]);
-			v.set(MSF,null); // show to which component v belongs
+			v.set(Property.MSF,null); // show to which component v belongs
 		}	
 		HeapPriorityQueue<Double,Edge<E>> pq = new HeapPriorityQueue<>();
 		Iterator<Edge<E>> eit= g.edges();
 		while(eit.hasNext()){
 			double w = 1.0;
 			Edge<E> e = eit.next();
-			if (e.has(WEIGHT)) w = (Double)e.get(WEIGHT);
+			if (e.has(Property.WEIGHT)) w = (Double)e.get(Property.WEIGHT);
 			pq.insert(w, e);
 		}
 		while ( ! pq.isEmpty()){
@@ -62,7 +53,7 @@ public class GraphExamples<V,E> {
 					c0=c1;
 					c1=tmp;
 				}
-				e.set(MSF,c0);
+				e.set(Property.MSF,c0);
 				num--;
 				// now copy all elements from c1 to c0 and change the attribute
 				for (Vertex<V> v:c1){
@@ -113,12 +104,12 @@ public class GraphExamples<V,E> {
 		Iterator<Vertex<V>> it = g.vertices();
 		while (it.hasNext()){
 			Vertex<V> v = it.next();
-			v.set(DISTANCE,Double.POSITIVE_INFINITY);
-			Locator<Double,Vertex<V>> loc = hq.insert((Double)v.get(DISTANCE),v);
-			v.set(PQLOCATOR, loc);
+			v.set(Property.DISTANCE,Double.POSITIVE_INFINITY);
+			Locator<Double,Vertex<V>> loc = hq.insert((Double)v.get(Property.DISTANCE),v);
+			v.set(Property.PQLOCATOR, loc);
 			s.set(v,null);
 		}
-		hq.replaceKey((Locator<Double,Vertex<V>>)s.get(PQLOCATOR),0.0);
+		hq.replaceKey((Locator<Double,Vertex<V>>)s.get(Property.PQLOCATOR),0.0);
 		s.set(s,s);
 		while ( ! hq.isEmpty()){
 			Locator<Double,Vertex<V>> loc = hq.removeMin();
@@ -130,12 +121,12 @@ public class GraphExamples<V,E> {
 			while(eit.hasNext()){
 				Edge<E> e  = eit.next();
 				double weight =1.0; // if no weight is entered
-				if (e.has(WEIGHT)) weight = (Double)e.get(WEIGHT);
+				if (e.has(Property.WEIGHT)) weight = (Double)e.get(Property.WEIGHT);
 				Vertex<V> u = g.opposite(e, v);
-				double newDist = (Double)u.get(DISTANCE)+weight;
-				if (newDist < (Double)u.get(DISTANCE)){
-					u.set(DISTANCE,newDist);
-					hq.replaceKey((Locator<Double,Vertex<V>>)u.get(PQLOCATOR), newDist);
+				double newDist = (Double)u.get(Property.DISTANCE)+weight;
+				if (newDist < (Double)u.get(Property.DISTANCE)){
+					u.set(Property.DISTANCE,newDist);
+					hq.replaceKey((Locator<Double,Vertex<V>>)u.get(Property.PQLOCATOR), newDist);
 					// now set as best gateway (until now) v
 					// i.e v is the gateway from u to s.
 					if(v==s) s.set(u,u);
@@ -155,19 +146,19 @@ public class GraphExamples<V,E> {
 		while(it.hasNext()){
 			Vertex<V> v=it.next();
 			int cnt = g.inDegree(v);
-			v.set(INCOUNT,cnt);
+			v.set(Property.INCOUNT,cnt);
 			if (cnt == 0) li.add(v);
 
 		}
 		int num = 0;
 		while ( ! li.isEmpty()){
 			Vertex<V> v = li.remove();
-			v.set(NUMBER,num++);
+			v.set(Property.NUMBER,num++);
 			Iterator<Edge<E>> eit = g.incidentOutEdges(v);
 			while(eit.hasNext()){
 				Vertex<V> w = g.destination(eit.next());
-				int newCnt = (Integer)w.get(INCOUNT)-1;
-				w.set(INCOUNT, newCnt);
+				int newCnt = (Integer)w.get(Property.INCOUNT)-1;
+				w.set(Property.INCOUNT, newCnt);
 				if (newCnt==0) li.add(w);
 			}
 		}
@@ -221,8 +212,8 @@ public class GraphExamples<V,E> {
 		int n=0;
 		while (it.hasNext()){
 			Vertex<V> w = it.next();
-			if (w.has(VISITED)){
-				w.destroy(VISITED);
+			if (w.has(Property.VISITED)){
+				w.destroy(Property.VISITED);
 				n++;
 			}
 		}
@@ -234,7 +225,7 @@ public class GraphExamples<V,E> {
 	 * @param v
 	 */
 	private void traverse(Graph<V,E> g, Vertex<V> v) {
-		v.set(VISITED,null);
+		v.set(Property.VISITED,null);
 		// System.out.println(v);
 		// now start the traversal at 
 		// all neighbours which are 
@@ -242,7 +233,7 @@ public class GraphExamples<V,E> {
 		Iterator<Edge<E>> it = g.incidentEdges(v);
 		while (it.hasNext()){
 			Vertex<V> w = g.opposite(it.next(),v);
-			if ( ! w.has(VISITED)){
+			if ( ! w.has(Property.VISITED)){
 				traverse(g, w);
 			}
 		}
