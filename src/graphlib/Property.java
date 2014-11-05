@@ -1,13 +1,19 @@
 package graphlib;
 
 /**
- * Property enum for all properties which
+ * Property String collection for all properties which
  * vertices and edges use in {@link GraphExamples}. 
  * @author webel3
  *
  */
-public enum Property {
+public class Property {
 	
-	VISITED, NUMBER, INCOUNT, DISTANCE, PQLOCATOR, WEIGHT, MSF;
-	
+	public static final String VISITED = "VISITED";
+	public static final String NUMBER = "NUMBER";
+	public static final String INCOUNT = "INCOUNT";
+	public static final String DISTANCE = "DISTANCE";
+	public static final String PQLOCATOR = "PQLOCATOR";
+	public static final String WEIGHT = "WEIGHT";
+	public static final String MSF = "MSF";
+
 }

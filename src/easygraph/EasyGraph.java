@@ -1,9 +1,11 @@
-package easygraph.model;
+package easygraph;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
+import easygraph.application.Editor;
+import easygraph.model.Step;
 import graphlib.Edge;
 import graphlib.Graph;
 import graphlib.IncidenceListGraph;
@@ -16,17 +18,18 @@ import graphlib.Vertex;
  */
 public class EasyGraph {
 
-	private Graph<Vertex<?>, Edge<?>> graph = null;
+	private static Graph<?, ?> graph = null;
 	
-	private final List<Step> forwardSteps = new ArrayList<Step>();
-	private final int forwardStepIndex = 0;
-	private final Stack<Step> backwardSteps = new Stack<Step>();
-	
+	private static final int FORWARD_STEP_INDEX = 0;
+	private static final List<Step> FORWARD_STEPS = new ArrayList<Step>();
+	private static final Stack<Step> BACKWARD_STEPS = new Stack<Step>();
+	private static final Editor GUI = new Editor();
+
 	/**
 	 * Mark an edge as discovered.
 	 * @param edge
 	 */
-	public void setDiscovered(Edge<?> edge){
+	public static void setDiscovered(Edge<?> edge){
 		// TODO
 	}
 	
@@ -34,7 +37,7 @@ public class EasyGraph {
 	 * Mark a vertex as discovered.
 	 * @param vertex
 	 */
-	public void setDiscovered(Vertex<?> vertex){
+	public static void setDiscovered(Vertex<?> vertex){
 		// TODO
 	}
 	
@@ -42,7 +45,7 @@ public class EasyGraph {
 	 * Mark an edge as selected.
 	 * @param edge
 	 */
-	public void setSelected(Edge<?> edge){
+	public static void setSelected(Edge<?> edge){
 		// TODO
 	}
 	
@@ -50,7 +53,7 @@ public class EasyGraph {
 	 * Mark a vertex as selected.
 	 * @param vertex
 	 */
-	public void setSelected(Vertex<?> vertex){
+	public static void setSelected(Vertex<?> vertex){
 		// TODO
 	}
 	
@@ -58,7 +61,7 @@ public class EasyGraph {
 	 * Mark an edge as disabled.
 	 * @param edge
 	 */
-	public void setDisabled(Edge<?> edge){
+	public static void setDisabled(Edge<?> edge) {
 		// TODO
 	}
 	
@@ -66,43 +69,41 @@ public class EasyGraph {
 	 * Mark a vertex as disabled.
 	 * @param vertex
 	 */
-	public void setDisabled(Vertex<?> vertex){
+	public static void setDisabled(Vertex<?> vertex) {
 		// TODO
 	}
 	
 	/**
 	 * Launch the easyGraph visualization software. A new graph instance will be provided.
 	 */
-	public void launchGui(){
-		this.graph = new IncidenceListGraph<Vertex<?>, Edge<?>>(false);
-		// TODO
+	public static void launchGui(){
+		EasyGraph.launchGui(new IncidenceListGraph<Vertex<?>, Edge<?>>(false));
 	}
 	
 	/**
 	 * Launch the easyGraph visualization software with a prepared graph instance.
 	 * @param graph
 	 */
-	public void launchGui(Graph<Vertex<?>,Edge<?>> graph){
-		this.graph = graph;
-		// TODO
+	public static void launchGui(Graph<?, ?> graph){
+		EasyGraph.graph = graph;
+		GUI.launchGui();
 	}
 	
 	/**
 	 * make a forward step
 	 */
-	void forward(){
+	public static void forward(){
 		// TODO
 	}
 	
 	/**
 	 * make a backward step
 	 */
-	void backward(){
+	public static void backward(){
 		// TODO
 	}
 	
-	/*
-	 * hide constructor, prevent instantiation
-	 */
-	private EasyGraph() {}
+	private EasyGraph() {
+		// hide constructor, prevent instantiation.
+	}
 }
