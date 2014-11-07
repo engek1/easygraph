@@ -84,8 +84,9 @@ public class EasyGraph {
 	 * Launch the easyGraph visualization software with a prepared graph instance.
 	 * @param graph
 	 */
-	public static void launchGui(Graph<?, ?> graph){
+	public static void launchGui(Graph<?, ?> graph) {
 		EasyGraph.graph = graph;
+		GUI.setGraph(EasyGraph.graph);
 		GUI.launchGui();
 	}
 	

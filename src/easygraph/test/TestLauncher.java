@@ -1,6 +1,7 @@
 package easygraph.test;
 
 import easygraph.EasyGraph;
+import easygraph.model.Coordinate;
 import easygraph.model.EGProperty;
 import graphlib.Edge;
 import graphlib.Graph;
@@ -24,18 +25,11 @@ public class TestLauncher {
 		Vertex<String> vB = g.insertVertex("B");
 		Vertex<String> vC = g.insertVertex("C");
 		Vertex<String> vD = g.insertVertex("D");
-		
-		vA.set(EGProperty.COORDINATE_X, 10);
-		vA.set(EGProperty.COORDINATE_Y, 10);
-		
-		vB.set(EGProperty.COORDINATE_X, 210);
-		vB.set(EGProperty.COORDINATE_Y, 10);
-		
-		vC.set(EGProperty.COORDINATE_X, 10);
-		vC.set(EGProperty.COORDINATE_Y, 210);
-		
-		vD.set(EGProperty.COORDINATE_X, 210);
-		vD.set(EGProperty.COORDINATE_Y, 210);
+
+		vA.set(EGProperty.EG_COORDINATES, new Coordinate(50, 50));
+		vB.set(EGProperty.EG_COORDINATES, new Coordinate(250, 50));
+		vC.set(EGProperty.EG_COORDINATES, new Coordinate(50, 250));
+		vD.set(EGProperty.EG_COORDINATES, new Coordinate(250, 250));
 		
 		Edge<String> eAB = g.insertEdge(vA, vB, "A-B");
 		Edge<String> eAC = g.insertEdge(vA, vC, "A-C");
