@@ -1,5 +1,6 @@
 package easygraph.application;
 
+import easygraph.guielements.GuiVertex;
 import easygraph.model.Coordinate;
 import easygraph.model.EGProperty;
 import graphlib.Graph;
@@ -89,21 +90,8 @@ public class Editor extends Application {
             
             while (it.hasNext()) {
             	Vertex<?> v = (Vertex<?>) it.next();
-            	
-            	Coordinate coords = (Coordinate) v.get(EGProperty.EG_COORDINATES);
-            	
-            	
-            	Circle c = new Circle(coords.getX(), coords.getY(), 15);
-                c.setFill(Color.NAVY);
-                c.setOnMouseClicked(new EventHandler<MouseEvent>() {
-    				@Override
-    				public void handle(MouseEvent event) {
-    					System.out.println("RECTANGLE clicked.");
-    					//event.getButton() == MouseButton.SECONDARY;
-    					event.consume();
-    				}
-                });
-                drawView.getChildren().add(c);
+            	GuiVertex elem = new GuiVertex(v);
+                drawView.getChildren().add(elem);
             }
             
             // add properties view to the right of the pane
