@@ -1,9 +1,8 @@
-package easygraph.view;
+package easygraph.controller;
 
 import javafx.fxml.FXML;
-import easygraph.controller.BaseViewController;
 
-public class ToolboxViewController extends BaseViewController {
+public class DrawViewController extends BaseViewController {
 	
 	//@FXML
 	//private Label firstNameLabel;
@@ -13,7 +12,7 @@ public class ToolboxViewController extends BaseViewController {
 	 * The constructor. The constructor is called before the initialize()
 	 * method.
 	 */
-	public ToolboxViewController() {
+	public DrawViewController() {
 	}
 
 	/**

@@ -4,8 +4,7 @@ import easygraph.application.Editor;
 
 abstract public class BaseViewController {
 	
-	private Editor gui;
-	
+	Editor gui;
 	
 	public BaseViewController () {
 		// nothing to do here yet.

@@ -6,4 +6,7 @@ public class EGProperty extends Property {
 
 	public static final String EG_COORDINATES = "EG_COORDINATES";
 	
+	public static final String EG_COLOR = "EG_COLOR";
+
+	
 }

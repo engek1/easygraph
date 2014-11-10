@@ -5,10 +5,14 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="800.0" prefWidth="200.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+<AnchorPane prefHeight="800.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="easygraph.controller.ToolboxViewController">
    <children>
-      <Button layoutX="74.0" layoutY="36.0" mnemonicParsing="false" text="Button" />
-      <Button layoutX="74.0" layoutY="101.0" mnemonicParsing="false" text="Button" />
+      <VBox layoutX="27.0" layoutY="19.0" spacing="4.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+         <children>
+            <Label fx:id="modeLabel" layoutX="39.0" layoutY="19.0" />
+            <Button layoutX="41.0" layoutY="46.0" mnemonicParsing="false" onAction="#handleSelectMode" text="Select" />
+            <Button layoutX="27.0" layoutY="94.0" mnemonicParsing="false" onAction="#handleAddVertexMode" text="add Vertex..." />
+         </children>
+      </VBox>
    </children>
 </AnchorPane>

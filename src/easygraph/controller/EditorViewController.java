@@ -1,7 +1,6 @@
-package easygraph.view;
+package easygraph.controller;
 
 import javafx.fxml.FXML;
-import easygraph.controller.BaseViewController;
 
 public class EditorViewController extends BaseViewController {
 	

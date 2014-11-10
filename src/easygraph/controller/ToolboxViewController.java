@@ -1,19 +1,26 @@
-package easygraph.view;
+package easygraph.controller;
 
 import javafx.fxml.FXML;
-import easygraph.controller.BaseViewController;
+import javafx.scene.control.Label;
 
-public class PropertiesViewController extends BaseViewController {
+/**
+ * 
+ * @author Weber Lukas, engek1
+ *
+ */
+public class ToolboxViewController extends BaseViewController {
 	
-	//@FXML
-	//private Label firstNameLabel;
-
+	private static final String MODE_ADD_VERTEX = "Add a Vertex";
+	private static final String MODE_SELECT = "Select Mode";
+	
+	@FXML
+	private Label modeLabel = new Label();
 
 	/**
 	 * The constructor. The constructor is called before the initialize()
 	 * method.
 	 */
-	public PropertiesViewController() {
+	public ToolboxViewController() {
 	}
 
 	/**
@@ -24,6 +31,21 @@ public class PropertiesViewController extends BaseViewController {
 	private void initialize() {
 	}
 
+	/**
+	 * handle user action
+	 */
+	@FXML
+    private void handleAddVertexMode(){
+    	this.modeLabel.setText(MODE_ADD_VERTEX);
+    }
+
+	/**
+	 * handle user action
+	 */
+    @FXML
+    private void handleSelectMode(){
+    	this.modeLabel.setText(MODE_SELECT);
+    }
 
 	/**
 	 * Fills all text fields to show details about the person. If the specified

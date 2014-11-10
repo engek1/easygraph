@@ -5,8 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
 
-
-<BorderPane prefHeight="800.0" prefWidth="1200.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+<BorderPane prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="easygraph.controller.EditorLayoutController">
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
@@ -28,4 +27,13 @@
         </menus>
       </MenuBar>
    </top>
+   <left>
+      <fx:include fx:id="toolboxView" source="ToolboxView.fxml" />
+   </left>
+   <center>
+      <fx:include fx:id="drawView" source="DrawView.fxml"/>
+   </center>
+   <right>
+      <fx:include fx:id="propertiesView" source="PropertiesView.fxml" />
+   </right>
 </BorderPane>
