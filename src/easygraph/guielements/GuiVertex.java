@@ -1,6 +1,5 @@
 package easygraph.guielements;
 
-import easygraph.model.Coordinate;
 import easygraph.model.EGProperty;
 import graphlib.Vertex;
 import javafx.event.EventHandler;
@@ -20,9 +19,8 @@ public class GuiVertex extends Circle {
 	}
 	
 	private void init() {
-		Coordinate coords = (Coordinate) vertex.get(EGProperty.EG_COORDINATES);
-		this.setCenterX(coords.getX());
-		this.setCenterY(coords.getY());
+		this.setCenterX((double)vertex.get(EGProperty.EG_COORDINATE_X));
+		this.setCenterY((double)vertex.get(EGProperty.EG_COORDINATE_Y));
 		
 		this.setFill(Color.NAVY);
         this.setOnMouseClicked(new EventHandler<MouseEvent>() {

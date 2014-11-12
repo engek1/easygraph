@@ -3,21 +3,29 @@ Arbeitsjournal - Projekt1 - easyGraph - Team WEW
 ----------------------------------------------------------------------------
 
 
+12.11.2014 beschluss mit hr. schwab:
+Edge Interface erweitern:
+- origin()			liefert den Ursprungsvertex
+- destination() 	liefert den Zielvertex
+- opposite(Vertex)	gibt den anderen Vertex einer Edge zurÃ¼ck (wird benÃ¶tigt, wenn der Graph nicht-gerichtet ist)
+
+
+
 ============================================================================
 07.11.2014	wengm17
 
-Erarbeiten der Visualisierungsmöglichkeiten eines Vertexs oder Edges. 
+Erarbeiten der Visualisierungsmï¿½glichkeiten eines Vertexs oder Edges. 
 ============================================================================
 05.11.2014	wengm17
 
 Weitergabe der Installationsanleitung des Projekts an Peter Schwab.
-TestLauncher erstellt für die Überprüfung der verschiedenen JAVAF8
+TestLauncher erstellt fï¿½r die ï¿½berprï¿½fung der verschiedenen JAVAF8
 Funktionen anhand eines Beispiels.
 ============================================================================
 31.10.2014	wengm17
 
 Individuelles Durcharbeiten eines passenden JAVAFX8 Tutorials.
-Grundfähigkeiten von JAVAFX8 kennen lernen. 
+Grundfï¿½higkeiten von JAVAFX8 kennen lernen. 
 
 Link:	http://code.makery.ch/java/javafx-8-tutorial-intro/
 ============================================================================
@@ -27,9 +35,9 @@ Suche im Internet nach geeigneten JAVAFX8 Tutorials.
 ============================================================================
 22.10.2014	wengm17
 
-Präsentation des Klassen-Diagramms.
-Bestimmen der gewünschten Funktionalitäten und deren Verwendung. 
-Besprechen der erarbeiteten Lösung und der erforderlichen Anpassungen auf 
+Prï¿½sentation des Klassen-Diagramms.
+Bestimmen der gewï¿½nschten Funktionalitï¿½ten und deren Verwendung. 
+Besprechen der erarbeiteten Lï¿½sung und der erforderlichen Anpassungen auf 
 Seiten der graphLip.jar. 
 
 Auftrag:  Repository erstellen und Peter Schwab "read" Rechte vergeben. 	
@@ -41,12 +49,12 @@ Erarbeiten des easyGraph UML-Klassen-Diagramms.
 15.10.2014	wengm17
 
 Analysieren der graphLip.jar und abbilden in ein UML-Klassen Diagramm. 
-Bestimmen der Interfaces sowie der Klassen Funktionalitäten. 
+Bestimmen der Interfaces sowie der Klassen Funktionalitï¿½ten. 
 ============================================================================
 10.10.2014	wengm17
 
 Digitalisieren und Anpassen des Domain-Model Entwurfs
-Präsenentation des Domain-Models.
+Prï¿½senentation des Domain-Models.
 Besprechung des Models mit Dr. Peter Schwab.
 Aufnahme der offenen Punkte und Pendenzen.
 
@@ -64,7 +72,7 @@ Erarbeiten der Projekt Haupt- und Unterziele.
 
 Bestimmen der Funktionalen, Nicht-Funktionalen und Domain Anforderungen.
 Erfassen der Anforderungen in ein Mindmap.
-Präsentation des Mindmaps und besprechen der Arbeiten mit Dr. Peter Schwab. 
+Prï¿½sentation des Mindmaps und besprechen der Arbeiten mit Dr. Peter Schwab. 
 
 Auftrag: Erstellen eines Domain-Model
 ============================================================================

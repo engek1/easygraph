@@ -1,6 +1,7 @@
 package easygraph.application;
 
 import easygraph.controller.EditorLayoutController;
+import graphlib.Edge;
 import graphlib.Graph;
 
 import java.io.IOException;
@@ -28,8 +29,7 @@ public class Editor extends Application {
     private Scene editorScene;
     private Scene debugScene;
     private EditorLayoutController editorController;
-   
-	
+
     /**
      * Set the graph reference and launch the GUI.
      * @param graph

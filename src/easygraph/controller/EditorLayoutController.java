@@ -2,7 +2,9 @@ package easygraph.controller;
 
 import java.util.Iterator;
 
+import easygraph.guielements.GuiEdge;
 import easygraph.guielements.GuiVertex;
+import graphlib.Edge;
 import graphlib.Graph;
 import graphlib.Vertex;
 import javafx.event.EventHandler;
@@ -63,12 +65,20 @@ public class EditorLayoutController{
 	 * @param graph
 	 */
 	public void showGraph(Graph<?, ?> graph) {
-      Iterator<?> it = graph.vertices();
+      Iterator<?> vIt = graph.vertices();
       
-      while (it.hasNext()) {
-      	Vertex<?> v = (Vertex<?>) it.next();
+      while (vIt.hasNext()) {
+      	Vertex<?> v = (Vertex<?>) vIt.next();
       	GuiVertex elem = new GuiVertex(v);
-          drawView.getChildren().add(elem);
+        drawView.getChildren().add(elem);
+      }
+      
+      Iterator<?> eIt = graph.edges();
+      while (eIt.hasNext()) {
+    	  Edge e = (Edge) eIt.next();
+    	  Vertex<?> [] endVertices = graph.endVertices(e);
+    	  GuiEdge elem = new GuiEdge(e, endVertices[0], endVertices[1]);
+    	  drawView.getChildren().add(elem);
       }
 	}
 
