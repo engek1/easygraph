@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
+<?import javafx.scene.input.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
@@ -11,17 +13,43 @@
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
-              <MenuItem mnemonicParsing="false" text="Close" />
+              <MenuItem mnemonicParsing="false" text="Save">
+                     <graphic>
+                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="file:resources/images/save.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></MenuItem>
+              <MenuItem mnemonicParsing="false" text="Open">
+                     <graphic>
+                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="file:resources/images/open.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></MenuItem>
+              <MenuItem mnemonicParsing="false" text="Quit">
+                     <graphic>
+                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="file:resources/images/quit.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></MenuItem>
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Edit">
+          <Menu mnemonicParsing="false" text="Example">
             <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
+              <MenuItem mnemonicParsing="false" text="Example 1 (small graph)" />
+                  <MenuItem mnemonicParsing="false" text="Example 2 (big graph)" />
+                  <MenuItem mnemonicParsing="false" text="Example 3 (negativ edges)" />
+                  <MenuItem mnemonicParsing="false" text="Example 4 (undirected edges)" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
             <items>
-              <MenuItem mnemonicParsing="false" text="About" />
+              <MenuItem mnemonicParsing="false" text="About the project..." />
             </items>
           </Menu>
         </menus>
@@ -31,7 +59,7 @@
       <fx:include fx:id="toolboxView" source="ToolboxView.fxml" />
    </left>
    <center>
-      <fx:include fx:id="drawView" source="DrawView.fxml"/>
+      <fx:include fx:id="drawView" source="DrawView.fxml" />
    </center>
    <right>
       <fx:include fx:id="propertiesView" source="PropertiesView.fxml" />

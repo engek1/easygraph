@@ -14,6 +14,7 @@ import java.util.Iterator;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
@@ -111,6 +112,9 @@ public class Editor extends Application {
     public void start(Stage primaryStage) {
         this.stage = primaryStage;
         this.stage.setTitle(Editor.TITLE);
+        
+        // Set the application icon.
+        this.stage.getIcons().add(new Image("file:resources/images/logo.png"));
         
         // for the beginning, just work with the editor scene.
         initEditorLayout();
