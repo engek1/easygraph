@@ -4,6 +4,12 @@ import javafx.fxml.FXML;
 
 public class EditorViewController extends BaseViewController {
 	
+	@FXML
+	public static final double SIZE_X = 600;
+	
+	@FXML
+	public static final double SIZE_Y = 400;
+	
 	//@FXML
 	//private Label firstNameLabel;
 

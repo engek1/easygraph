@@ -25,6 +25,7 @@ public class TestLauncher {
 		Vertex<String> vC = g.insertVertex("C");
 		Vertex<String> vD = g.insertVertex("D");
 
+		/*
 		vA.set(EGProperty.EG_COORDINATE_X, 50.0);
 		vA.set(EGProperty.EG_COORDINATE_Y, 50.0);
 		
@@ -36,6 +37,7 @@ public class TestLauncher {
 		
 		vD.set(EGProperty.EG_COORDINATE_X, 250.0);
 		vD.set(EGProperty.EG_COORDINATE_Y, 250.0);
+		*/
 		
 		Edge<String> eAB = g.insertEdge(vA, vB, "A-B");
 		Edge<String> eAC = g.insertEdge(vA, vC, "A-C");

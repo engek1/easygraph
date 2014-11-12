@@ -1,10 +1,15 @@
 package easygraph.application;
 
 import easygraph.controller.EditorLayoutController;
+import easygraph.controller.EditorViewController;
+import easygraph.model.EGProperty;
+import easygraph.utils.Config;
 import graphlib.Edge;
 import graphlib.Graph;
+import graphlib.Vertex;
 
 import java.io.IOException;
+import java.util.Iterator;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -36,8 +41,71 @@ public class Editor extends Application {
      */
     public void launchGui(Graph<?, ?> graph) {
     	this.graph = graph;
+    	if (!checkCoordinatesSanity()) {
+    		adjustVerticesToCircle();
+    	}
     	launch();
     }
+    
+    
+    /**
+     * Check if each vertex has X/Y coordinates so that it can be painted on the GUI.
+     * @return true if each vertex has X/Y coordinates, else false
+     */
+    private boolean checkCoordinatesSanity() {
+    	Iterator<?> it = Editor.graph.vertices();
+    	while (it.hasNext()) {
+    		Vertex<?> v = (Vertex<?>) it.next();
+    		if (!v.has(EGProperty.EG_COORDINATE_X) || !v.has(EGProperty.EG_COORDINATE_Y)) {
+    			return false;
+    		}
+    	}
+    	return true;
+    }
+
+    /**
+     * Put all vertices in place of a circle by using some Math.<br><br>
+     * 
+     * Given a radius length r and an angle t in radians and a circle's center (middleX, middleY), 
+     * you can calculate the coordinates of a point on the circumference as follows:<br><br>
+     * float posX = r * cos(t) + middleX;<br>
+     * float posY = r * sin(t) + middleY;
+     * 
+     * @param x size in x-dimension of the available space
+     * @param y size of y-dimension of the available space
+     */
+    public void adjustVerticesToCircle(double x, double y) {
+    	// calculate the maximum possible gui square 
+    	// minus 2 * the predefined padding for optical reasons
+    	double maxSize = x > y ? y : x;
+    	maxSize -= (2 * Config.getPadding());
+    	
+    	// calculate the angle of each vertex
+    	double offset = 360.0 / Editor.graph.numberOfVertices();
+    	double radius = maxSize / 2;
+    	double middleX = x / 2;
+    	double middleY = y / 2;
+    	int factor = 0;
+    	
+    	Iterator<?> it = Editor.graph.vertices();
+    	while (it.hasNext()) {
+    		double angle = factor++ * offset;
+    		double posX = radius * Math.cos(Math.toRadians(angle)) + middleX;
+        	double posY = radius * Math.sin(Math.toRadians(angle)) + middleY;
+    		Vertex<?> v = (Vertex<?>) it.next();
+    		v.set(EGProperty.EG_COORDINATE_X, posX);
+    		v.set(EGProperty.EG_COORDINATE_Y, posY);
+    	}
+    }
+    
+    
+    /**
+     * Call the vertices adjustment method with pre-defined size parameters.
+     */
+    public void adjustVerticesToCircle() {
+    	this.adjustVerticesToCircle(EditorViewController.SIZE_X, EditorViewController.SIZE_Y);
+    }
+    
     
     @Override
     public void start(Stage primaryStage) {
