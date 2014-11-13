@@ -1,18 +1,24 @@
 package easygraph.controller;
 
-import java.util.Iterator;
-
+import javafx.fxml.FXML;
+import javafx.scene.input.MouseEvent;
+import easygraph.controller.mode.AddEdgeMode;
+import easygraph.controller.mode.AddVertexMode;
+import easygraph.controller.mode.Mode;
+import easygraph.controller.mode.SelectMode;
 import easygraph.guielements.GuiEdge;
 import easygraph.guielements.GuiVertex;
+import easygraph.model.EGProperty;
 import graphlib.Edge;
 import graphlib.Graph;
 import graphlib.Vertex;
-import javafx.event.EventHandler;
-import javafx.fxml.FXML;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 
-public class EditorLayoutController{
+/**
+ * 
+ * @author engek1
+ *
+ */
+public class EditorLayoutController implements RootController {
 
 	@FXML
 	private ToolboxViewController toolboxViewController;
@@ -20,44 +26,27 @@ public class EditorLayoutController{
 	private PropertiesViewController propertiesViewController;
 	@FXML
 	private DrawViewController drawViewController;
-
-	@FXML
-	private AnchorPane drawView;
-
-	private EventHandler<MouseEvent> addVertexEventHandler;
-
-	private enum Mode {
-		EDIT, RUN
-	}
+	
+//	@FXML
+//	private AnchorPane drawPane;
+	
+	// current editor mode
+	private Mode mode;
+	
+	private Graph<?, ?> graph;
 	
 	public EditorLayoutController() {
-		// init Handlers
-		addVertexEventHandler = new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent event) {
-				System.out.println("Pane coordinates: X = " + event.getX()
-						+ ", Y = " + event.getY());
-			}
-		};
-
+		this.mode = new SelectMode(this);
 	}
 
 	public void initialize() {
-		System.out.println(drawViewController);
-		System.out.println(drawView);
-		System.out.println(toolboxViewController);
-		System.out.println(propertiesViewController);
+//		System.out.println(drawViewController);
+//		System.out.println(toolboxViewController);
+//		System.out.println(propertiesViewController);
 		
-		drawView.setOnMouseClicked(new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent event) {
-				System.out.println("Pane coordinates: X = " + event.getX()
-						+ ", Y = " + event.getY());
-			}
-		});
-		
-
-		
+		drawViewController.setRootController(this);
+		toolboxViewController.setRootController(this);
+		propertiesViewController.setRootController(this);
 	}
 
 	/**
@@ -65,21 +54,72 @@ public class EditorLayoutController{
 	 * @param graph
 	 */
 	public void showGraph(Graph<?, ?> graph) {
-      Iterator<?> vIt = graph.vertices();
-      
-      while (vIt.hasNext()) {
-      	Vertex<?> v = (Vertex<?>) vIt.next();
-      	GuiVertex elem = new GuiVertex(v);
-        drawView.getChildren().add(elem);
-      }
-      
-      Iterator<?> eIt = graph.edges();
-      while (eIt.hasNext()) {
-    	  Edge e = (Edge) eIt.next();
-    	  Vertex<?> [] endVertices = graph.endVertices(e);
-    	  GuiEdge elem = new GuiEdge(e, endVertices[0], endVertices[1]);
-    	  drawView.getChildren().add(elem);
-      }
+		this.graph = graph;
+		drawViewController.showGraph(graph);
+	}
+
+	@Override
+	public void addVertex(double x, double y) {
+		Vertex<?> newVertex = this.graph.insertVertex(null);
+		newVertex.set(EGProperty.EG_COORDINATE_X, x);
+		newVertex.set(EGProperty.EG_COORDINATE_Y, y);
+		drawViewController.addVertex(newVertex);
+	}
+
+	@Override
+	public void handleDrawViewLeftClick(MouseEvent event) {
+		System.out.println("Pane coordinates: X = " + event.getX()
+		+ ", Y = " + event.getY());
+		
+		this.mode.drawViewLeftClick(event.getX(), event.getY());
+	}
+
+	@Override
+	public void handleAddVertexMode() {
+		this.mode = new AddVertexMode(this);
+	}
+
+	@Override
+	public void handleSelectMode() {
+		this.mode = new SelectMode(this);
+	}
+
+	@Override
+	public void handleAddEdgeUnweigUndirMode() {
+		this.mode = new AddEdgeMode(this);
+	}
+
+	@Override
+	public void handleAddEdgeWeigUndirMode() {
+		// TODO Auto-generated method stub
+		this.mode = new AddEdgeMode(this);
+	}
+
+	@Override
+	public void handleAddEdgeUnweigDirMode() {
+		// TODO Auto-generated method stub
+		this.mode = new AddEdgeMode(this);
+	}
+
+	@Override
+	public void handleAddEdgeWeigDirMode() {
+		// TODO Auto-generated method stub
+		this.mode = new AddEdgeMode(this);
+	}
+
+	@Override
+	public void handleVertexClick(Vertex vertex) {
+		this.mode.vertexClicked(vertex);
+	}
+
+	@Override
+	public void addEdge(Vertex fromVertex, Vertex toVertex) {
+
+		// TODO catch exception when try to insert parallel edge.
+		Edge newEdge = this.graph.insertEdge(fromVertex, toVertex, null);
+		
+		drawViewController.addEdge(newEdge, fromVertex, toVertex);
+		
 	}
 
 }

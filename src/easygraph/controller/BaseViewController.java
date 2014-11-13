@@ -1,16 +1,22 @@
 package easygraph.controller;
 
-import easygraph.application.Editor;
-
+/**
+ * 
+ * @author engek1
+ *
+ */
 abstract public class BaseViewController {
 	
-	Editor gui;
-	
-	public BaseViewController () {
-		// nothing to do here yet.
+	RootController rootController;
+
+	public void setRootController(RootController rootController) {
+		this.rootController = rootController;
+	}
+
+	public RootController getRootController() {
+		return rootController;
 	}
 	
-	public void setMainGUI(Editor gui) {
-		this.gui = gui;
-	}
+	
+	
 }

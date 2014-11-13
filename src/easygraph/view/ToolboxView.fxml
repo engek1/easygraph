@@ -1,19 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="800.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="easygraph.controller.ToolboxViewController">
+<AnchorPane prefWidth="200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="easygraph.controller.ToolboxViewController">
    <children>
       <Pane prefHeight="800.0" prefWidth="200.0">
          <children>
-            <Button layoutX="40.0" layoutY="35.0" mnemonicParsing="false" onAction="#handleSelectMode" prefHeight="42.0" prefWidth="123.0" text="add Vertex" />
-            <Button layoutX="39.0" layoutY="117.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="123.0" text="add undirected &#10;unweighted edge " textAlignment="CENTER" />
-            <Button layoutX="39.0" layoutY="288.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="123.0" text="add directed&#10;unweighted edge" textAlignment="CENTER" />
-            <Button layoutX="39.0" layoutY="233.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="123.0" text="add directed &#10;weighted edge " textAlignment="CENTER" />
-            <Button layoutX="39.0" layoutY="177.0" mnemonicParsing="false" onAction="#handleAddVertexMode" prefHeight="42.0" prefWidth="123.0" text="add undirected &#10;weighted edge" textAlignment="CENTER" />
+            <VBox layoutX="39.0" layoutY="31.0" spacing="14.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#handleSelectMode" prefHeight="42.0" prefWidth="123.0" text="select Element" />
+                  <Button layoutX="39.0" layoutY="23.0" mnemonicParsing="false" onAction="#handleAddVertexMode" prefHeight="42.0" prefWidth="123.0" text="add Vertex" />
+                  <Button layoutX="39.0" layoutY="117.0" mnemonicParsing="false" onAction="#handleAddEdgeUnweightedUndirected" prefHeight="42.0" prefWidth="123.0" text="add undirected &#10;unweighted edge " textAlignment="CENTER" />
+                  <Button layoutX="39.0" layoutY="177.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="123.0" text="add undirected &#10;weighted edge" textAlignment="CENTER" />
+                  <Button layoutX="39.0" layoutY="233.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="123.0" text="add directed &#10;weighted edge " textAlignment="CENTER" />
+                  <Button layoutX="39.0" layoutY="288.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="123.0" text="add directed&#10;unweighted edge" textAlignment="CENTER" />
+               </children>
+            </VBox>
             <Separator layoutY="399.0" prefHeight="3.0" prefWidth="200.0" />
             <Separator layoutY="526.0" prefHeight="3.0" prefWidth="200.0" />
             <Button layoutX="39.0" layoutY="587.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="123.0" text="play / pause" />
@@ -26,6 +32,7 @@
             <Button layoutX="40.0" layoutY="651.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="42.0" text="&lt;" />
             <Button layoutX="120.0" layoutY="651.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="42.0" text="&gt;" />
             <Button layoutX="39.0" layoutY="712.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="123.0" text="stop / reset" textAlignment="CENTER" />
+            <Label fx:id="modeLabel" layoutX="14.0" layoutY="14.0" text="" />
          </children>
       </Pane>
    </children>

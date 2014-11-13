@@ -1,10 +1,8 @@
 package easygraph.application;
 
 import easygraph.controller.EditorLayoutController;
-import easygraph.controller.EditorViewController;
 import easygraph.model.EGProperty;
 import easygraph.utils.Config;
-import graphlib.Edge;
 import graphlib.Graph;
 import graphlib.Vertex;
 
@@ -36,6 +34,9 @@ public class Editor extends Application {
     private Scene debugScene;
     private EditorLayoutController editorController;
 
+	public static final double SIZE_X = 600;
+	public static final double SIZE_Y = 400;
+    
     /**
      * Set the graph reference and launch the GUI.
      * @param graph
@@ -104,7 +105,7 @@ public class Editor extends Application {
      * Call the vertices adjustment method with pre-defined size parameters.
      */
     public void adjustVerticesToCircle() {
-    	this.adjustVerticesToCircle(EditorViewController.SIZE_X, EditorViewController.SIZE_Y);
+    	this.adjustVerticesToCircle(SIZE_X, SIZE_Y);
     }
     
     
