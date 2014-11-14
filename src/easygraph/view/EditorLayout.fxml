@@ -61,7 +61,7 @@
                      <graphic>
                         <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="file:resources/images/Ball.png" />
+                              <Image url="file:resources/images/blueBall.png" />
                            </image>
                         </ImageView>
                      </graphic></MenuItem>

@@ -2,15 +2,27 @@
 Arbeitsjournal - Projekt1 - easyGraph - Team WEW 
 ----------------------------------------------------------------------------
 
+To Do webel3 -> vom 14.11.2014
+To Do engk1 -> vom 12.11. - 14.11.2014
 
-12.11.2014 beschluss mit hr. schwab:
+============================================================================
+14.11.2014	webel3 / wengm17
+
+Eigenens GUI-Eventhandling erstellt
+
+Weitere Anpassungen am GUI vorgenommen.
+
+============================================================================
+12.11.2014	webel3 / wengm17
+
+Anpassen des GUI, hinzuf¸gen von ICON's sowie zus‰tzlichen Buttons.
+
+Beschluss mit Peter Schwab:
 Edge Interface erweitern:
 - origin()			liefert den Ursprungsvertex
 - destination() 	liefert den Zielvertex
-- opposite(Vertex)	gibt den anderen Vertex einer Edge zur√ºck (wird ben√∂tigt, wenn der Graph nicht-gerichtet ist)
-
-
-
+- opposite(Vertex)	gibt den anderen Vertex einer Edge zur√ºck (wird bet‰tigt, 
+					wenn der Graph nicht-gerichtet ist)
 ============================================================================
 07.11.2014	wengm17
 
