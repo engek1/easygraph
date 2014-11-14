@@ -1,18 +1,17 @@
 package easygraph;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Stack;
-
 import easygraph.application.Editor;
 import easygraph.model.EGProperty;
-import easygraph.model.EStep;
 import easygraph.model.Step;
-import easygraph.model.VStep;
+import graphlib.Decorable;
 import graphlib.Edge;
 import graphlib.Graph;
 import graphlib.IncidenceListGraph;
 import graphlib.Vertex;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Stack;
 
 /**
  * 
@@ -24,8 +23,8 @@ public class EasyGraph {
 	private static Graph<?, ?> graph = null;
 	
 	private static int FORWARD_STEP_INDEX = 0;
-	private static final List<Step> FORWARD_STEPS = new ArrayList<Step>();
-	private static final Stack<Step> BACKWARD_STEPS = new Stack<Step>();
+	private static final List<Step<? extends Decorable>> FORWARD_STEPS = new ArrayList<Step<? extends Decorable>>();
+	private static final Stack<Step<? extends Decorable>> BACKWARD_STEPS = new Stack<Step<? extends Decorable>>();
 	private static final Editor GUI = new Editor();
 
 	/* default values */
@@ -38,7 +37,7 @@ public class EasyGraph {
 	 * @param edge
 	 */
 	public static void setDiscovered(Edge<?> edge){
-		FORWARD_STEPS.add(new EStep(edge, EGProperty.EG_COLOR, DEFAULT_COLOR_DISCOVERED));
+		FORWARD_STEPS.add(new Step<Edge<?>>(edge, EGProperty.EG_COLOR, DEFAULT_COLOR_DISCOVERED));
 		// add others...
 	}
 	
@@ -47,7 +46,7 @@ public class EasyGraph {
 	 * @param vertex
 	 */
 	public static void setDiscovered(Vertex<?> vertex){
-		FORWARD_STEPS.add(new VStep(vertex, EGProperty.EG_COLOR, DEFAULT_COLOR_DISCOVERED));
+		FORWARD_STEPS.add(new Step<Vertex<?>>(vertex, EGProperty.EG_COLOR, DEFAULT_COLOR_DISCOVERED));
 		// add others...
 	}
 	
@@ -56,7 +55,7 @@ public class EasyGraph {
 	 * @param edge
 	 */
 	public static void setSelected(Edge<?> edge){
-		FORWARD_STEPS.add(new EStep(edge, EGProperty.EG_COLOR, DEFAULT_COLOR_SELECTED));
+		FORWARD_STEPS.add(new Step<Edge<?>>(edge, EGProperty.EG_COLOR, DEFAULT_COLOR_SELECTED));
 	}
 	
 	/**
@@ -64,7 +63,7 @@ public class EasyGraph {
 	 * @param vertex
 	 */
 	public static void setSelected(Vertex<?> vertex){
-		FORWARD_STEPS.add(new VStep(vertex, EGProperty.EG_COLOR, DEFAULT_COLOR_SELECTED));
+		FORWARD_STEPS.add(new Step<Vertex<?>>(vertex, EGProperty.EG_COLOR, DEFAULT_COLOR_SELECTED));
 	}
 	
 	/**
@@ -72,7 +71,7 @@ public class EasyGraph {
 	 * @param edge
 	 */
 	public static void setDisabled(Edge<?> edge) {
-		FORWARD_STEPS.add(new EStep(edge, EGProperty.EG_COLOR, DEFAULT_COLOR_DISABLED));
+		FORWARD_STEPS.add(new Step<Edge<?>>(edge, EGProperty.EG_COLOR, DEFAULT_COLOR_DISABLED));
 	}
 	
 	/**
@@ -80,7 +79,7 @@ public class EasyGraph {
 	 * @param vertex
 	 */
 	public static void setDisabled(Vertex<?> vertex) {
-		FORWARD_STEPS.add(new VStep(vertex, EGProperty.EG_COLOR, DEFAULT_COLOR_DISABLED));
+		FORWARD_STEPS.add(new Step<Vertex<?>>(vertex, EGProperty.EG_COLOR, DEFAULT_COLOR_DISABLED));
 	}
 	
 	/**
@@ -104,14 +103,16 @@ public class EasyGraph {
 	 * Save the property-changes to the model and make them on the UI.
 	 * Increase the step-index.
 	 */
-	public static void forward(){
+	public static void forward() {
 		// get next step
-		Step step = FORWARD_STEPS.get(FORWARD_STEP_INDEX);
+		Step<? extends Decorable> step = FORWARD_STEPS.get(FORWARD_STEP_INDEX);
+		
 		// add backward step to history
-		BACKWARD_STEPS.push(step.getBackwardStep());
+		BACKWARD_STEPS.push(step.origin());
 		
 		// make changes on model
-		step.execute();
+		step.apply();
+		
 		// TODO make changes on UI as well 
 		
 		// finally increase the index
@@ -124,7 +125,7 @@ public class EasyGraph {
 	 */
 	public static void backward(){
 		Step step = BACKWARD_STEPS.pop();
-		step.execute();
+		step.apply();
 		// TODO make changes on UI as well 
 		
 		FORWARD_STEP_INDEX--;

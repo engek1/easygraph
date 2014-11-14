@@ -1,19 +1,24 @@
 package easygraph.model;
 
+import graphlib.Decorable;
+
 /**
  * 
  * @author engek1,...
  *
  */
-public abstract class Step {
+public class Step<T extends Decorable> {
 
+	private T object = null;
 	private String property = null;
 	private Object value = null;
 
-	public Step(String property, Object value) {
+	public Step(T object, String property, Object value) {
+		this.object = object;
 		this.property = property;
 		this.value = value;
 	}
+
 
 	public String getProperty() {
 		return property;
@@ -27,11 +32,15 @@ public abstract class Step {
 	 * Saves the current state of the property to a new Step to ensure backward functionality.
 	 * @return
 	 */
-	public abstract Step getBackwardStep();
+	public Step<T> origin() {
+		return new Step<T>(this.object, getProperty(), object.get(this.getProperty()));
+	}
 
 	/**
 	 * save the property-change (that's what happens in this step) to the element. (decorable)
 	 */
-	public abstract void execute();
+	public void apply() {
+		this.object.set(this.getProperty(), this.getValue());
+	}
 	
 }
