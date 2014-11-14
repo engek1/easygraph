@@ -2,7 +2,10 @@
 Arbeitsjournal - Projekt1 - easyGraph - Team WEW 
 ----------------------------------------------------------------------------
 
-To Do engk1 -> vom 12.11. - 14.11.2014
+============================================================================
+14.11.2014	engek1
+
+Verschieben von Vertizes in erster Version.
 
 ============================================================================
 14.11.2014	webel3 / wengm17
@@ -10,6 +13,12 @@ To Do engk1 -> vom 12.11. - 14.11.2014
 Eigenens GUI-Eventhandling erstellt
 
 Weitere Anpassungen am GUI vorgenommen.
+
+============================================================================
+13.11.2014	engek1
+
+Hinzufügen von Vertizes mittels Klick auf die Zeichenfläche.
+Hinzufügen von Edges mittels Auswählen von Start- und Zielvertex.
 
 ============================================================================
 12.11.2014	webel3 / wengm17
@@ -23,9 +32,12 @@ Edge Interface erweitern:
 - opposite(Vertex)	gibt den anderen Vertex einer Edge zurÃ¼ck (wird betätigt, 
 					wenn der Graph nicht-gerichtet ist)
 ============================================================================
-07.11.2014	wengm17
+07.11.2014	engek1
 
-Erarbeiten der Visualisierungsmï¿½glichkeiten eines Vertexs oder Edges. 
+Erarbeiten der Visualisierungsmöglichkeiten eines Vertexs oder Edges. 
+Step-Mechanismus für die Zwischenspeicherung der Algorithmen und zur schrittweisen
+Ausführung inkl. Rückwärts.
+
 ============================================================================
 05.11.2014	wengm17
 
