@@ -1,8 +1,11 @@
 package easygraph.guielements;
 
+import easygraph.eventhandling.EdgeEvent;
 import easygraph.model.EGProperty;
 import graphlib.Edge;
 import graphlib.Vertex;
+import javafx.event.EventHandler;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 
@@ -27,8 +30,16 @@ public class GuiEdge extends Line {
 		this.setEndX((double)this.destination.get(EGProperty.EG_COORDINATE_X));
 		this.setEndY((double)this.destination.get(EGProperty.EG_COORDINATE_Y));
 		
-		this.setStrokeWidth(2.0);
-		this.setStroke(Color.NAVY);
+		this.setStrokeWidth(5.0);
+		this.setStroke(Color.valueOf("#000080"));
+		
+		this.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {				
+				event.consume();
+				GuiEdge.this.fireEvent(new EdgeEvent(GuiEdge.this.edge));
+			}
+        });
 	}
 
 }

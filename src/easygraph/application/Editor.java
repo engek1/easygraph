@@ -1,6 +1,10 @@
 package easygraph.application;
 
 import easygraph.controller.EditorLayoutController;
+import easygraph.eventhandling.EdgeEvent;
+import easygraph.eventhandling.EdgeEventHandler;
+import easygraph.eventhandling.VertexEvent;
+import easygraph.eventhandling.VertexEventHandler;
 import easygraph.model.EGProperty;
 import easygraph.utils.Config;
 import graphlib.Graph;
@@ -10,9 +14,11 @@ import java.io.IOException;
 import java.util.Iterator;
 
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
@@ -119,9 +125,9 @@ public class Editor extends Application {
         
         // for the beginning, just work with the editor scene.
         initEditorLayout();
-        
+
         stage.setScene(editorScene);
-        stage.show();
+        stage.show();        
     }
 
     private void initEditorLayout() {
@@ -129,6 +135,9 @@ public class Editor extends Application {
     	try {
     		BorderPane borderPane = (BorderPane) editorLoader.load();
             editorScene = new Scene(borderPane);   
+            
+            editorScene.addEventHandler(VertexEvent.VERTEX_CLICKED, new VertexEventHandler());
+            editorScene.addEventHandler(EdgeEvent.EDGE_CLICKED, new EdgeEventHandler());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

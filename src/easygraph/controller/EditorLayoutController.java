@@ -40,10 +40,6 @@ public class EditorLayoutController implements RootController {
 	}
 
 	public void initialize() {
-//		System.out.println(drawViewController);
-//		System.out.println(toolboxViewController);
-//		System.out.println(propertiesViewController);
-		
 		drawViewController.setRootController(this);
 		toolboxViewController.setRootController(this);
 		propertiesViewController.setRootController(this);

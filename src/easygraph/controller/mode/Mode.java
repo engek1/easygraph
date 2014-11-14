@@ -18,6 +18,6 @@ public abstract class Mode {
 	
 	public abstract void drawViewLeftClick(double x, double y);
 
-	public abstract void vertexClicked(Vertex vertex);
+	public abstract void vertexClicked(Vertex<?> vertex);
 
 }

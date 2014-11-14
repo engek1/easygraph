@@ -4,6 +4,7 @@ import easygraph.controller.RootController;
 import graphlib.Vertex;
 
 /**
+ * Drag-n-drop mode.
  * 
  * @author engek1
  *
@@ -22,7 +23,6 @@ public class SelectMode extends Mode {
 
 	@Override
 	public void vertexClicked(Vertex vertex) {
-		// TODO Auto-generated method stub
 		// show vertex details
 	}
 

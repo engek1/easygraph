@@ -7,8 +7,11 @@ import graphlib.Graph;
 import graphlib.IncidenceListGraph;
 import graphlib.Vertex;
 
+import org.controlsfx.dialog.Dialogs;
+
 public class TestLauncher {
 	
+	@SuppressWarnings("unused")
 	public static void main(String[] args) {
 		
 		/*
@@ -17,7 +20,7 @@ public class TestLauncher {
 				|  \  |
 				|   \ |
 				C --- D
-		 *
+		 */
 		
 		Graph<String, String> g = new IncidenceListGraph<String, String>(false);
 		Vertex<String> vA = g.insertVertex("A");
@@ -25,7 +28,6 @@ public class TestLauncher {
 		Vertex<String> vC = g.insertVertex("C");
 		Vertex<String> vD = g.insertVertex("D");
 
-		/*
 		vA.set(EGProperty.EG_COORDINATE_X, 50.0);
 		vA.set(EGProperty.EG_COORDINATE_Y, 50.0);
 		
@@ -37,14 +39,12 @@ public class TestLauncher {
 		
 		vD.set(EGProperty.EG_COORDINATE_X, 250.0);
 		vD.set(EGProperty.EG_COORDINATE_Y, 250.0);
-		*
 		
 		Edge<String> eAB = g.insertEdge(vA, vB, "A-B");
 		Edge<String> eAC = g.insertEdge(vA, vC, "A-C");
 		Edge<String> eAD = g.insertEdge(vA, vD, "A-D");
 		Edge<String> eBD = g.insertEdge(vB, vD, "B-D");
 		Edge<String> eCD = g.insertEdge(vC, vD, "C-D");
-		*/
 		
 		
 		// example graph from graphlib:
@@ -63,7 +63,7 @@ public class TestLauncher {
 		// v  v v  v   v
 		// M-->N-->O-->P
 		
-		
+		/*
 		IncidenceListGraph<String,String> g = new IncidenceListGraph<String,String> (true);
 		// vertices
 		Vertex<String> vA = g.insertVertex("A");
@@ -110,8 +110,11 @@ public class TestLauncher {
 		Edge<String> eMN = g.insertEdge(vM, vN, "MN"); 
 		Edge<String> eNO = g.insertEdge(vN, vO, "NO"); 
 		Edge<String> eOP = g.insertEdge(vO, vP, "OP"); 	
+		*/
+		
 		
 		EasyGraph.launchGui(g);
+		
 	}
 
 }
