@@ -1,38 +1,93 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefWidth="200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="easygraph.controller.ToolboxViewController">
+<AnchorPane prefHeight="600.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="easygraph.controller.ToolboxViewController">
    <children>
-      <Pane prefHeight="800.0" prefWidth="200.0">
+      <Pane prefHeight="600.0" prefWidth="200.0">
          <children>
             <VBox layoutX="39.0" layoutY="31.0" spacing="14.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#handleSelectMode" prefHeight="42.0" prefWidth="123.0" text="select Element" />
-                  <Button layoutX="39.0" layoutY="23.0" mnemonicParsing="false" onAction="#handleAddVertexMode" prefHeight="42.0" prefWidth="123.0" text="add Vertex" />
-                  <Button layoutX="39.0" layoutY="117.0" mnemonicParsing="false" onAction="#handleAddEdgeUnweightedUndirected" prefHeight="42.0" prefWidth="123.0" text="add undirected &#10;unweighted edge " textAlignment="CENTER" />
-                  <Button layoutX="39.0" layoutY="177.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="123.0" text="add undirected &#10;weighted edge" textAlignment="CENTER" />
-                  <Button layoutX="39.0" layoutY="233.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="123.0" text="add directed &#10;weighted edge " textAlignment="CENTER" />
-                  <Button layoutX="39.0" layoutY="288.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="123.0" text="add directed&#10;unweighted edge" textAlignment="CENTER" />
+                  <Button id="moveElementButton" mnemonicParsing="false" onAction="#handleSelectMode" prefHeight="50.0" prefWidth="123.0" text="move Element">
+                     <graphic>
+                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="file:resources/images/move.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
+                  <Button id="addVertexButton" layoutX="39.0" layoutY="23.0" mnemonicParsing="false" onAction="#handleAddVertexMode" prefHeight="50.0" prefWidth="123.0" text="add Vertex" textAlignment="JUSTIFY">
+                     <graphic>
+                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="file:resources/images/vertex.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
+                  <Button id="addEdgeButton" layoutX="39.0" layoutY="117.0" mnemonicParsing="false" onAction="#handleAddEdgeUnweightedUndirected" prefHeight="50.0" prefWidth="123.0" text="add Edge " textAlignment="CENTER">
+                     <graphic>
+                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="file:resources/images/edge.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
                </children>
             </VBox>
-            <Separator layoutY="399.0" prefHeight="3.0" prefWidth="200.0" />
-            <Separator layoutY="526.0" prefHeight="3.0" prefWidth="200.0" />
-            <Button layoutX="39.0" layoutY="587.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="123.0" text="play / pause" />
-            <MenuButton layoutX="39.0" layoutY="446.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="123.0" text="algorithm" textAlignment="CENTER">
+            <Separator layoutX="-1.0" layoutY="236.0" prefHeight="3.0" prefWidth="200.0" />
+            <Separator layoutX="-1.0" layoutY="356.0" prefHeight="3.0" prefWidth="200.0" />
+            <MenuButton layoutX="38.0" layoutY="275.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="123.0" text="Algorithm" textAlignment="CENTER">
               <items>
                 <MenuItem mnemonicParsing="false" text="Action 1" />
                 <MenuItem mnemonicParsing="false" text="Action 2" />
               </items>
             </MenuButton>
-            <Button layoutX="40.0" layoutY="651.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="42.0" text="&lt;" />
-            <Button layoutX="120.0" layoutY="651.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="42.0" text="&gt;" />
-            <Button layoutX="39.0" layoutY="712.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="123.0" text="stop / reset" textAlignment="CENTER" />
-            <Label fx:id="modeLabel" layoutX="14.0" layoutY="14.0" text="" />
+            <Button id="playButton" layoutX="38.0" layoutY="384.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="55.0">
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="file:resources/images/start.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
+            <Button id="pauseButton" layoutX="108.0" layoutY="384.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="55.0">
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="file:resources/images/pause.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button id="backwardButton" layoutX="38.0" layoutY="454.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="55.0" textAlignment="RIGHT">
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="file:resources/images/backward.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
+            <Button id="forwardButton" layoutX="108.0" layoutY="454.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="55.0">
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="file:resources/images/forward.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
+            <Button id="resetButton" layoutX="38.0" layoutY="526.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="123.0" textAlignment="CENTER">
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="file:resources/images/reset.png" />
+                     </image></ImageView>
+               </graphic></Button>
+            <Label fx:id="modeLabel" layoutX="39.0" layoutY="14.0" prefHeight="3.0" prefWidth="123.0" text="" />
          </children>
       </Pane>
    </children>

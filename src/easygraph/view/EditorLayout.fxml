@@ -15,7 +15,7 @@
             <items>
               <MenuItem mnemonicParsing="false" text="Save">
                      <graphic>
-                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="file:resources/images/save.png" />
                            </image>
@@ -23,7 +23,7 @@
                      </graphic></MenuItem>
               <MenuItem mnemonicParsing="false" text="Open">
                      <graphic>
-                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="file:resources/images/open.png" />
                            </image>
@@ -31,7 +31,7 @@
                      </graphic></MenuItem>
               <MenuItem mnemonicParsing="false" text="Quit">
                      <graphic>
-                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="file:resources/images/quit.png" />
                            </image>
@@ -41,15 +41,51 @@
           </Menu>
           <Menu mnemonicParsing="false" text="Example">
             <items>
-              <MenuItem mnemonicParsing="false" text="Example 1 (small graph)" />
-                  <MenuItem mnemonicParsing="false" text="Example 2 (big graph)" />
-                  <MenuItem mnemonicParsing="false" text="Example 3 (negativ edges)" />
-                  <MenuItem mnemonicParsing="false" text="Example 4 (undirected edges)" />
+              <MenuItem mnemonicParsing="false" text="Example 1 (small graph)">
+                     <graphic>
+                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="file:resources/images/greenBall.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></MenuItem>
+                  <MenuItem mnemonicParsing="false" text="Example 2 (big graph)">
+                     <graphic>
+                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="file:resources/images/orangeBall.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></MenuItem>
+                  <MenuItem mnemonicParsing="false" text="Example 3 (negativ edges)">
+                     <graphic>
+                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="file:resources/images/Ball.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></MenuItem>
+                  <MenuItem mnemonicParsing="false" text="Example 4 (undirected edges)">
+                     <graphic>
+                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="file:resources/images/redBall.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></MenuItem>
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
             <items>
-              <MenuItem mnemonicParsing="false" text="About the project..." />
+              <MenuItem mnemonicParsing="false" text="About the project...">
+                     <graphic>
+                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="file:resources/images/about.png" />
+                           </image>
+                        </ImageView>
+                	</graphic>
+               </MenuItem>
             </items>
           </Menu>
         </menus>
