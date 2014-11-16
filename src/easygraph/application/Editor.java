@@ -13,6 +13,8 @@ import graphlib.Vertex;
 import java.io.IOException;
 import java.util.Iterator;
 
+import org.controlsfx.dialog.Dialogs;
+
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -136,8 +138,8 @@ public class Editor extends Application {
     		BorderPane borderPane = (BorderPane) editorLoader.load();
             editorScene = new Scene(borderPane);   
             
-            editorScene.addEventHandler(VertexEvent.VERTEX_CLICKED, new VertexEventHandler());
-            editorScene.addEventHandler(EdgeEvent.EDGE_CLICKED, new EdgeEventHandler());
+            editorScene.addEventHandler(EdgeEvent.EDGE_CLICKED, new EdgeEventHandler(stage));
+            editorScene.addEventHandler(VertexEvent.VERTEX_CLICKED, new VertexEventHandler(stage));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

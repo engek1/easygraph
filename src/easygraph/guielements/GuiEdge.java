@@ -2,11 +2,11 @@ package easygraph.guielements;
 
 import easygraph.eventhandling.EdgeEvent;
 import easygraph.model.EGProperty;
+import easygraph.utils.Config;
 import graphlib.Edge;
 import graphlib.Vertex;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 
 public class GuiEdge extends Line {
@@ -31,7 +31,7 @@ public class GuiEdge extends Line {
 		this.setEndY((double)this.destination.get(EGProperty.EG_COORDINATE_Y));
 		
 		this.setStrokeWidth(5.0);
-		this.setStroke(Color.valueOf("#000080"));
+		this.setStroke(Config.getColor());
 		
 		this.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override

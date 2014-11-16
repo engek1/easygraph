@@ -37,7 +37,7 @@ public class DrawViewController extends BaseViewController implements VertexClic
 			@Override
 			public void handle(MouseEvent event) {
 				// forward only right clicks to rootController
-				if(event.getButton()==MouseButton.PRIMARY){
+				if(event.getButton() == MouseButton.PRIMARY){
 					getRootController().handleDrawViewLeftClick(event);
 					event.consume();
 				}
@@ -54,22 +54,15 @@ public class DrawViewController extends BaseViewController implements VertexClic
 		
 		drawPane.setOnMouseClicked(drawViewClickedHandler);
 		// TODO set default width and heigth to draw pane
-//		drawPane.setPrefSize(SIZE_X, SIZE_Y);
+		// drawPane.setPrefSize(SIZE_X, SIZE_Y);
 		System.out.println(drawPane);
 
 	}
 
 	
 	void showGraph(Graph<?, ?> graph) {
-
-		Iterator<?> vIt = graph.vertices();
-
-		while (vIt.hasNext()) {
-			Vertex<?> v = (Vertex<?>) vIt.next();
-			GuiVertex elem = new GuiVertex(v, this);
-			drawPane.getChildren().add(elem);
-		}
-
+		
+		// add edges to the gui
 		Iterator<?> eIt = graph.edges();
 		while (eIt.hasNext()) {
 			Edge e = (Edge) eIt.next();
@@ -77,10 +70,18 @@ public class DrawViewController extends BaseViewController implements VertexClic
 			GuiEdge elem = new GuiEdge(e, endVertices[0], endVertices[1]);
 			drawPane.getChildren().add(elem);
 		}
+		
+		// add vertices to the gui
+		Iterator<?> vIt = graph.vertices();
+		while (vIt.hasNext()) {
+			Vertex<?> v = (Vertex<?>) vIt.next();
+			GuiVertex elem = new GuiVertex(v);
+			drawPane.getChildren().add(elem);
+		}
 	}
 
 	void addVertex(Vertex newVertex) {
-		GuiVertex newGVertex = new GuiVertex(newVertex, this);
+		GuiVertex newGVertex = new GuiVertex(newVertex);
 		Platform.runLater(() -> drawPane.getChildren().add(newGVertex));
 	}
 

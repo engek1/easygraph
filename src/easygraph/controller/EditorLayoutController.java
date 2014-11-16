@@ -6,8 +6,6 @@ import easygraph.controller.mode.AddEdgeMode;
 import easygraph.controller.mode.AddVertexMode;
 import easygraph.controller.mode.Mode;
 import easygraph.controller.mode.SelectMode;
-import easygraph.guielements.GuiEdge;
-import easygraph.guielements.GuiVertex;
 import easygraph.model.EGProperty;
 import graphlib.Edge;
 import graphlib.Graph;
