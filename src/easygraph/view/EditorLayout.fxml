@@ -20,7 +20,10 @@
                               <Image url="file:resources/images/save.png" />
                            </image>
                         </ImageView>
-                     </graphic></MenuItem>
+                     </graphic>
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
               <MenuItem mnemonicParsing="false" text="Open">
                      <graphic>
                         <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
@@ -28,7 +31,10 @@
                               <Image url="file:resources/images/open.png" />
                            </image>
                         </ImageView>
-                     </graphic></MenuItem>
+                     </graphic>
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="O" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
               <MenuItem mnemonicParsing="false" text="Quit">
                      <graphic>
                         <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
@@ -36,7 +42,10 @@
                               <Image url="file:resources/images/quit.png" />
                            </image>
                         </ImageView>
-                     </graphic></MenuItem>
+                     </graphic>
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="Q" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Example">
@@ -48,7 +57,10 @@
                               <Image url="file:resources/images/greenBall.png" />
                            </image>
                         </ImageView>
-                     </graphic></MenuItem>
+                     </graphic>
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="DIGIT1" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
                   <MenuItem mnemonicParsing="false" text="Example 2 (big graph)">
                      <graphic>
                         <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
@@ -56,7 +68,10 @@
                               <Image url="file:resources/images/orangeBall.png" />
                            </image>
                         </ImageView>
-                     </graphic></MenuItem>
+                     </graphic>
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="DIGIT2" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
                   <MenuItem mnemonicParsing="false" text="Example 3 (negativ edges)">
                      <graphic>
                         <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
@@ -64,7 +79,10 @@
                               <Image url="file:resources/images/blueBall.png" />
                            </image>
                         </ImageView>
-                     </graphic></MenuItem>
+                     </graphic>
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="DIGIT3" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
                   <MenuItem mnemonicParsing="false" text="Example 4 (undirected edges)">
                      <graphic>
                         <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
@@ -72,7 +90,10 @@
                               <Image url="file:resources/images/redBall.png" />
                            </image>
                         </ImageView>
-                     </graphic></MenuItem>
+                     </graphic>
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="DIGIT4" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
@@ -85,6 +106,9 @@
                            </image>
                         </ImageView>
                 	</graphic>
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="A" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator>
                </MenuItem>
             </items>
           </Menu>

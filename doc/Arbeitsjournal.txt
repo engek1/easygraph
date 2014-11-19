@@ -3,52 +3,55 @@ Arbeitsjournal - Projekt1 - easyGraph - Team WEW
 ----------------------------------------------------------------------------
 
 ============================================================================
+14.11.2014	engek1 / wengm17
+
+PropertiesView.fxml angepasst. 4 Labels für die Optionen hinzugefügt, um 
+die Edges und Vertexs Optionen (Name, Gewicht, Farbe, usw.) anzeigen zu
+können. Button für die Anpassung der Optionen hinzugefügt. Kurzbefehle 
+für die einfachere Bedienung in der EditorView.fxml eingefügt. 
+============================================================================
 14.11.2014	engek1
 
 Verschieben von Vertizes in erster Version.
-
 ============================================================================
 14.11.2014	webel3 / wengm17
 
 Eigenens GUI-Eventhandling erstellt
 
 Weitere Anpassungen am GUI vorgenommen.
-
 ============================================================================
 13.11.2014	engek1
 
-Hinzuf�gen von Vertizes mittels Klick auf die Zeichenfl�che.
-Hinzuf�gen von Edges mittels Ausw�hlen von Start- und Zielvertex.
-
+Hinzufügen von Vertizes mittels Klick auf die Zeichenfläche.
+Hinzufügen von Edges mittels Auswählen von Start- und Zielvertex.
 ============================================================================
 12.11.2014	webel3 / wengm17
 
-Anpassen des GUI, hinzuf�gen von ICON's sowie zus�tzlichen Buttons.
+Anpassen des GUI, hinzufügen von ICON's sowie zusätzlichen Buttons.
 
 Beschluss mit Peter Schwab:
 Edge Interface erweitern:
 - origin()			liefert den Ursprungsvertex
 - destination() 	liefert den Zielvertex
-- opposite(Vertex)	gibt den anderen Vertex einer Edge zurück (wird bet�tigt, 
+- opposite(Vertex)	gibt den anderen Vertex einer Edge zurück (wird betätigt, 
 					wenn der Graph nicht-gerichtet ist)
 ============================================================================
 07.11.2014	engek1
 
-Erarbeiten der Visualisierungsm�glichkeiten eines Vertexs oder Edges. 
-Step-Mechanismus f�r die Zwischenspeicherung der Algorithmen und zur schrittweisen
-Ausf�hrung inkl. R�ckw�rts.
-
+Erarbeiten der Visualisierungsmöglichkeiten eines Vertexs oder Edges. 
+Step-Mechanismus für die Zwischenspeicherung der Algorithmen und zur 
+schrittweisen Ausführung inkl. Rückwärts.
 ============================================================================
 05.11.2014	wengm17
 
 Weitergabe der Installationsanleitung des Projekts an Peter Schwab.
-TestLauncher erstellt f�r die �berpr�fung der verschiedenen JAVAF8
+TestLauncher erstellt  für die Überprüfung der verschiedenen JAVAF8
 Funktionen anhand eines Beispiels.
 ============================================================================
 31.10.2014	wengm17
 
 Individuelles Durcharbeiten eines passenden JAVAFX8 Tutorials.
-Grundf�higkeiten von JAVAFX8 kennen lernen. 
+Grundfähigkeiten von JAVAFX8 kennen lernen. 
 
 Link:	http://code.makery.ch/java/javafx-8-tutorial-intro/
 ============================================================================
@@ -58,9 +61,9 @@ Suche im Internet nach geeigneten JAVAFX8 Tutorials.
 ============================================================================
 22.10.2014	wengm17
 
-Pr�sentation des Klassen-Diagramms.
-Bestimmen der gew�nschten Funktionalit�ten und deren Verwendung. 
-Besprechen der erarbeiteten L�sung und der erforderlichen Anpassungen auf 
+Präsentation des Klassen-Diagramms.
+Bestimmen der gewünschten Funktionalitäten und deren Verwendung. 
+Besprechen der erarbeiteten Lösung und der erforderlichen Anpassungen auf 
 Seiten der graphLip.jar. 
 
 Auftrag:  Repository erstellen und Peter Schwab "read" Rechte vergeben. 	
@@ -77,7 +80,7 @@ Bestimmen der Interfaces sowie der Klassen Funktionalit�ten.
 10.10.2014	wengm17
 
 Digitalisieren und Anpassen des Domain-Model Entwurfs
-Pr�senentation des Domain-Models.
+Präsenentation des Domain-Models.
 Besprechung des Models mit Dr. Peter Schwab.
 Aufnahme der offenen Punkte und Pendenzen.
 
@@ -95,7 +98,7 @@ Erarbeiten der Projekt Haupt- und Unterziele.
 
 Bestimmen der Funktionalen, Nicht-Funktionalen und Domain Anforderungen.
 Erfassen der Anforderungen in ein Mindmap.
-Pr�sentation des Mindmaps und besprechen der Arbeiten mit Dr. Peter Schwab. 
+Präsentation des Mindmaps und besprechen der Arbeiten mit Dr. Peter Schwab. 
 
 Auftrag: Erstellen eines Domain-Model
 ============================================================================
