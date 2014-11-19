@@ -1,21 +1,20 @@
 package easygraph.eventhandling;
 
 import javafx.event.EventHandler;
-import javafx.stage.Stage;
+import easygraph.application.Editor;
+import easygraph.model.EGProperty;
 
 public class EdgeEventHandler extends AbstractEventHandler implements EventHandler<EdgeEvent> {
 
-	private static final String TITLE = "I'm the EdgeEventHandler title";
-	
-	public EdgeEventHandler(Stage stage) {
-		super(stage, EdgeEventHandler.TITLE);
+	public EdgeEventHandler(Editor editor) {
+		super(editor);
 	}
 	
 	@Override
 	public void handle(EdgeEvent event) {
 		// do some crazy stuff ...
-		System.out.println("stored value in this VERTEX: " + event.getEdge().element().toString());
-		showPropertiesDialog();
+		System.out.println("EDGE clicked, name: " + event.getEdge().get(EGProperty.EG_NAME));
+		getEditor().getMode().edgeClicked(event.getEdge());
 	}
 
 }

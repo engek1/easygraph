@@ -1,6 +1,7 @@
 package easygraph.controller.mode;
 
-import easygraph.controller.RootController;
+import easygraph.application.Editor;
+import graphlib.Edge;
 import graphlib.Vertex;
 
 /**
@@ -12,8 +13,8 @@ public class AddEdgeMode extends Mode {
 
 	Vertex fromVertex = null;
 
-	public AddEdgeMode(RootController rootController) {
-		super(rootController);
+	public AddEdgeMode(Editor editor) {
+		super(editor);
 		System.out.println("change to: " + getClass().getName());
 	}
 
@@ -23,15 +24,20 @@ public class AddEdgeMode extends Mode {
 	}
 
 	@Override
-	public void vertexClicked(Vertex vertex) {
+	public void vertexClicked(Vertex<?> vertex) {
 
 		if (fromVertex == null) {
 			this.fromVertex = vertex;
 		}else{
-			rootController.addEdge(fromVertex, vertex);
+			editor.addEdge(fromVertex, vertex);
 			this.fromVertex = null;
 		}
 
+	}
+
+	@Override
+	public void edgeClicked(Edge<?> edge) {
+		// do nothing
 	}
 
 }

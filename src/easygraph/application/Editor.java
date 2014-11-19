@@ -1,41 +1,47 @@
 package easygraph.application;
 
 import easygraph.controller.EditorLayoutController;
+import easygraph.controller.mode.Mode;
+import easygraph.controller.mode.MoveMode;
+import easygraph.eventhandling.ChangeModeEvent;
+import easygraph.eventhandling.ChangeModeEventHandler;
+import easygraph.eventhandling.DrawViewClickEvent;
+import easygraph.eventhandling.DrawViewClickEventHandler;
 import easygraph.eventhandling.EdgeEvent;
 import easygraph.eventhandling.EdgeEventHandler;
 import easygraph.eventhandling.VertexEvent;
 import easygraph.eventhandling.VertexEventHandler;
 import easygraph.model.EGProperty;
 import easygraph.utils.Config;
+import graphlib.Edge;
 import graphlib.Graph;
 import graphlib.Vertex;
 
 import java.io.IOException;
 import java.util.Iterator;
 
-import org.controlsfx.dialog.Dialogs;
-
 import javafx.application.Application;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 /**
  * 
- * @author engek1,...
+ * @author engek1, webel3, wenger
  *
  */
-public class Editor extends Application {
+public class Editor extends Application implements GraphController {
 	
 	private static final String TITLE = "EasyGraph Editor GUI";
 	
 	private static final String EDITOR_LAYOUT = "../view/EditorLayout.fxml";
 	
 	private static Graph<?, ?> graph;
+	
+	// current editor mode
+	private Mode mode;
 	
 	private Stage stage;
     private Scene editorScene;
@@ -45,6 +51,10 @@ public class Editor extends Application {
 	public static final double SIZE_X = 600;
 	public static final double SIZE_Y = 400;
     
+	public Editor() {
+		this.mode = new MoveMode(this);
+	}
+	
     /**
      * Set the graph reference and launch the GUI.
      * @param graph
@@ -138,8 +148,10 @@ public class Editor extends Application {
     		BorderPane borderPane = (BorderPane) editorLoader.load();
             editorScene = new Scene(borderPane);   
             
-            editorScene.addEventHandler(EdgeEvent.EDGE_CLICKED, new EdgeEventHandler(stage));
-            editorScene.addEventHandler(VertexEvent.VERTEX_CLICKED, new VertexEventHandler(stage));
+            editorScene.addEventHandler(EdgeEvent.EDGE_CLICKED, new EdgeEventHandler(this));
+            editorScene.addEventHandler(VertexEvent.VERTEX_CLICKED, new VertexEventHandler(this));
+            editorScene.addEventHandler(ChangeModeEvent.CHANGE_MODE, new ChangeModeEventHandler(this));
+            editorScene.addEventHandler(DrawViewClickEvent.DRAW_VIEW_CLICKED, new DrawViewClickEventHandler(this));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -156,4 +168,30 @@ public class Editor extends Application {
         return stage;
     }
 
+	@Override
+	public void addVertex(double x, double y) {
+		Vertex<?> newVertex = this.graph.insertVertex(null);
+		newVertex.set(EGProperty.EG_COORDINATE_X, x);
+		newVertex.set(EGProperty.EG_COORDINATE_Y, y);
+		newVertex.set(EGProperty.EG_NAME, "-");
+		editorController.addVertex(newVertex);
+	}
+
+	@Override
+	public void addEdge(Vertex fromVertex, Vertex toVertex) {
+		// TODO catch exception when try to insert parallel edge.
+		Edge newEdge = this.graph.insertEdge(fromVertex, toVertex, null);
+		newEdge.set(EGProperty.EG_NAME, "none");
+		
+		editorController.addEdge(newEdge, fromVertex, fromVertex);
+	}
+
+	public void setMode(Mode mode){
+		this.mode = mode; 
+	}
+	
+	public Mode getMode(){
+		return this.mode;
+	}
+	
 }

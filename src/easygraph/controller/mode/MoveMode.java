@@ -9,21 +9,22 @@ import graphlib.Vertex;
  * @author engek1
  *
  */
-public class AddVertexMode extends Mode {
+public class MoveMode extends Mode {
 
-	public AddVertexMode(Editor editor) {
+	public MoveMode(Editor editor) {
 		super(editor);
 		System.out.println("change mode: " + getClass().getName());
 	}
 
 	@Override
 	public void drawViewLeftClick(double x, double y) {
-		editor.addVertex(x, y);
+		// do nothing
 	}
 
 	@Override
 	public void vertexClicked(Vertex<?> vertex) {
-		// do nothing
+		// TODO Auto-generated method stub
+		// show vertex details
 	}
 
 	@Override

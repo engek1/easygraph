@@ -9,7 +9,7 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="easygraph.controller.ToolboxViewController">
    <children>
-      <Pane prefHeight="600.0" prefWidth="200.0">
+      <Pane fx:id="toolboxPane" prefHeight="600.0" prefWidth="200.0">
          <children>
             <VBox layoutX="39.0" layoutY="31.0" spacing="14.0">
                <children>
@@ -29,7 +29,7 @@
                            </image>
                         </ImageView>
                      </graphic></Button>
-                  <Button id="addEdgeButton" layoutX="39.0" layoutY="117.0" mnemonicParsing="false" onAction="#handleAddEdgeUnweightedUndirected" prefHeight="50.0" prefWidth="123.0" text="add Edge " textAlignment="CENTER">
+                  <Button id="addEdgeButton" layoutX="39.0" layoutY="117.0" mnemonicParsing="false" onAction="#handleAddEdge" prefHeight="50.0" prefWidth="123.0" text="add Edge " textAlignment="CENTER">
                      <graphic>
                         <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -87,7 +87,6 @@
                         <Image url="file:resources/images/reset.png" />
                      </image></ImageView>
                </graphic></Button>
-            <Label fx:id="modeLabel" layoutX="39.0" layoutY="14.0" prefHeight="3.0" prefWidth="123.0" text="" />
          </children>
       </Pane>
    </children>

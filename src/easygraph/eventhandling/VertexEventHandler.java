@@ -1,23 +1,22 @@
 package easygraph.eventhandling;
 
-import org.controlsfx.dialog.Dialogs;
-
 import javafx.event.EventHandler;
-import javafx.stage.Stage;
+import easygraph.application.Editor;
+import easygraph.model.EGProperty;
 
 public class VertexEventHandler extends AbstractEventHandler implements EventHandler<VertexEvent>  {
 
-	private static final String TITLE = "I'm the VertexEventHandler title";
-	
-	public VertexEventHandler(Stage stage) {
-		super(stage, VertexEventHandler.TITLE);
+	public VertexEventHandler(Editor editor) {
+		super(editor);
 	}
 	
 	@Override
 	public void handle(VertexEvent event) {
 		// do some crazy stuff ...
-		System.out.println("stored value in this VERTEX: " + event.getVertex().element().toString());
-		showPropertiesDialog();
+		System.out.println("VERTEX clicked, name: " + event.getVertex().get(EGProperty.EG_NAME));
+		getEditor().getMode().vertexClicked(event.getVertex());
+		
+		//showPropertiesDialog();
 	}
-
+	
 }

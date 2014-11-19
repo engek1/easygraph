@@ -7,8 +7,6 @@ import graphlib.Graph;
 import graphlib.IncidenceListGraph;
 import graphlib.Vertex;
 
-import org.controlsfx.dialog.Dialogs;
-
 public class TestLauncher {
 	
 	@SuppressWarnings("unused")
@@ -23,28 +21,37 @@ public class TestLauncher {
 		 */
 		
 		Graph<String, String> g = new IncidenceListGraph<String, String>(false);
-		Vertex<String> vA = g.insertVertex("A");
-		Vertex<String> vB = g.insertVertex("B");
-		Vertex<String> vC = g.insertVertex("C");
-		Vertex<String> vD = g.insertVertex("D");
+		Vertex<String> vA = g.insertVertex(null);
+		Vertex<String> vB = g.insertVertex(null);
+		Vertex<String> vC = g.insertVertex(null);
+		Vertex<String> vD = g.insertVertex(null);
 
 		vA.set(EGProperty.EG_COORDINATE_X, 50.0);
 		vA.set(EGProperty.EG_COORDINATE_Y, 50.0);
+		vA.set(EGProperty.EG_NAME, "A");
 		
 		vB.set(EGProperty.EG_COORDINATE_X, 250.0);
 		vB.set(EGProperty.EG_COORDINATE_Y, 50.0);
+		vB.set(EGProperty.EG_NAME, "B");
 		
 		vC.set(EGProperty.EG_COORDINATE_X, 50.0);
 		vC.set(EGProperty.EG_COORDINATE_Y, 250.0);
+		vC.set(EGProperty.EG_NAME, "C");
 		
 		vD.set(EGProperty.EG_COORDINATE_X, 250.0);
 		vD.set(EGProperty.EG_COORDINATE_Y, 250.0);
+		vD.set(EGProperty.EG_NAME, "D");
 		
-		Edge<String> eAB = g.insertEdge(vA, vB, "A-B");
-		Edge<String> eAC = g.insertEdge(vA, vC, "A-C");
-		Edge<String> eAD = g.insertEdge(vA, vD, "A-D");
-		Edge<String> eBD = g.insertEdge(vB, vD, "B-D");
-		Edge<String> eCD = g.insertEdge(vC, vD, "C-D");
+		Edge<String> eAB = g.insertEdge(vA, vB, null);
+		eAB.set(EGProperty.EG_NAME, "A-B");
+		Edge<String> eAC = g.insertEdge(vA, vC, null);
+		eAC.set(EGProperty.EG_NAME, "A-C");
+		Edge<String> eAD = g.insertEdge(vA, vD, null);
+		eAD.set(EGProperty.EG_NAME, "A-D");
+		Edge<String> eBD = g.insertEdge(vB, vD, null);
+		eBD.set(EGProperty.EG_NAME, "B-D");
+		Edge<String> eCD = g.insertEdge(vC, vD, null);
+		eCD.set(EGProperty.EG_NAME, "C-D");
 		
 		
 		// example graph from graphlib:

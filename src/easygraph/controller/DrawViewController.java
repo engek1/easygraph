@@ -1,5 +1,6 @@
 package easygraph.controller;
 
+import easygraph.eventhandling.DrawViewClickEvent;
 import easygraph.guielements.GuiEdge;
 import easygraph.guielements.GuiVertex;
 import graphlib.Edge;
@@ -9,6 +10,7 @@ import graphlib.Vertex;
 import java.util.Iterator;
 
 import javafx.application.Platform;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.input.MouseButton;
@@ -20,7 +22,7 @@ import javafx.scene.layout.Pane;
  * @author engek1
  *
  */
-public class DrawViewController extends BaseViewController implements VertexClickHandler {
+public class DrawViewController {
 
 	@FXML
 	private Pane drawPane;
@@ -38,11 +40,12 @@ public class DrawViewController extends BaseViewController implements VertexClic
 			public void handle(MouseEvent event) {
 				// forward only right clicks to rootController
 				if(event.getButton() == MouseButton.PRIMARY){
-					getRootController().handleDrawViewLeftClick(event);
+					Event.fireEvent(drawPane, new DrawViewClickEvent(event));
 					event.consume();
 				}
 			}
 		};
+		
 	}
 
 	/**
@@ -83,11 +86,6 @@ public class DrawViewController extends BaseViewController implements VertexClic
 	void addVertex(Vertex newVertex) {
 		GuiVertex newGVertex = new GuiVertex(newVertex);
 		Platform.runLater(() -> drawPane.getChildren().add(newGVertex));
-	}
-
-	@Override
-	public void handleClick(Vertex vertex) {
-		getRootController().handleVertexClick(vertex);
 	}
 
 	void addEdge(Edge newEdge, Vertex<?> fromVertex, Vertex<?> toVertex) {

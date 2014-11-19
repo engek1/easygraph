@@ -1,24 +1,19 @@
 package easygraph.controller;
 
+import easygraph.eventhandling.ChangeModeEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
+import javafx.scene.layout.Pane;
 
 /**
  * 
  * @author Weber Lukas, engek1
  *
  */
-public class ToolboxViewController extends BaseViewController {
-	
-	private static final String MODE_ADD_VERTEX = "Add a Vertex";
-	private static final String MODE_SELECT = "Select Mode";
-	private static final String MODE_ADD_EDGE_UNWEIGHT_UNDIR = "Add a unweighted undirected Edge";
-	private static final String MODE_ADD_EDGE_WEIGHT_UNDIR = "Add a weighted undirected Edge";
-	private static final String MODE_ADD_EDGE_UNWEIGHT_DIR = "Add a unweighted directed Edge";
-	private static final String MODE_ADD_EDGE_WEIGHT_DIR = "Add a weighted directed Edge";
-	
+public class ToolboxViewController {
+
 	@FXML
-	private Label modeLabel = new Label();
+	private Pane toolboxPane;
 
 	/**
 	 * The constructor. The constructor is called before the initialize()
@@ -39,42 +34,24 @@ public class ToolboxViewController extends BaseViewController {
 	 * handle user action
 	 */
 	@FXML
-    private void handleAddVertexMode(){
-    	this.modeLabel.setText(MODE_ADD_VERTEX);
-    	getRootController().handleAddVertexMode();
-    }
+	private void handleAddVertexMode() {
+		Event.fireEvent(toolboxPane, new ChangeModeEvent(
+				ChangeModeEvent.Mode.ADD_VERTEX));
+	}
 
 	/**
 	 * handle user action
 	 */
-    @FXML
-    private void handleSelectMode(){
-    	this.modeLabel.setText(MODE_SELECT);
-    	getRootController().handleSelectMode();
-    }
+	@FXML
+	private void handleSelectMode() {
+		Event.fireEvent(toolboxPane, new ChangeModeEvent(
+				ChangeModeEvent.Mode.SELECT));
+	}
 
-    @FXML
-    private void handleAddEdgeUnweightedUndirected(){
-    	this.modeLabel.setText(MODE_ADD_EDGE_UNWEIGHT_UNDIR);
-    	getRootController().handleAddEdgeUnweigUndirMode();
-    }
-    
-    @FXML
-    private void handleAddEdgeWeightedUndirected(){
-    	this.modeLabel.setText(MODE_ADD_EDGE_WEIGHT_UNDIR);
-    	getRootController().handleAddEdgeWeigUndirMode();
-    }
-
-    @FXML
-    private void handleAddEdgeUnweightedDirected(){
-    	this.modeLabel.setText(MODE_ADD_EDGE_UNWEIGHT_DIR);
-    	getRootController().handleAddEdgeUnweigDirMode();
-    }
-
-    @FXML
-    private void handleAddEdgeWeightedDirected(){
-    	this.modeLabel.setText(MODE_ADD_EDGE_WEIGHT_DIR);
-    	getRootController().handleAddEdgeWeigDirMode();
-    }
+	@FXML
+	private void handleAddEdge() {
+		Event.fireEvent(toolboxPane, new ChangeModeEvent(
+				ChangeModeEvent.Mode.ADD_EDGE));
+	}
 
 }
