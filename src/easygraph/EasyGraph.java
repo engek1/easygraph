@@ -124,7 +124,7 @@ public class EasyGraph {
 	 * Decrease the step-index.
 	 */
 	public static void backward(){
-		Step step = BACKWARD_STEPS.pop();
+		Step<? extends Decorable> step = BACKWARD_STEPS.pop();
 		step.apply();
 		// TODO make changes on UI as well 
 		

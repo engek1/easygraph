@@ -21,14 +21,15 @@ public class AddVertexMode extends Mode {
 		editor.addVertex(x, y);
 	}
 
-	@Override
-	public void vertexClicked(Vertex<?> vertex) {
-		// do nothing
-	}
+	/* do nothing */
 
 	@Override
-	public void edgeClicked(Edge<?> edge) {
-		// do nothing
-	}
+	public void vertexClicked(Vertex<?> vertex) {}
+
+	@Override
+	public void editEdge(Edge<?> edge) {}
+
+	@Override
+	public void editVertex(Vertex<?> vertex) {}
 
 }

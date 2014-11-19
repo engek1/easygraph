@@ -21,6 +21,8 @@ public abstract class Mode {
 
 	public abstract void vertexClicked(Vertex<?> vertex);
 
-	public abstract void edgeClicked(Edge<?> edge);
+	public abstract void editEdge(Edge<?> edge);
+	
+	public abstract void editVertex(Vertex<?> vertex);
 	
 }

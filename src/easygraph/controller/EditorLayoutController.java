@@ -1,16 +1,9 @@
 package easygraph.controller;
 
-import javafx.fxml.FXML;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import easygraph.controller.mode.AddEdgeMode;
-import easygraph.controller.mode.AddVertexMode;
-import easygraph.controller.mode.Mode;
-import easygraph.controller.mode.MoveMode;
-import easygraph.model.EGProperty;
 import graphlib.Edge;
 import graphlib.Graph;
 import graphlib.Vertex;
+import javafx.fxml.FXML;
 
 /**
  * 
@@ -42,7 +35,7 @@ public class EditorLayoutController {
 		drawViewController.showGraph(graph);
 	}
 	
-	public void addVertex(Vertex vertex) {
+	public void addVertex(Vertex<?> vertex) {
 		drawViewController.addVertex(vertex);
 	}
 

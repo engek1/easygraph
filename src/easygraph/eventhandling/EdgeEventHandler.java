@@ -14,7 +14,7 @@ public class EdgeEventHandler extends AbstractEventHandler implements EventHandl
 	public void handle(EdgeEvent event) {
 		// do some crazy stuff ...
 		System.out.println("EDGE clicked, name: " + event.getEdge().get(EGProperty.EG_NAME));
-		getEditor().getMode().edgeClicked(event.getEdge());
+		getEditor().getMode().editEdge(event.getEdge());
 	}
 
 }

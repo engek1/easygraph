@@ -1,12 +1,5 @@
 package easygraph.controller;
 
-import easygraph.eventhandling.DrawViewClickEvent;
-import easygraph.guielements.GuiEdge;
-import easygraph.guielements.GuiVertex;
-import graphlib.Edge;
-import graphlib.Graph;
-import graphlib.Vertex;
-
 import java.util.Iterator;
 
 import javafx.application.Platform;
@@ -16,6 +9,12 @@ import javafx.fxml.FXML;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import easygraph.eventhandling.DrawViewClickEvent;
+import easygraph.guielements.GuiEdge;
+import easygraph.guielements.GuiVertex;
+import graphlib.Edge;
+import graphlib.Graph;
+import graphlib.Vertex;
 
 /**
  * 
@@ -63,6 +62,7 @@ public class DrawViewController {
 	}
 
 	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	void showGraph(Graph<?, ?> graph) {
 		
 		// add edges to the gui
@@ -83,14 +83,14 @@ public class DrawViewController {
 		}
 	}
 
-	void addVertex(Vertex newVertex) {
+	void addVertex(Vertex<?> newVertex) {
 		GuiVertex newGVertex = new GuiVertex(newVertex);
 		Platform.runLater(() -> drawPane.getChildren().add(newGVertex));
 	}
 
-	void addEdge(Edge newEdge, Vertex<?> fromVertex, Vertex<?> toVertex) {
+	void addEdge(Edge<?> newEdge, Vertex<?> fromVertex, Vertex<?> toVertex) {
 		GuiEdge guiEdge = new GuiEdge(newEdge, fromVertex, toVertex);
 		Platform.runLater(() -> drawPane.getChildren().add(guiEdge));
 	}
-
+	
 }

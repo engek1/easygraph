@@ -6,5 +6,5 @@ public interface GraphController {
 
 	void addVertex(double x, double y);
 
-	void addEdge(Vertex fromVertex, Vertex toVertex);
+	void addEdge(Vertex<?> fromVertex, Vertex<?> toVertex);
 }

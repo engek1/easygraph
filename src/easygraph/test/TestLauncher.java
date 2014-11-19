@@ -9,7 +9,6 @@ import graphlib.Vertex;
 
 public class TestLauncher {
 	
-	@SuppressWarnings("unused")
 	public static void main(String[] args) {
 		
 		/*

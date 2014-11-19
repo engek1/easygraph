@@ -5,7 +5,6 @@ import easygraph.model.EGProperty;
 import easygraph.utils.Config;
 import graphlib.Vertex;
 import javafx.event.EventHandler;
-import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -58,30 +57,10 @@ public class GuiVertex extends StackPane {
 		this.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
-				GuiVertex.this.fireEvent(new VertexEvent(GuiVertex.this.vertex));
+				GuiVertex.this.fireEvent(new VertexEvent(GuiVertex.this.vertex, event));
 				event.consume();
 			}
         });
-        
-//        this.setOnMouseReleased(new EventHandler<MouseEvent>() {
-//
-//			@Override
-//			public void handle(MouseEvent ev) {
-//				if(ev.getButton()==MouseButton.PRIMARY){
-//					System.out.println("vertex released");
-//					//clickHandler.handleMouseReleased(vertex, ev);
-//					ev.consume();
-//				}
-//			}
-//		});
-        
-//        this.setOnMouseDragged(new EventHandler<MouseEvent>() {
-//        	public void handle(MouseEvent ev) {
-//        		GuiVertex.this.setLayoutX(ev.getX() - GuiVertex.RADIUS);
-//        		GuiVertex.this.setLayoutY(ev.getY() - GuiVertex.RADIUS);
-//				ev.consume();
-//        	};
-//		});
-        
 	}
+	
 }

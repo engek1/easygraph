@@ -12,7 +12,7 @@ import graphlib.Edge;
 import graphlib.Vertex;
 
 /**
- * Drag-n-drop mode.
+ * Select Elements Mode
  * 
  * @author engek1
  *
@@ -25,21 +25,18 @@ public class SelectMode extends Mode {
 	}
 
 	@Override
-	public void drawViewLeftClick(double x, double y) {
-		// do nothing
+	public void editVertex(Vertex<?> vertex) {
+		showPropertiesDialog();
 	}
 
 	@Override
-	public void vertexClicked(Vertex<?> vertex) {
-		// TODO
+	public void editEdge(Edge<?> edge) {
+		showPropertiesDialog();
 	}
 
-	@Override
-	public void edgeClicked(Edge<?> edge) {
-		// TODO show dialog maybe
-		
-	}
-
+	/*
+	 *  show edit dialog
+	 */
 	private void showPropertiesDialog() {
 
 		Dialog dialog = new Dialog();
@@ -67,5 +64,13 @@ public class SelectMode extends Mode {
 			// update
 		}
 	}
+
+	/* do nothing */
+	
+	@Override
+	public void drawViewLeftClick(double x, double y) {}
+
+	@Override
+	public void vertexClicked(Vertex<?> vertex) {}
 
 }

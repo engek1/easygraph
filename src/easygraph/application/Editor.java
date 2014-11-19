@@ -2,7 +2,7 @@ package easygraph.application;
 
 import easygraph.controller.EditorLayoutController;
 import easygraph.controller.mode.Mode;
-import easygraph.controller.mode.MoveMode;
+import easygraph.controller.mode.SelectMode;
 import easygraph.eventhandling.ChangeModeEvent;
 import easygraph.eventhandling.ChangeModeEventHandler;
 import easygraph.eventhandling.DrawViewClickEvent;
@@ -52,7 +52,7 @@ public class Editor extends Application implements GraphController {
 	public static final double SIZE_Y = 400;
     
 	public Editor() {
-		this.mode = new MoveMode(this);
+		this.mode = new SelectMode(this);
 	}
 	
     /**
@@ -60,7 +60,7 @@ public class Editor extends Application implements GraphController {
      * @param graph
      */
     public void launchGui(Graph<?, ?> graph) {
-    	this.graph = graph;
+    	Editor.graph = graph;
     	if (!checkCoordinatesSanity()) {
     		adjustVerticesToCircle();
     	}
@@ -157,7 +157,7 @@ public class Editor extends Application implements GraphController {
 		}
     	
         editorController = editorLoader.getController();
-        editorController.showGraph(this.graph);
+        editorController.showGraph(Editor.graph);
     }
     
     /**
@@ -170,20 +170,21 @@ public class Editor extends Application implements GraphController {
 
 	@Override
 	public void addVertex(double x, double y) {
-		Vertex<?> newVertex = this.graph.insertVertex(null);
+		Vertex<?> newVertex = Editor.graph.insertVertex(null);
 		newVertex.set(EGProperty.EG_COORDINATE_X, x);
 		newVertex.set(EGProperty.EG_COORDINATE_Y, y);
 		newVertex.set(EGProperty.EG_NAME, "-");
 		editorController.addVertex(newVertex);
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public void addEdge(Vertex fromVertex, Vertex toVertex) {
 		// TODO catch exception when try to insert parallel edge.
-		Edge newEdge = this.graph.insertEdge(fromVertex, toVertex, null);
+		Edge<?> newEdge = Editor.graph.insertEdge(fromVertex, toVertex, null);
 		newEdge.set(EGProperty.EG_NAME, "none");
 		
-		editorController.addEdge(newEdge, fromVertex, fromVertex);
+		editorController.addEdge(newEdge, fromVertex, toVertex);
 	}
 
 	public void setMode(Mode mode){
