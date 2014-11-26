@@ -1,6 +1,7 @@
 package easygraph.controller.mode;
 
 import easygraph.application.Editor;
+import easygraph.guielements.GuiVertex;
 import graphlib.Edge;
 import graphlib.Vertex;
 
@@ -24,5 +25,9 @@ public abstract class Mode {
 	public abstract void editEdge(Edge<?> edge);
 	
 	public abstract void editVertex(Vertex<?> vertex);
+
+	public abstract void vertexPressed(GuiVertex guiVertex);
+
+	public abstract void drawViewMouseReleased(double x, double y);
 	
 }

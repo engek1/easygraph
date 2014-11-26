@@ -1,7 +1,8 @@
 package easygraph.guielements;
 
 import easygraph.application.Editor;
-import easygraph.eventhandling.VertexEvent;
+import easygraph.eventhandling.VertexClickedEvent;
+import easygraph.eventhandling.VertexPressedEvent;
 import easygraph.model.EGProperty;
 import easygraph.utils.Config;
 import graphlib.Vertex;
@@ -65,14 +66,28 @@ public class GuiVertex extends StackPane {
 		// text has to be 2nd param, otherwise the ellipse would cover the text
 		this.getChildren().addAll(ellipse, text);
 		
-		// add a VertexEvent to the StackPane
+		// add a Click Handler to the StackPane
 		this.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
-				GuiVertex.this.fireEvent(new VertexEvent(GuiVertex.this.vertex, event));
+				GuiVertex.this.fireEvent(new VertexClickedEvent(GuiVertex.this.vertex, event));
 				event.consume();
 			}
         });
+
+		// add a Pressed Handler to the StackPane 
+		this.setOnMousePressed(new EventHandler<MouseEvent>() {
+			
+			public void handle(final MouseEvent event) {
+				GuiVertex.this.fireEvent(new VertexPressedEvent(GuiVertex.this, event));
+			}
+		});
+		
 	}
+
+	public Vertex<?> getVertex() {
+		return vertex;
+	}
+	
 	
 }

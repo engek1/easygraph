@@ -1,7 +1,5 @@
 package easygraph.application;
 
-import easygraph.annotations.AlgorithmMethod;
-import easygraph.annotations.AlgorithmClazz;
 import easygraph.controller.EditorLayoutController;
 import easygraph.controller.mode.Mode;
 import easygraph.controller.mode.SelectMode;
@@ -9,23 +7,23 @@ import easygraph.eventhandling.ChangeModeEvent;
 import easygraph.eventhandling.ChangeModeEventHandler;
 import easygraph.eventhandling.DrawViewClickEvent;
 import easygraph.eventhandling.DrawViewClickEventHandler;
+import easygraph.eventhandling.DrawViewMouseReleasedEvent;
+import easygraph.eventhandling.DrawViewMouseReleasedEventHandler;
 import easygraph.eventhandling.EdgeEvent;
 import easygraph.eventhandling.EdgeEventHandler;
-import easygraph.eventhandling.VertexEvent;
-import easygraph.eventhandling.VertexEventHandler;
+import easygraph.eventhandling.VertexClickedEvent;
+import easygraph.eventhandling.VertexClickedEventHandler;
+import easygraph.eventhandling.VertexPressedEvent;
+import easygraph.eventhandling.VertexPressedEventHandler;
 import easygraph.model.EGProperty;
 import easygraph.utils.Config;
 import graphlib.Edge;
 import graphlib.Graph;
-import graphlib.GraphExamples;
 import graphlib.Vertex;
 
 import java.io.IOException;
-import java.lang.reflect.Method;
 import java.util.Iterator;
-import java.util.ServiceLoader;
 
-import sun.reflect.Reflection;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -187,12 +185,15 @@ public class Editor extends Application implements GraphController {
 
 			editorScene.addEventHandler(EdgeEvent.EDGE_CLICKED,
 					new EdgeEventHandler(this));
-			editorScene.addEventHandler(VertexEvent.VERTEX_CLICKED,
-					new VertexEventHandler(this));
+			editorScene.addEventHandler(VertexClickedEvent.VERTEX_CLICKED,
+					new VertexClickedEventHandler(this));
 			editorScene.addEventHandler(ChangeModeEvent.CHANGE_MODE,
 					new ChangeModeEventHandler(this));
 			editorScene.addEventHandler(DrawViewClickEvent.DRAW_VIEW_CLICKED,
 					new DrawViewClickEventHandler(this));
+            editorScene.addEventHandler(VertexPressedEvent.VERTEX_PRESSED, new VertexPressedEventHandler(this));
+            editorScene.addEventHandler(DrawViewMouseReleasedEvent.DRAW_VIEW_MOUSE_RELEASED, new DrawViewMouseReleasedEventHandler(this));
+            
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

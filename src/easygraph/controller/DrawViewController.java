@@ -15,6 +15,7 @@ import javafx.scene.layout.Pane;
 import easygraph.annotations.AlgorithmClazz;
 import easygraph.annotations.AlgorithmMethod;
 import easygraph.eventhandling.DrawViewClickEvent;
+import easygraph.eventhandling.DrawViewMouseReleasedEvent;
 import easygraph.guielements.GuiEdge;
 import easygraph.guielements.GuiVertex;
 import graphlib.Edge;
@@ -33,6 +34,7 @@ public class DrawViewController {
 	private Pane drawPane;
 	
 	private EventHandler<MouseEvent> drawViewClickedHandler;
+	private EventHandler<MouseEvent> drawViewMouseReleasedHandler;
 
 	
 	/**
@@ -51,6 +53,14 @@ public class DrawViewController {
 				}
 			}
 		};
+		// init mouse released Handler
+		drawViewMouseReleasedHandler = new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent e) {
+				Event.fireEvent(drawPane, new DrawViewMouseReleasedEvent(e));
+			}
+		};
 		
 	}
 
@@ -63,9 +73,11 @@ public class DrawViewController {
 	private void initialize() {
 		
 		drawPane.setOnMouseClicked(drawViewClickedHandler);
+		drawPane.setOnMouseReleased(drawViewMouseReleasedHandler);
+		
 		// TODO set default width and heigth to draw pane
 		// drawPane.setPrefSize(SIZE_X, SIZE_Y);
-		System.out.println(drawPane);
+		
 	}
 
 	

@@ -3,16 +3,15 @@ package easygraph.eventhandling;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseButton;
 import easygraph.application.Editor;
-import easygraph.model.EGProperty;
 
-public class VertexEventHandler extends AbstractEventHandler implements EventHandler<VertexEvent>  {
+public class VertexClickedEventHandler extends AbstractEventHandler implements EventHandler<VertexClickedEvent>  {
 
-	public VertexEventHandler(Editor editor) {
+	public VertexClickedEventHandler(Editor editor) {
 		super(editor);
 	}
 	
 	@Override
-	public void handle(VertexEvent event) {		
+	public void handle(VertexClickedEvent event) {		
 		/*
 		 *  pass only primary mouse button clicks to the vertex clicked action
 		 *  and pass others to edit vertex action
