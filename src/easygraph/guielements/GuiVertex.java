@@ -1,5 +1,6 @@
 package easygraph.guielements;
 
+import easygraph.application.Editor;
 import easygraph.eventhandling.VertexEvent;
 import easygraph.model.EGProperty;
 import easygraph.utils.Config;
@@ -35,7 +36,18 @@ public class GuiVertex extends StackPane {
 		ellipse.setStrokeWidth(2.0);
 		
 		// use a Text for the string representation of the value stored in vertex
-		Text text = new Text((String)this.vertex.get(EGProperty.EG_NAME));		
+		
+		Text text = null;
+		Object obj = this.vertex.element();
+		
+		if (obj != null && (obj.getClass().isPrimitive() || obj instanceof String) ) {
+			text = new Text(obj.toString());
+		} else if (this.vertex.has(EGProperty.EG_NAME)) {
+			text = new Text((String)this.vertex.get(EGProperty.EG_NAME));
+		} else {
+			text = new Text(Editor.getIdentifier());
+		}
+		
 		text.setFont(Font.font(Config.getFontFamily(), FontWeight.BOLD, Config.getFontSize()));
 		text.setFill(Config.getColor());
 				

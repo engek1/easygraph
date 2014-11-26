@@ -20,26 +20,22 @@ public class TestLauncher {
 		 */
 		
 		Graph<String, String> g = new IncidenceListGraph<String, String>(false);
-		Vertex<String> vA = g.insertVertex(null);
-		Vertex<String> vB = g.insertVertex(null);
-		Vertex<String> vC = g.insertVertex(null);
-		Vertex<String> vD = g.insertVertex(null);
+		Vertex<String> vA = g.insertVertex("A");
+		Vertex<String> vB = g.insertVertex("B");
+		Vertex<String> vC = g.insertVertex("C");
+		Vertex<String> vD = g.insertVertex("D");
 
 		vA.set(EGProperty.EG_COORDINATE_X, 50.0);
 		vA.set(EGProperty.EG_COORDINATE_Y, 50.0);
-		vA.set(EGProperty.EG_NAME, "A");
 		
 		vB.set(EGProperty.EG_COORDINATE_X, 250.0);
 		vB.set(EGProperty.EG_COORDINATE_Y, 50.0);
-		vB.set(EGProperty.EG_NAME, "B");
 		
 		vC.set(EGProperty.EG_COORDINATE_X, 50.0);
 		vC.set(EGProperty.EG_COORDINATE_Y, 250.0);
-		vC.set(EGProperty.EG_NAME, "C");
 		
 		vD.set(EGProperty.EG_COORDINATE_X, 250.0);
 		vD.set(EGProperty.EG_COORDINATE_Y, 250.0);
-		vD.set(EGProperty.EG_NAME, "D");
 		
 		Edge<String> eAB = g.insertEdge(vA, vB, null);
 		eAB.set(EGProperty.EG_NAME, "A-B");

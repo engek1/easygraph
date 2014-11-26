@@ -39,6 +39,8 @@ public class Editor extends Application implements GraphController {
 	
 	private static Graph<?, ?> graph;
 	
+	private static Integer VertexNumber = 0;
+	
 	// current editor mode
 	private Mode mode;
 	
@@ -170,7 +172,7 @@ public class Editor extends Application implements GraphController {
 		Vertex<?> newVertex = Editor.graph.insertVertex(null);
 		newVertex.set(EGProperty.EG_COORDINATE_X, x);
 		newVertex.set(EGProperty.EG_COORDINATE_Y, y);
-		newVertex.set(EGProperty.EG_NAME, "-");
+		newVertex.set(EGProperty.EG_NAME, Editor.getIdentifier());
 		editorController.addVertex(newVertex);
 	}
 
@@ -191,6 +193,10 @@ public class Editor extends Application implements GraphController {
 	
 	public Mode getMode(){
 		return this.mode;
+	}
+	
+	public static String getIdentifier() {
+		return "v-" + ++Editor.VertexNumber;
 	}
 	
 }
