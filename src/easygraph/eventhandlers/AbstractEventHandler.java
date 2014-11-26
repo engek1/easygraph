@@ -1,4 +1,4 @@
-package easygraph.eventhandling;
+package easygraph.eventhandlers;
 
 import easygraph.application.Editor;
 

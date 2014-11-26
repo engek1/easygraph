@@ -1,4 +1,4 @@
-package easygraph.eventhandling;
+package easygraph.events;
 
 import javafx.event.Event;
 import javafx.event.EventType;

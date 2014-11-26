@@ -1,4 +1,4 @@
-package easygraph.eventhandling;
+package easygraph.events;
 
 import graphlib.Edge;
 import javafx.event.Event;

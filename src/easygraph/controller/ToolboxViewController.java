@@ -4,7 +4,7 @@ import java.lang.reflect.Method;
 
 import easygraph.annotations.AlgorithmClazz;
 import easygraph.annotations.AlgorithmMethod;
-import easygraph.eventhandling.ChangeModeEvent;
+import easygraph.events.ChangeModeEvent;
 import graphlib.GraphExamples;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

@@ -1,8 +1,9 @@
-package easygraph.eventhandling;
+package easygraph.eventhandlers;
 
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseButton;
 import easygraph.application.Editor;
+import easygraph.events.VertexClickedEvent;
 
 public class VertexClickedEventHandler extends AbstractEventHandler implements EventHandler<VertexClickedEvent>  {
 

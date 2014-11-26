@@ -1,6 +1,6 @@
 package easygraph.guielements;
 
-import easygraph.eventhandling.EdgeEvent;
+import easygraph.events.EdgeEvent;
 import easygraph.model.EGProperty;
 import easygraph.utils.Config;
 import graphlib.Edge;

@@ -1,7 +1,8 @@
-package easygraph.eventhandling;
+package easygraph.eventhandlers;
 
 import javafx.event.EventHandler;
 import easygraph.application.Editor;
+import easygraph.events.EdgeEvent;
 import easygraph.model.EGProperty;
 
 public class EdgeEventHandler extends AbstractEventHandler implements EventHandler<EdgeEvent> {

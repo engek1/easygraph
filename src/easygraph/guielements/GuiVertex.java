@@ -1,8 +1,8 @@
 package easygraph.guielements;
 
 import easygraph.application.Editor;
-import easygraph.eventhandling.VertexClickedEvent;
-import easygraph.eventhandling.VertexPressedEvent;
+import easygraph.events.VertexClickedEvent;
+import easygraph.events.VertexPressedEvent;
 import easygraph.model.EGProperty;
 import easygraph.utils.Config;
 import graphlib.Vertex;

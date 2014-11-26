@@ -1,4 +1,4 @@
-package easygraph.eventhandling;
+package easygraph.events;
 
 import graphlib.Vertex;
 import javafx.event.Event;

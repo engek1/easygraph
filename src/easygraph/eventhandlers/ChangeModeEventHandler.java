@@ -1,10 +1,11 @@
-package easygraph.eventhandling;
+package easygraph.eventhandlers;
 
 import javafx.event.EventHandler;
 import easygraph.application.Editor;
 import easygraph.controller.mode.AddEdgeMode;
 import easygraph.controller.mode.AddVertexMode;
 import easygraph.controller.mode.SelectMode;
+import easygraph.events.ChangeModeEvent;
 
 public class ChangeModeEventHandler extends AbstractEventHandler implements EventHandler<ChangeModeEvent> {
 
