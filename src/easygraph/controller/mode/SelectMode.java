@@ -41,10 +41,8 @@ public class SelectMode extends Mode {
 		dialog.setTitle("dialog title");
 		dialog.setHeaderText("header text");
 
-		String img = ClassLoader.getSystemClassLoader()
-				.getResource("easygraph/eventhandling/settings.png").toString();
-		dialog.setGraphic(new ImageView(new Image(img)));
-
+		dialog.setGraphic(new ImageView(new Image("file:resources/images/settings.png")));
+		
 		// Set the button types.
 		ButtonType buttonSave = new ButtonType("Speichern", ButtonData.OK_DONE);
 		ButtonType buttonCancle = new ButtonType("Abbrechen",

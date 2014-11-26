@@ -3,14 +3,15 @@ package graphlib;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.Random;
 
-import javax.management.RuntimeErrorException;
+import easygraph.annotations.AlgorithmMethod;
+import easygraph.annotations.AlgorithmClazz;
 
 
-
+@AlgorithmClazz
 public class GraphExamples<V,E> {
 
+	@AlgorithmMethod
 	final int kruskal(Graph<V,E> g){
 		if (g.isDirected()) throw new RuntimeException("We need an undirected graph!");
 		// Returns the number of connected components
@@ -99,6 +100,7 @@ public class GraphExamples<V,E> {
 	}
 	
 
+	@AlgorithmMethod
 	public void dijkstra(Graph<V,E> g, Vertex<V> s){
 		HeapPriorityQueue<Double,Vertex<V>> hq = new HeapPriorityQueue<>();
 		Iterator<Vertex<V>> it = g.vertices();

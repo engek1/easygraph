@@ -1,19 +1,25 @@
 package easygraph.controller;
 
+import java.lang.reflect.Method;
 import java.util.Iterator;
 
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import easygraph.annotations.AlgorithmClazz;
+import easygraph.annotations.AlgorithmMethod;
 import easygraph.eventhandling.DrawViewClickEvent;
 import easygraph.guielements.GuiEdge;
 import easygraph.guielements.GuiVertex;
 import graphlib.Edge;
 import graphlib.Graph;
+import graphlib.GraphExamples;
 import graphlib.Vertex;
 
 /**
@@ -28,6 +34,7 @@ public class DrawViewController {
 	
 	private EventHandler<MouseEvent> drawViewClickedHandler;
 
+	
 	/**
 	 * The constructor. The constructor is called before the initialize()
 	 * method.
@@ -47,6 +54,7 @@ public class DrawViewController {
 		
 	}
 
+	
 	/**
 	 * Initializes the controller class. This method is automatically called
 	 * after the fxml file has been loaded.
@@ -58,7 +66,6 @@ public class DrawViewController {
 		// TODO set default width and heigth to draw pane
 		// drawPane.setPrefSize(SIZE_X, SIZE_Y);
 		System.out.println(drawPane);
-
 	}
 
 	
@@ -85,11 +92,13 @@ public class DrawViewController {
 		}
 	}
 
+	
 	void addVertex(Vertex<?> newVertex) {
 		GuiVertex newGVertex = new GuiVertex(newVertex);
 		Platform.runLater(() -> drawPane.getChildren().add(newGVertex));
 	}
 
+	
 	void addEdge(Edge<?> newEdge, Vertex<?> fromVertex, Vertex<?> toVertex) {
 		GuiEdge guiEdge = new GuiEdge(newEdge, fromVertex, toVertex);
 		Platform.runLater(new Runnable() {

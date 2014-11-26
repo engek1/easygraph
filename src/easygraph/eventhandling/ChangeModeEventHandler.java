@@ -5,7 +5,6 @@ import easygraph.application.Editor;
 import easygraph.controller.mode.AddEdgeMode;
 import easygraph.controller.mode.AddVertexMode;
 import easygraph.controller.mode.SelectMode;
-import easygraph.eventhandling.ChangeModeEvent.Mode;
 
 public class ChangeModeEventHandler extends AbstractEventHandler implements EventHandler<ChangeModeEvent> {
 
@@ -16,17 +15,19 @@ public class ChangeModeEventHandler extends AbstractEventHandler implements Even
 	@Override
 	public void handle(ChangeModeEvent event) {
 		
-		if(event.getMode()==Mode.SELECT){
+		switch (event.getMode()) {
+		case SELECT:
 			getEditor().setMode(new SelectMode(getEditor()));
-		}else if(event.getMode()==Mode.ADD_VERTEX){
+			break;
+		case ADD_VERTEX:
 			getEditor().setMode(new AddVertexMode(getEditor()));
-		}else if(event.getMode()==Mode.ADD_EDGE){
+			break;
+		case ADD_EDGE:
 			getEditor().setMode(new AddEdgeMode(getEditor()));
-		}else{
+			break;
+		default:
 			System.out.println("ERROR: tried to change Mode to unknown state.");
+			break;
 		}
-		
-		
 	}
-
 }
