@@ -4,7 +4,6 @@ import javafx.event.EventHandler;
 import javafx.scene.input.MouseButton;
 import easygraph.application.Editor;
 import easygraph.events.VertexPressedEvent;
-import easygraph.model.EGProperty;
 
 public class VertexPressedEventHandler extends AbstractEventHandler implements EventHandler<VertexPressedEvent>  {
 
