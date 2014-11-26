@@ -71,30 +71,6 @@ public class Editor extends Application implements GraphController {
 		}
 		launch();
 	}
-
-	/*
-	private void lookupAlgorithms() {
-		try {
-			Class<?> clazz = ClassLoader.getSystemClassLoader().loadClass(GraphExamples.class.getCanonicalName());
-
-			if (clazz.isAnnotationPresent(AlgorithmClazz.class)) {
-				System.out.println("YEEEEHAAA!");
-			}
-
-			for (Method method : clazz.getDeclaredMethods()) {
-				System.out.println("method found : " + method.getName());
-
-				if (method.isAnnotationPresent(AlgorithmMethod.class)) {
-					System.out.println(method.getName()
-							+ " has AlgorithmMethod annotated to it.");
-				}
-			}
-
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-	}
-	*/
 	
 
 	/**

@@ -12,9 +12,7 @@ public class VertexPressedEventHandler extends AbstractEventHandler implements E
 	}
 	
 	@Override
-	public void handle(VertexPressedEvent event) {
-		System.out.println("VERTEX pressed, name: " + event.getGuiVertex().getVertex().get(EGProperty.EG_NAME));
-		
+	public void handle(VertexPressedEvent event) {		
 		/*
 		 *  pass only primary mouse button clicks to the vertex clicked action
 		 *  and pass others to edit vertex action

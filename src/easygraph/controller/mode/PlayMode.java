@@ -1,6 +1,7 @@
 package easygraph.controller.mode;
 
 import easygraph.application.Editor;
+import easygraph.guielements.GuiVertex;
 import graphlib.Edge;
 import graphlib.Vertex;
 
@@ -27,6 +28,16 @@ public class PlayMode extends Mode {
 
 	@Override
 	public void editVertex(Vertex<?> vertex) {}
+
+	@Override
+	public void vertexPressed(GuiVertex guiVertex) {
+		// TODO Auto-generated method stub	
+	}
+
+	@Override
+	public void drawViewMouseReleased(double x, double y) {
+		// TODO Auto-generated method stub
+	}
 
 }
 
