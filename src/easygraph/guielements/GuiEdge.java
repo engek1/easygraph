@@ -32,7 +32,7 @@ public class GuiEdge extends Line {
 		
 		this.setStrokeWidth(5.0);
 		this.setStroke(Config.getColor());
-		
+				
 		this.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {				

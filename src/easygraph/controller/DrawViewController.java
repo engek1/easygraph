@@ -65,6 +65,15 @@ public class DrawViewController {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	void showGraph(Graph<?, ?> graph) {
 		
+		// add vertices to the gui
+		Iterator<?> vIt = graph.vertices();
+		while (vIt.hasNext()) {
+			Vertex<?> v = (Vertex<?>) vIt.next();
+			GuiVertex elem = new GuiVertex(v);
+			drawPane.getChildren().add(elem);
+			//elem.toFront();
+		}
+		
 		// add edges to the gui
 		Iterator<?> eIt = graph.edges();
 		while (eIt.hasNext()) {
@@ -72,14 +81,7 @@ public class DrawViewController {
 			Vertex<?>[] endVertices = graph.endVertices(e);
 			GuiEdge elem = new GuiEdge(e, endVertices[0], endVertices[1]);
 			drawPane.getChildren().add(elem);
-		}
-		
-		// add vertices to the gui
-		Iterator<?> vIt = graph.vertices();
-		while (vIt.hasNext()) {
-			Vertex<?> v = (Vertex<?>) vIt.next();
-			GuiVertex elem = new GuiVertex(v);
-			drawPane.getChildren().add(elem);
+			elem.toBack();
 		}
 	}
 
@@ -90,7 +92,12 @@ public class DrawViewController {
 
 	void addEdge(Edge<?> newEdge, Vertex<?> fromVertex, Vertex<?> toVertex) {
 		GuiEdge guiEdge = new GuiEdge(newEdge, fromVertex, toVertex);
-		Platform.runLater(() -> drawPane.getChildren().add(guiEdge));
+		Platform.runLater(new Runnable() {
+			public void run() {
+				drawPane.getChildren().add(guiEdge);
+				guiEdge.toBack();
+			}
+		});
 	}
 	
 }

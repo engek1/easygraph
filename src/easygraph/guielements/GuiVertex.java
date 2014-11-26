@@ -24,7 +24,7 @@ public class GuiVertex extends StackPane {
 	}
 	
 	private void init() {
-		
+				
 		// use an ellipse to make border visible
 		Ellipse ellipse = new Ellipse();
 		ellipse.setRadiusX(GuiVertex.RADIUS);
@@ -38,7 +38,7 @@ public class GuiVertex extends StackPane {
 		Text text = new Text((String)this.vertex.get(EGProperty.EG_NAME));		
 		text.setFont(Font.font(Config.getFontFamily(), FontWeight.BOLD, Config.getFontSize()));
 		text.setFill(Config.getColor());
-		
+				
 		// get the X and Y positions where the centers of the vertex circle have to be
 		double coordX = (double)vertex.get(EGProperty.EG_COORDINATE_X);
 		double coordY = (double)vertex.get(EGProperty.EG_COORDINATE_Y);

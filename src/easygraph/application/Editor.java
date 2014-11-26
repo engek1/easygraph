@@ -35,7 +35,6 @@ import javafx.stage.Stage;
 public class Editor extends Application implements GraphController {
 	
 	private static final String TITLE = "EasyGraph Editor GUI";
-	
 	private static final String EDITOR_LAYOUT = "../view/EditorLayout.fxml";
 	
 	private static Graph<?, ?> graph;
@@ -45,7 +44,6 @@ public class Editor extends Application implements GraphController {
 	
 	private Stage stage;
     private Scene editorScene;
-    private Scene debugScene;
     private EditorLayoutController editorController;
 
 	public static final double SIZE_X = 600;
@@ -135,7 +133,6 @@ public class Editor extends Application implements GraphController {
         // Set the application icon.
         this.stage.getIcons().add(new Image("file:resources/images/logo.png"));
         
-        // for the beginning, just work with the editor scene.
         initEditorLayout();
 
         stage.setScene(editorScene);
@@ -180,6 +177,7 @@ public class Editor extends Application implements GraphController {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public void addEdge(Vertex fromVertex, Vertex toVertex) {
+		
 		// TODO catch exception when try to insert parallel edge.
 		Edge<?> newEdge = Editor.graph.insertEdge(fromVertex, toVertex, null);
 		newEdge.set(EGProperty.EG_NAME, "none");

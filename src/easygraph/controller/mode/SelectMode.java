@@ -34,9 +34,7 @@ public class SelectMode extends Mode {
 		showPropertiesDialog();
 	}
 
-	/*
-	 *  show edit dialog
-	 */
+
 	private void showPropertiesDialog() {
 
 		Dialog dialog = new Dialog();

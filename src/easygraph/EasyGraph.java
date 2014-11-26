@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
+import javafx.scene.paint.Color;
+
 /**
  * 
  * @author engek1
@@ -28,64 +30,69 @@ public class EasyGraph {
 	private static final Editor GUI = new Editor();
 
 	/* default values */
-	private static final Object DEFAULT_COLOR_DISCOVERED = "BLUE";
-	private static final Object DEFAULT_COLOR_SELECTED = "RED";
-	private static final Object DEFAULT_COLOR_DISABLED = "GREY";
+	private static final Color DEFAULT_COLOR_DISCOVERED = Color.BLUE;
+	private static final Color DEFAULT_COLOR_SELECTED = Color.RED;
+	private static final Color DEFAULT_COLOR_DISABLED = Color.GRAY;
 
-	/**
-	 * Mark an edge as discovered.
-	 * @param edge
-	 */
-	public static void setDiscovered(Edge<?> edge){
-		FORWARD_STEPS.add(new Step<Edge<?>>(edge, EGProperty.EG_COLOR, DEFAULT_COLOR_DISCOVERED));
-		// add others...
+
+	public static void setDiscovered(Edge<?> edge) {
+		setDiscovered(edge, DEFAULT_COLOR_DISCOVERED);
 	}
 	
-	/**
-	 * Mark a vertex as discovered.
-	 * @param vertex
-	 */
-	public static void setDiscovered(Vertex<?> vertex){
-		FORWARD_STEPS.add(new Step<Vertex<?>>(vertex, EGProperty.EG_COLOR, DEFAULT_COLOR_DISCOVERED));
-		// add others...
+	public static void setDiscovered(Edge<?> edge, Color color) {
+		FORWARD_STEPS.add(new Step<Edge<?>>(edge, EGProperty.EG_COLOR, color));
+	}
+
+	
+	public static void setDiscovered(Vertex<?> vertex) {
+		setDiscovered(vertex, DEFAULT_COLOR_DISCOVERED);
 	}
 	
-	/**
-	 * Mark an edge as selected.
-	 * @param edge
-	 */
-	public static void setSelected(Edge<?> edge){
-		FORWARD_STEPS.add(new Step<Edge<?>>(edge, EGProperty.EG_COLOR, DEFAULT_COLOR_SELECTED));
+	public static void setDiscovered(Vertex<?> vertex, Color color) {
+		FORWARD_STEPS.add(new Step<Vertex<?>>(vertex, EGProperty.EG_COLOR, color));
 	}
 	
-	/**
-	 * Mark a vertex as selected.
-	 * @param vertex
-	 */
-	public static void setSelected(Vertex<?> vertex){
-		FORWARD_STEPS.add(new Step<Vertex<?>>(vertex, EGProperty.EG_COLOR, DEFAULT_COLOR_SELECTED));
+	
+	public static void setSelected(Edge<?> edge) {
+		setSelected(edge, DEFAULT_COLOR_SELECTED);
+	}
+
+	public static void setSelected(Edge<?> edge, Color color) {
+		FORWARD_STEPS.add(new Step<Edge<?>>(edge, EGProperty.EG_COLOR, color));
 	}
 	
-	/**
-	 * Mark an edge as disabled.
-	 * @param edge
-	 */
+
+	public static void setSelected(Vertex<?> vertex) {
+		setSelected(vertex, DEFAULT_COLOR_SELECTED);
+	}
+	
+	public static void setSelected(Vertex<?> vertex, Color color) {
+		FORWARD_STEPS.add(new Step<Vertex<?>>(vertex, EGProperty.EG_COLOR, color));
+	}
+	
+	
 	public static void setDisabled(Edge<?> edge) {
-		FORWARD_STEPS.add(new Step<Edge<?>>(edge, EGProperty.EG_COLOR, DEFAULT_COLOR_DISABLED));
+		setDisabled(edge, DEFAULT_COLOR_DISABLED);
+	}
+
+	public static void setDisabled(Edge<?> edge, Color color) {
+		FORWARD_STEPS.add(new Step<Edge<?>>(edge, EGProperty.EG_COLOR, color));
 	}
 	
-	/**
-	 * Mark a vertex as disabled.
-	 * @param vertex
-	 */
+	
 	public static void setDisabled(Vertex<?> vertex) {
-		FORWARD_STEPS.add(new Step<Vertex<?>>(vertex, EGProperty.EG_COLOR, DEFAULT_COLOR_DISABLED));
+		setDisabled(vertex, DEFAULT_COLOR_DISABLED);
 	}
+
+	public static void setDisabled(Vertex<?> vertex, Color color) {
+		FORWARD_STEPS.add(new Step<Vertex<?>>(vertex, EGProperty.EG_COLOR, color));
+	}
+	
 	
 	/**
 	 * Launch the easyGraph visualization software. A new graph instance will be provided.
 	 */
-	public static void launchGui(){
+	public static void launchGui() {
 		EasyGraph.launchGui(new IncidenceListGraph<Vertex<?>, Edge<?>>(false));
 	}
 	
@@ -113,7 +120,7 @@ public class EasyGraph {
 		// make changes on model
 		step.apply();
 		
-		// TODO make changes on UI as well 
+		// TODO make changes on UI as well
 		
 		// finally increase the index
 		FORWARD_STEP_INDEX++;
@@ -123,10 +130,11 @@ public class EasyGraph {
 	 * Make a backward-step. Take the last backward-step and execute the property changes on model and UI.
 	 * Decrease the step-index.
 	 */
-	public static void backward(){
+	public static void backward() {
 		Step<? extends Decorable> step = BACKWARD_STEPS.pop();
 		step.apply();
-		// TODO make changes on UI as well 
+		
+		// TODO make changes on UI as well
 		
 		FORWARD_STEP_INDEX--;
 	}
