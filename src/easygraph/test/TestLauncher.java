@@ -37,16 +37,11 @@ public class TestLauncher {
 		vD.set(EGProperty.EG_COORDINATE_X, 250.0);
 		vD.set(EGProperty.EG_COORDINATE_Y, 250.0);
 		
-		Edge<String> eAB = g.insertEdge(vA, vB, null);
-		eAB.set(EGProperty.EG_NAME, "A-B");
-		Edge<String> eAC = g.insertEdge(vA, vC, null);
-		eAC.set(EGProperty.EG_NAME, "A-C");
-		Edge<String> eAD = g.insertEdge(vA, vD, null);
-		eAD.set(EGProperty.EG_NAME, "A-D");
-		Edge<String> eBD = g.insertEdge(vB, vD, null);
-		eBD.set(EGProperty.EG_NAME, "B-D");
-		Edge<String> eCD = g.insertEdge(vC, vD, null);
-		eCD.set(EGProperty.EG_NAME, "C-D");
+		Edge<String> eAB = g.insertEdge(vA, vB, "A-B");
+		Edge<String> eAC = g.insertEdge(vA, vC, "A-C");
+		Edge<String> eAD = g.insertEdge(vA, vD, "A-D");
+		Edge<String> eBD = g.insertEdge(vB, vD, "B-D");
+		Edge<String> eCD = g.insertEdge(vC, vD, "C-D");
 		
 		
 		// example graph from graphlib:
