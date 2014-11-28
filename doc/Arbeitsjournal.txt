@@ -3,6 +3,17 @@ Arbeitsjournal - Projekt1 - easyGraph - Team WEW
 ----------------------------------------------------------------------------
 
 ============================================================================
+26.11.2014 engek1 / webel3
+
+Refactoring an den Events / Eventhandlern und der State Machine 
+mit den unterschiedlichen RunModes.
+Annotations zur Erkennung von Algorithmen erstellt.
+============================================================================
+21.11.2014 engek1 / wengm17 / webel3
+
+Erstellung eigener Events und entsprechender Eventhandler.
+Erste Drag-n-Drop Versuche für Vertices.
+============================================================================
 14.11.2014	engek1 / wengm17
 
 PropertiesView.fxml angepasst. 4 Labels für die Optionen hinzugefügt, um 
