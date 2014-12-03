@@ -30,8 +30,7 @@ public class AddEdgeState extends State {
 				    this.editor.addEdge(this.origin.getVertex(), event.getGuiVertex().getVertex());
 				    this.origin.unmark();
 				    
-				    // finally, change to a new AddEdgeState.
-					// otherwise, you would insert a new Edge from the origin vertex.
+				    // finally, change to a new AddEdgeState. otherwise, you would insert a new Edge from the origin vertex.
 				    this.editor.getState().changeState(new AddEdgeState(this.editor));
 				} catch (RuntimeException re) {
 					this.editor.showConfirmDialog("EasyGraph catched a Runtime Exception. The Message of it is: " + re.getMessage());

@@ -13,6 +13,7 @@ public class MoveVertexState extends State {
 	public MoveVertexState(Editor editor, GuiVertex guiVertex) {
 		super(editor);
 		this.guiVertex = guiVertex;
+		guiVertex.mark();
 	}
 	
 	@Override
@@ -28,14 +29,16 @@ public class MoveVertexState extends State {
 		}
 		// TODO: prevent maximum sizes exceeded.
 		
+		 // set new coordinates
 		this.guiVertex.setLayoutX(coordX);
 		this.guiVertex.setLayoutY(coordY);
-		this.guiVertex.setCursor(Cursor.DEFAULT);
-		
 		this.guiVertex.getVertex().set(EGProperty.EG_COORDINATE_X, coordX);
 		this.guiVertex.getVertex().set(EGProperty.EG_COORDINATE_Y, coordY);
-		
+
+		this.guiVertex.setCursor(Cursor.DEFAULT);
+		this.guiVertex.unmark();
 		this.guiVertex.effectProperty();
+		
 		// TODO : update all connecting Edges.
 		
 		// finally, leave the drag-n-drop State and change to a SelectState.
