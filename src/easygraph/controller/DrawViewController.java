@@ -1,26 +1,20 @@
 package easygraph.controller;
 
-import java.lang.reflect.Method;
 import java.util.Iterator;
 
 import javafx.application.Platform;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import easygraph.annotations.AlgorithmClazz;
-import easygraph.annotations.AlgorithmMethod;
-import easygraph.events.DrawViewClickEvent;
-import easygraph.events.DrawViewMouseReleasedEvent;
+import easygraph.events.PaneLeftClickEvent;
+import easygraph.events.PaneMouseReleasedEvent;
 import easygraph.guielements.GuiEdge;
 import easygraph.guielements.GuiVertex;
 import graphlib.Edge;
 import graphlib.Graph;
-import graphlib.GraphExamples;
 import graphlib.Vertex;
 
 /**
@@ -28,40 +22,17 @@ import graphlib.Vertex;
  * @author engek1
  *
  */
-public class DrawViewController {
+public class DrawViewController extends BaseController {
 
 	@FXML
 	private Pane drawPane;
 	
-	private EventHandler<MouseEvent> drawViewClickedHandler;
-	private EventHandler<MouseEvent> drawViewMouseReleasedHandler;
-
 	
 	/**
 	 * The constructor. The constructor is called before the initialize()
 	 * method.
 	 */
 	public DrawViewController() {
-		// init click handler
-		drawViewClickedHandler = new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent event) {
-				// forward only right clicks to rootController
-				if(event.getButton() == MouseButton.PRIMARY){
-					Event.fireEvent(drawPane, new DrawViewClickEvent(event));
-					event.consume();
-				}
-			}
-		};
-		// init mouse released Handler
-		drawViewMouseReleasedHandler = new EventHandler<MouseEvent>() {
-
-			@Override
-			public void handle(MouseEvent e) {
-				Event.fireEvent(drawPane, new DrawViewMouseReleasedEvent(e));
-			}
-		};
-		
 	}
 
 	
@@ -72,12 +43,28 @@ public class DrawViewController {
 	@FXML
 	private void initialize() {
 		
-		drawPane.setOnMouseClicked(drawViewClickedHandler);
-		drawPane.setOnMouseReleased(drawViewMouseReleasedHandler);
+		// add a MouseClicked EventHandler to the draw pane.
+		this.drawPane.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				if (event.getButton() == MouseButton.PRIMARY) {
+					Event.fireEvent(drawPane, new PaneLeftClickEvent(event));
+					event.consume();
+				}
+			}
+			
+		});
 		
-		// TODO set default width and heigth to draw pane
-		// drawPane.setPrefSize(SIZE_X, SIZE_Y);
+		// add a MouseReleased EventHandler to the draw pane.
+		this.drawPane.setOnMouseReleased(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				Event.fireEvent(drawPane, new PaneMouseReleasedEvent(event));
+			}
+			
+		});
 		
+		// TODO set default width and heigth to draw pane		
 	}
 
 	

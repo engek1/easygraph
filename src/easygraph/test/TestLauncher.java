@@ -43,7 +43,6 @@ public class TestLauncher {
 		Edge<String> eBD = g.insertEdge(vB, vD, "B-D");
 		Edge<String> eCD = g.insertEdge(vC, vD, "C-D");
 		
-		
 		// example graph from graphlib:
 		//
 		// A-->B-->C-->D

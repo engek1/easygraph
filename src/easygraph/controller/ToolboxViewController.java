@@ -1,18 +1,18 @@
 package easygraph.controller;
 
-import java.lang.reflect.Method;
-
 import easygraph.annotations.AlgorithmClazz;
 import easygraph.annotations.AlgorithmMethod;
-import easygraph.events.ChangeModeEvent;
+import easygraph.events.StateChangeEvent;
+import easygraph.state.AddEdgeState;
+import easygraph.state.AddVertexState;
+import easygraph.state.SelectState;
 import graphlib.GraphExamples;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+
+import java.lang.reflect.Method;
+
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.MenuButton;
-import javafx.scene.control.MenuItem;
 import javafx.scene.layout.Pane;
 
 /**
@@ -20,7 +20,7 @@ import javafx.scene.layout.Pane;
  * @author Weber Lukas, engek1
  *
  */
-public class ToolboxViewController {
+public class ToolboxViewController extends BaseController {
 
 	@FXML
 	private Pane toolboxPane;
@@ -66,22 +66,19 @@ public class ToolboxViewController {
 
 	@FXML
 	private void handleAddVertexMode() {
-		Event.fireEvent(toolboxPane, new ChangeModeEvent(
-				ChangeModeEvent.Mode.ADD_VERTEX));
+		Event.fireEvent(toolboxPane, new StateChangeEvent(new AddVertexState(this.getEditor())));
 	}
 
 
 	@FXML
 	private void handleSelectMode() {
-		Event.fireEvent(toolboxPane, new ChangeModeEvent(
-				ChangeModeEvent.Mode.SELECT));
+		Event.fireEvent(toolboxPane, new StateChangeEvent(new SelectState(this.getEditor())));
 	}
 
 	
 	@FXML
 	private void handleAddEdge() {
-		Event.fireEvent(toolboxPane, new ChangeModeEvent(
-				ChangeModeEvent.Mode.ADD_EDGE));
+		Event.fireEvent(toolboxPane, new StateChangeEvent(new AddEdgeState(this.getEditor())));
 	}
 	
 }

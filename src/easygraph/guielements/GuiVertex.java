@@ -1,12 +1,14 @@
 package easygraph.guielements;
 
 import easygraph.application.Editor;
-import easygraph.events.VertexClickedEvent;
-import easygraph.events.VertexPressedEvent;
+import easygraph.events.VertexLeftClickEvent;
+import easygraph.events.VertexLeftPressedEvent;
+import easygraph.events.VertexRightClickEvent;
 import easygraph.model.EGProperty;
 import easygraph.utils.Config;
 import graphlib.Vertex;
 import javafx.event.EventHandler;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -15,10 +17,13 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
-public class GuiVertex extends StackPane {
+public class GuiVertex extends StackPane implements Repaintable {
 
 	public static final int RADIUS = 20;
 	private Vertex<?> vertex;
+	
+	private Ellipse ellipse;
+	private Text text;
 	
 	public GuiVertex(Vertex<?> v) {
 		this.vertex = v;
@@ -28,17 +33,15 @@ public class GuiVertex extends StackPane {
 	private void init() {
 				
 		// use an ellipse to make border visible
-		Ellipse ellipse = new Ellipse();
+		ellipse = new Ellipse();
 		ellipse.setRadiusX(GuiVertex.RADIUS);
 		ellipse.setRadiusY(GuiVertex.RADIUS);
-		
 		ellipse.setFill(Color.WHITE);
-		ellipse.setStroke(Config.getColor());
+		ellipse.setStroke(Config.getUnmarkColor());
 		ellipse.setStrokeWidth(2.0);
 		
 		// use a Text for the string representation of the value stored in vertex
 		
-		Text text = null;
 		Object obj = this.vertex.element();
 		
 		if (obj != null && (obj.getClass().isPrimitive() || obj instanceof String) ) {
@@ -50,7 +53,7 @@ public class GuiVertex extends StackPane {
 		}
 		
 		text.setFont(Font.font(Config.getFontFamily(), FontWeight.BOLD, Config.getFontSize()));
-		text.setFill(Config.getColor());
+		text.setFill(Config.getUnmarkColor());
 				
 		// get the X and Y positions where the centers of the vertex circle have to be
 		double coordX = (double)vertex.get(EGProperty.EG_COORDINATE_X);
@@ -68,18 +71,32 @@ public class GuiVertex extends StackPane {
 		
 		// add a Click Handler to the StackPane
 		this.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			
 			@Override
 			public void handle(MouseEvent event) {
-				GuiVertex.this.fireEvent(new VertexClickedEvent(GuiVertex.this.vertex, event));
+				// stop propagation of the originally fired event.
 				event.consume();
+				
+				MouseButton btn = event.getButton();
+				
+				if (btn == MouseButton.PRIMARY) {
+					GuiVertex.this.fireEvent(new VertexLeftClickEvent(GuiVertex.this));
+				}
+				else if (btn == MouseButton.SECONDARY) {
+					GuiVertex.this.fireEvent(new VertexRightClickEvent(GuiVertex.this));
+				}
 			}
         });
 
 		// add a Pressed Handler to the StackPane 
 		this.setOnMousePressed(new EventHandler<MouseEvent>() {
-			
+			@Override
 			public void handle(final MouseEvent event) {
-				GuiVertex.this.fireEvent(new VertexPressedEvent(GuiVertex.this, event));
+				if (event.getButton() == MouseButton.PRIMARY) {
+					GuiVertex.this.fireEvent(new VertexLeftPressedEvent(GuiVertex.this));
+				}
+				// stop propagation of originally fired event.
+				event.consume();
 			}
 		});
 		
@@ -87,6 +104,25 @@ public class GuiVertex extends StackPane {
 
 	public Vertex<?> getVertex() {
 		return vertex;
+	}
+	
+	@Override
+	public void mark() {
+		this.mark(Config.getMarkColor());
+	}
+
+	@Override
+	public void mark(Color color) {
+		ellipse.setStroke(color);
+		text.setFill(color);
+		this.effectProperty();
+	}
+
+	@Override
+	public void unmark() {
+		ellipse.setStroke(Config.getUnmarkColor());
+		text.setFill(Config.getUnmarkColor());
+		this.effectProperty();
 	}
 	
 	

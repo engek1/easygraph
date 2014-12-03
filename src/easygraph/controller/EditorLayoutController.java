@@ -1,5 +1,6 @@
 package easygraph.controller;
 
+import easygraph.application.Editor;
 import graphlib.Edge;
 import graphlib.Graph;
 import graphlib.Vertex;
@@ -10,8 +11,8 @@ import javafx.fxml.FXML;
  * @author engek1
  *
  */
-public class EditorLayoutController {
-
+public class EditorLayoutController extends BaseController {
+		
 	@FXML
 	private ToolboxViewController toolboxViewController;
 	@FXML
@@ -19,18 +20,11 @@ public class EditorLayoutController {
 	@FXML
 	private DrawViewController drawViewController;
 	
-	public EditorLayoutController() {
-		
-	}
 
 	public void initialize() {
-
 	}
 
-	/**
-	 * draw Graph to DrawView
-	 * @param graph
-	 */
+
 	public void showGraph(Graph<?, ?> graph) {
 		drawViewController.showGraph(graph);
 	}
@@ -41,6 +35,13 @@ public class EditorLayoutController {
 
 	public void addEdge(Edge<?> edge, Vertex<?> fromVertex, Vertex<?> toVertex) {
 		drawViewController.addEdge(edge, fromVertex, toVertex);
+	}
+	
+	public void distributeEditor(Editor editor) {
+		this.setEditor(editor);
+		this.toolboxViewController.setEditor(editor);
+		this.propertiesViewController.setEditor(editor);
+		this.drawViewController.setEditor(editor);
 	}
 
 }

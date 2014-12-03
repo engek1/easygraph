@@ -5,7 +5,8 @@ import javafx.scene.paint.Color;
 public class Config {
 	
 	private static final double GUI_PADDING = 30;
-	private static final String GUI_COLOR = "#6495ED"; // cornflower blue
+	private static final String GUI_COLOR_UNMARKED = "#6495ED"; // cornflower blue
+	private static final String GUI_COLOR_MARKED = "#FF4000";
 	
 	private static final String FONT_FAMILY = "Verdana";
 	private static final double FONT_SIZE = 15.0;
@@ -16,8 +17,12 @@ public class Config {
 		return Config.GUI_PADDING;
 	}
 	
-	public static Color getColor() {
-		return Color.valueOf(Config.GUI_COLOR);
+	public static Color getUnmarkColor() {
+		return Color.valueOf(Config.GUI_COLOR_UNMARKED);
+	}
+	
+	public static Color getMarkColor() {
+		return Color.valueOf(Config.GUI_COLOR_MARKED);
 	}
 	
 	public static String getFontFamily() {

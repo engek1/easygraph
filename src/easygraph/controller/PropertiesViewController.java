@@ -2,7 +2,7 @@ package easygraph.controller;
 
 import javafx.fxml.FXML;
 
-public class PropertiesViewController {
+public class PropertiesViewController extends BaseController {
 	
 	/**
 	 * The constructor. The constructor is called before the initialize()

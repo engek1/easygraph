@@ -1,21 +1,9 @@
 package easygraph.application;
 
 import easygraph.controller.EditorLayoutController;
-import easygraph.controller.mode.Mode;
-import easygraph.controller.mode.SelectMode;
-import easygraph.eventhandlers.ChangeModeEventHandler;
-import easygraph.eventhandlers.DrawViewClickEventHandler;
-import easygraph.eventhandlers.DrawViewMouseReleasedEventHandler;
-import easygraph.eventhandlers.EdgeEventHandler;
-import easygraph.eventhandlers.VertexClickedEventHandler;
-import easygraph.eventhandlers.VertexPressedEventHandler;
-import easygraph.events.ChangeModeEvent;
-import easygraph.events.DrawViewClickEvent;
-import easygraph.events.DrawViewMouseReleasedEvent;
-import easygraph.events.EdgeEvent;
-import easygraph.events.VertexClickedEvent;
-import easygraph.events.VertexPressedEvent;
 import easygraph.model.EGProperty;
+import easygraph.state.SelectState;
+import easygraph.state.State;
 import easygraph.utils.Config;
 import graphlib.Edge;
 import graphlib.Graph;
@@ -27,6 +15,11 @@ import java.util.Iterator;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonBar.ButtonData;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Dialog;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -42,12 +35,9 @@ public class Editor extends Application implements GraphController {
 	private static final String EDITOR_LAYOUT = "../view/EditorLayout.fxml";
 
 	private static Graph<?, ?> graph;
-
 	private static Integer VertexNumber = 0;
 
-	// current editor mode
-	private Mode mode;
-
+	private State state;
 	private Stage stage;
 	private Scene editorScene;
 	private EditorLayoutController editorController;
@@ -55,10 +45,12 @@ public class Editor extends Application implements GraphController {
 	public static final double SIZE_X = 600;
 	public static final double SIZE_Y = 400;
 
+	
 	public Editor() {
-		this.mode = new SelectMode(this);
+		// nothing to do here.
 	}
 
+	
 	/**
 	 * Set the graph reference and launch the GUI.
 	 * 
@@ -83,14 +75,14 @@ public class Editor extends Application implements GraphController {
 		Iterator<?> it = Editor.graph.vertices();
 		while (it.hasNext()) {
 			Vertex<?> v = (Vertex<?>) it.next();
-			if (!v.has(EGProperty.EG_COORDINATE_X)
-					|| !v.has(EGProperty.EG_COORDINATE_Y)) {
+			if (!v.has(EGProperty.EG_COORDINATE_X) || !v.has(EGProperty.EG_COORDINATE_Y)) {
 				return false;
 			}
 		}
 		return true;
 	}
 
+	
 	/**
 	 * Put all vertices in place of a circle by using some Math.<br>
 	 * <br>
@@ -131,6 +123,7 @@ public class Editor extends Application implements GraphController {
 		}
 	}
 
+	
 	/**
 	 * Call the vertices adjustment method with pre-defined size parameters.
 	 */
@@ -138,6 +131,7 @@ public class Editor extends Application implements GraphController {
 		this.adjustVerticesToCircle(SIZE_X, SIZE_Y);
 	}
 
+	
 	@Override
 	public void start(Stage primaryStage) {
 		this.stage = primaryStage;
@@ -147,11 +141,15 @@ public class Editor extends Application implements GraphController {
 		this.stage.getIcons().add(new Image("file:resources/images/logo.png"));
 
 		initEditorLayout();
-
 		stage.setScene(editorScene);
+		
+		this.state = new SelectState(this);
+		this.state.enter();
+		
 		stage.show();
 	}
 
+	
 	private void initEditorLayout() {
 		FXMLLoader editorLoader = new FXMLLoader(
 				Editor.class.getResource(Editor.EDITOR_LAYOUT));
@@ -159,6 +157,7 @@ public class Editor extends Application implements GraphController {
 			BorderPane borderPane = (BorderPane) editorLoader.load();
 			editorScene = new Scene(borderPane);
 
+			/*
 			editorScene.addEventHandler(EdgeEvent.EDGE_CLICKED,
 					new EdgeEventHandler(this));
 			editorScene.addEventHandler(VertexClickedEvent.VERTEX_CLICKED,
@@ -169,24 +168,23 @@ public class Editor extends Application implements GraphController {
 					new DrawViewClickEventHandler(this));
             editorScene.addEventHandler(VertexPressedEvent.VERTEX_PRESSED, new VertexPressedEventHandler(this));
             editorScene.addEventHandler(DrawViewMouseReleasedEvent.DRAW_VIEW_MOUSE_RELEASED, new DrawViewMouseReleasedEventHandler(this));
+            */
             
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
 		editorController = editorLoader.getController();
+		editorController.distributeEditor(this);
 		editorController.showGraph(Editor.graph);
 	}
 
-	/**
-	 * Returns the main stage.
-	 * 
-	 * @return
-	 */
+
 	public Stage getPrimaryStage() {
 		return stage;
 	}
 
+	
 	@Override
 	public void addVertex(double x, double y) {
 		Vertex<?> newVertex = Editor.graph.insertVertex(null);
@@ -199,20 +197,31 @@ public class Editor extends Application implements GraphController {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public void addEdge(Vertex fromVertex, Vertex toVertex) {
-
-		// TODO catch exception when try to insert parallel edge.
 		Edge<?> newEdge = Editor.graph.insertEdge(fromVertex, toVertex, null);
 		newEdge.set(EGProperty.EG_NAME, "none");
-
 		editorController.addEdge(newEdge, fromVertex, toVertex);
 	}
-
-	public void setMode(Mode mode) {
-		this.mode = mode;
+	
+	
+	public void showConfirmDialog(String text) {
+		Alert alert = new Alert(AlertType.WARNING);
+		alert.setTitle("Warning");
+		alert.setHeaderText("Invalid Selection");
+		alert.setContentText(text);
+		alert.showAndWait();
+		
 	}
 
-	public Mode getMode() {
-		return this.mode;
+	public State getState() {
+		return this.state;
+	}
+	
+	public void setState(State state) {
+		this.state = state;
+	}
+	
+	public Graph<?, ?> getGraph() {
+		return Editor.graph;
 	}
 
 	public static String getIdentifier() {
