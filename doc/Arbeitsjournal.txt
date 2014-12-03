@@ -3,6 +3,18 @@ Arbeitsjournal - Projekt1 - easyGraph - Team WEW
 ----------------------------------------------------------------------------
 
 ============================================================================
+26.11.2014 - 03.12.2014 webel3
+
+Refactoring an den Events und Eventhandlern.
+Einbau einer Statemachine, welche neu die Eventhandler inkludiert (dafür 
+Zwischenlayer von Eventhandlern entfernt).
+
+Colorable Interface erstellt und in GuiVertex implementiert, damit 
+ein Repaint mit anderen Farben erwirkt werden kann.
+
+--> Erkenntnis: mittels aufrufen von "effectProperty()" kann ein 
+Gui-Element zum neuladen gezwungen werden.
+============================================================================
 26.11.2014 engek1 / webel3
 
 Refactoring an den Events / Eventhandlern und der State Machine 
