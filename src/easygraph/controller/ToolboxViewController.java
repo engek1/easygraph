@@ -14,6 +14,7 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 
 /**
  * 
@@ -24,6 +25,9 @@ public class ToolboxViewController extends BaseController {
 
 	@FXML
 	private Pane toolboxPane;
+	
+	@FXML
+	private VBox vbox;
 
 	@FXML
 	ComboBox<String> methodsBox = new ComboBox<String>();
@@ -80,5 +84,12 @@ public class ToolboxViewController extends BaseController {
 	private void handleAddEdge() {
 		Event.fireEvent(toolboxPane, new StateChangeEvent(new AddEdgeState(this.getEditor())));
 	}
+	
+	@FXML
+	private void disable() {
+		vbox.setDisable(true);
+	}
+	
+	
 	
 }
