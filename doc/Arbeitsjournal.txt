@@ -3,12 +3,12 @@ Arbeitsjournal - Projekt1 - easyGraph - Team WEW
 ----------------------------------------------------------------------------
 
 ============================================================================
-05.12.2014 webel3
+05.12.2014 webel3 / wengm17
 
 - 2 Bugs behoben
 - optische Erkennung fertig implementiert
 - Update der ankommenden Edges bei Vertex Verschiebung implementiert
-- Anforderungskatalog fertiggestellt für die Dokumentation
+- Anforderungskatalog fertiggestellt für die Projekt Dokumentation
 - Anforderungen anhand der RUP Satzschablone angepasst
 - Anforderungen qualifiziert und kategorisiert
 ============================================================================
