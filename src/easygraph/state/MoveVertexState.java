@@ -23,6 +23,7 @@ public class MoveVertexState extends State {
 	
 	@Override
 	public void handle(PaneMouseReleasedEvent event) {
+		
 		double eventX = event.getMouseEvent().getX();
 		double eventY = event.getMouseEvent().getY();
 		
@@ -46,20 +47,18 @@ public class MoveVertexState extends State {
 		this.guiVertex.setCursor(Cursor.DEFAULT);
 		this.guiVertex.unmark();
 		
-		// TODO : update all connecting Edges.
+		// update all connecting edges
 		Iterator<?> it = this.editor.getGraph().incidentEdges((Vertex) this.guiVertex.getVertex());
 		while (it.hasNext()) {
 			Edge<?> e = (Edge<?>) it.next();
 			if (e.has(EGProperty.EG_GUI_EDGE_REFERENCE)) {
 				GuiEdge ge = (GuiEdge) e.get(EGProperty.EG_GUI_EDGE_REFERENCE);
-				ge.unmark();
-				
-				// TODO: don't work yet....
+				ge.setCoordinates();
 			}
 		}
 		
 		// finally, leave the drag-n-drop State and change to a SelectState.
-		this.editor.getState().changeState(new SelectState(this.editor));;
+		this.changeState(new SelectState(this.editor));;
 	}
 
 }

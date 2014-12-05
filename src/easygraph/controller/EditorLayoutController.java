@@ -15,8 +15,10 @@ public class EditorLayoutController extends BaseController {
 		
 	@FXML
 	private ToolboxViewController toolboxViewController;
+	
 	@FXML
 	private PropertiesViewController propertiesViewController;
+	
 	@FXML
 	private DrawViewController drawViewController;
 	

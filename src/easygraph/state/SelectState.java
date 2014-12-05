@@ -17,7 +17,7 @@ public class SelectState extends State {
 	@Override
 	public void handle(VertexLeftPressedEvent event) {
 		event.getGuiVertex().setCursor(Cursor.CLOSED_HAND);
-		this.editor.getState().changeState(new MoveVertexState(this.editor, event.getGuiVertex()));
+		this.changeState(new MoveVertexState(this.editor, event.getGuiVertex()));
 	}
 
 

@@ -26,11 +26,7 @@ public class GuiEdge extends Line implements Repaintable {
 	}
 	
 	private void init() {
-		this.setStartX((double)this.origin.get(EGProperty.EG_COORDINATE_X));
-		this.setStartY((double)this.origin.get(EGProperty.EG_COORDINATE_Y));
-		
-		this.setEndX((double)this.destination.get(EGProperty.EG_COORDINATE_X));
-		this.setEndY((double)this.destination.get(EGProperty.EG_COORDINATE_Y));
+		this.setCoordinates();
 		
 		this.setStrokeWidth(5.0);
 		this.setStroke(Config.getUnmarkColor());
@@ -51,6 +47,14 @@ public class GuiEdge extends Line implements Repaintable {
 			}
         });
 	}
+	
+	public void setCoordinates() {
+		this.setStartX((double)this.origin.get(EGProperty.EG_COORDINATE_X));
+		this.setStartY((double)this.origin.get(EGProperty.EG_COORDINATE_Y));
+		
+		this.setEndX((double)this.destination.get(EGProperty.EG_COORDINATE_X));
+		this.setEndY((double)this.destination.get(EGProperty.EG_COORDINATE_Y));
+	}
 
 	@Override
 	public void mark() {
@@ -66,6 +70,7 @@ public class GuiEdge extends Line implements Repaintable {
 
 	@Override
 	public void unmark() {
+		System.out.println("SCHNABBER");
 		this.setStroke(Config.getUnmarkColor());
 		this.effectProperty();		
 	}

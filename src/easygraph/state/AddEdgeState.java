@@ -1,6 +1,8 @@
 package easygraph.state;
 
+import javafx.event.Event;
 import easygraph.application.Editor;
+import easygraph.events.StateChangeEvent;
 import easygraph.events.VertexLeftClickEvent;
 import easygraph.events.VertexRightClickEvent;
 import easygraph.guielements.GuiVertex;
@@ -31,7 +33,7 @@ public class AddEdgeState extends State {
 				    this.origin.unmark();
 				    
 				    // finally, change to a new AddEdgeState. otherwise, you would insert a new Edge from the origin vertex.
-				    this.editor.getState().changeState(new AddEdgeState(this.editor));
+				    this.changeState(new AddEdgeState(this.editor));
 				} catch (RuntimeException re) {
 					this.editor.showConfirmDialog("EasyGraph catched a Runtime Exception. The Message of it is: " + re.getMessage());
 				}
@@ -43,7 +45,7 @@ public class AddEdgeState extends State {
 	public void handle(VertexRightClickEvent event) {
 		if (this.origin != null) {
 			this.origin.unmark();
-			this.editor.getState().changeState(new AddEdgeState(this.editor));
+			this.changeState(new AddEdgeState(this.editor));
 		}
 	}
 	
@@ -53,6 +55,7 @@ public class AddEdgeState extends State {
 		if (this.origin != null) {
 			this.origin.unmark();
 		}
+		// remember to call the parent's leave!
 		super.leave();
 	}
 
