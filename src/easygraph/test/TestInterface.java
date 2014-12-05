@@ -15,7 +15,7 @@ import graphlib.Vertex;
 
 public class TestInterface<V,E> {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
 		/*
 				A --- B
 				| \   |
@@ -58,11 +58,8 @@ public class TestInterface<V,E> {
 		};
 		new Thread(guiThread).start();
 		
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+		Thread.sleep(1000);
+		
 		System.out.println("##### START ALGORITHM...");
 		
 		// start Algorithm
@@ -71,7 +68,6 @@ public class TestInterface<V,E> {
 		
 		EasyGraph.setSelected(vA);
 		
-		EasyGraph.setDiscovered(vA);
 		EasyGraph.setDiscovered(eAB);
 		EasyGraph.setDiscovered(vB);
 		EasyGraph.setDiscovered(eAC);
@@ -86,9 +82,12 @@ public class TestInterface<V,E> {
 		EasyGraph.setDisabled(eAB);
 		EasyGraph.setDisabled(vD);
 		EasyGraph.setDisabled(eAD);
+		EasyGraph.setDisabled(eBD);
+		EasyGraph.setDisabled(eCD);
 		
 		// then execute steps
 		for (int i = 0; i < 20; i++) {
+			Thread.sleep(1000);
 			EasyGraph.forward();
 		}
 		

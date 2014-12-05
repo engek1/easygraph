@@ -10,5 +10,10 @@ public interface Repaintable {
 	void mark(Color color);
 	
 	void unmark();
+	
+	/**
+	 * repaint all gui-specific attributes from model.
+	 */
+	void repaint();
 
 }

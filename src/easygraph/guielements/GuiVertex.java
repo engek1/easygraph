@@ -28,6 +28,7 @@ public class GuiVertex extends StackPane implements Repaintable {
 	public GuiVertex(Vertex<?> v) {
 		this.vertex = v;
 		this.init();
+		v.set(EGProperty.EG_GUI_VERTEX_REFERENCE, this);
 	}
 	
 	private void init() {
@@ -123,6 +124,13 @@ public class GuiVertex extends StackPane implements Repaintable {
 		ellipse.setStroke(Config.getUnmarkColor());
 		text.setFill(Config.getUnmarkColor());
 		this.effectProperty();
+	}
+
+	@Override
+	public void repaint() {
+		Color color = (Color) vertex.get(EGProperty.EG_COLOR);
+		mark(color);
+		// TODO paint other gui properties...
 	}
 	
 	

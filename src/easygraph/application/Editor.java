@@ -1,10 +1,13 @@
 package easygraph.application;
 
 import easygraph.controller.EditorLayoutController;
+import easygraph.guielements.GuiEdge;
+import easygraph.guielements.GuiVertex;
 import easygraph.model.EGProperty;
 import easygraph.state.SelectState;
 import easygraph.state.State;
 import easygraph.utils.Config;
+import graphlib.Decorable;
 import graphlib.Edge;
 import graphlib.Graph;
 import graphlib.Vertex;
@@ -210,6 +213,18 @@ public class Editor extends Application implements GraphController {
 
 	public static String getIdentifier() {
 		return "v-" + ++Editor.VertexNumber;
+	}
+
+	public void repaint(Decorable object) {
+		if(object instanceof Vertex<?>){
+			Vertex<?> vertex = (Vertex<?>) object;
+			GuiVertex guiVertex = (GuiVertex) vertex.get(EGProperty.EG_GUI_VERTEX_REFERENCE);
+			guiVertex.repaint();
+		}else if (object instanceof Edge<?>){
+			Edge<?> edge = (Edge<?>) object;
+			GuiEdge guiEdge = (GuiEdge) edge.get(EGProperty.EG_GUI_EDGE_REFERENCE);
+			guiEdge.repaint();
+		}
 	}
 
 }

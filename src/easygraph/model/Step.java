@@ -28,6 +28,11 @@ public class Step<T extends Decorable> {
 		return value;
 	}
 
+	public T getObject() {
+		return object;
+	}
+
+
 	/**
 	 * Saves the current state of the property to a new Step to ensure backward functionality.
 	 * @return 
@@ -38,6 +43,7 @@ public class Step<T extends Decorable> {
 		try{
 			propertyValue = object.get(property);
 		}catch(RuntimeException e){
+			// FIXME try to solve this problem.
 			System.out.println("! "+e.getMessage());
 		}
 		return new Step<T>(this.object, property, propertyValue);

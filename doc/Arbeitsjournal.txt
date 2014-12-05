@@ -3,7 +3,7 @@ Arbeitsjournal - Projekt1 - easyGraph - Team WEW
 ----------------------------------------------------------------------------
 
 ============================================================================
-05.12.2014 webel3 / wengm17
+05.12.2014 webel3 / wengm17 / engek1
 
 - 2 Bugs behoben
 - optische Erkennung fertig implementiert
@@ -11,8 +11,12 @@ Arbeitsjournal - Projekt1 - easyGraph - Team WEW
 - Anforderungskatalog fertiggestellt für die Projekt Dokumentation
 - Anforderungen anhand der RUP Satzschablone angepasst
 - Anforderungen qualifiziert und kategorisiert
+- Interface Tester gemacht um Schnittstelle des EasyGraph
+  anhand einer Algorithmussimulation zu testen.
+- Eingabeelemente disablen in gewissen Modi.
+- Elemente färben von Schnittstelle aus.
 ============================================================================
-26.11.2014 - 03.12.2014 webel3 / wengm17
+26.11.2014 - 03.12.2014 webel3 / wengm17    (engek1 -> krank)
 
 Refactoring an den Events und Eventhandlern.
 Einbau einer Statemachine, welche neu die Eventhandler inkludiert (dafür 

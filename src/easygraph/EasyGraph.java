@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
+import javafx.application.Platform;
 import javafx.scene.paint.Color;
 
 /**
@@ -126,13 +127,15 @@ public class EasyGraph {
 		// get next step
 		Step<? extends Decorable> step = FORWARD_STEPS.get(FORWARD_STEP_INDEX);
 		
-		// add backward step to history
+		// add backward step to history 
+		// FIXME check if originally the property was not set.
 		BACKWARD_STEPS.push(step.origin());
 		
 		// make changes on model
 		step.apply();
 		
-		// TODO make changes on UI as well
+		// make changes on UI as well. Important let it run in the JavaFx thread when called from outside.
+		Platform.runLater(()->GUI.repaint(step.getObject()));
 		
 		// finally increase the index
 		FORWARD_STEP_INDEX++;
@@ -148,8 +151,9 @@ public class EasyGraph {
 		Step<? extends Decorable> step = BACKWARD_STEPS.pop();
 		step.apply();
 		
-		// TODO make changes on UI as well
-		
+		// make changes on UI as well. Important let it run in the JavaFx thread when called from outside.
+		Platform.runLater(()->GUI.repaint(step.getObject()));
+				
 		FORWARD_STEP_INDEX--;
 	}
 	

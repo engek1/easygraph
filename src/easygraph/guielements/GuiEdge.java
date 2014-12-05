@@ -74,4 +74,11 @@ public class GuiEdge extends Line implements Repaintable {
 		this.setStroke(Config.getUnmarkColor());
 		this.effectProperty();		
 	}
+
+	@Override
+	public void repaint() {
+		Color color = (Color) edge.get(EGProperty.EG_COLOR);
+		mark(color);
+		// TODO paint other gui properties...
+	}
 }
