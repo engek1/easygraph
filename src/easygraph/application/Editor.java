@@ -17,9 +17,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.ButtonBar.ButtonData;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Dialog;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -156,19 +153,6 @@ public class Editor extends Application implements GraphController {
 		try {
 			BorderPane borderPane = (BorderPane) editorLoader.load();
 			editorScene = new Scene(borderPane);
-
-			/*
-			editorScene.addEventHandler(EdgeEvent.EDGE_CLICKED,
-					new EdgeEventHandler(this));
-			editorScene.addEventHandler(VertexClickedEvent.VERTEX_CLICKED,
-					new VertexClickedEventHandler(this));
-			editorScene.addEventHandler(ChangeModeEvent.CHANGE_MODE,
-					new ChangeModeEventHandler(this));
-			editorScene.addEventHandler(DrawViewClickEvent.DRAW_VIEW_CLICKED,
-					new DrawViewClickEventHandler(this));
-            editorScene.addEventHandler(VertexPressedEvent.VERTEX_PRESSED, new VertexPressedEventHandler(this));
-            editorScene.addEventHandler(DrawViewMouseReleasedEvent.DRAW_VIEW_MOUSE_RELEASED, new DrawViewMouseReleasedEventHandler(this));
-            */
             
 		} catch (IOException e) {
 			e.printStackTrace();

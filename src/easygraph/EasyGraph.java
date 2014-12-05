@@ -41,6 +41,7 @@ public class EasyGraph {
 	
 	public static void setDiscovered(Edge<?> edge, Color color) {
 		FORWARD_STEPS.add(new Step<Edge<?>>(edge, EGProperty.EG_COLOR, color));
+		System.out.println("add Step: Edge("+edge+") - "+color);
 	}
 
 	
@@ -50,6 +51,7 @@ public class EasyGraph {
 	
 	public static void setDiscovered(Vertex<?> vertex, Color color) {
 		FORWARD_STEPS.add(new Step<Vertex<?>>(vertex, EGProperty.EG_COLOR, color));
+		System.out.println("add Step: Vertex("+vertex+") - "+color);
 	}
 	
 	
@@ -59,6 +61,7 @@ public class EasyGraph {
 
 	public static void setSelected(Edge<?> edge, Color color) {
 		FORWARD_STEPS.add(new Step<Edge<?>>(edge, EGProperty.EG_COLOR, color));
+		System.out.println("add Step: Edge("+edge+") - "+color);
 	}
 	
 
@@ -68,6 +71,7 @@ public class EasyGraph {
 	
 	public static void setSelected(Vertex<?> vertex, Color color) {
 		FORWARD_STEPS.add(new Step<Vertex<?>>(vertex, EGProperty.EG_COLOR, color));
+		System.out.println("add Step: Vertex("+vertex+") - "+color);
 	}
 	
 	
@@ -77,6 +81,7 @@ public class EasyGraph {
 
 	public static void setDisabled(Edge<?> edge, Color color) {
 		FORWARD_STEPS.add(new Step<Edge<?>>(edge, EGProperty.EG_COLOR, color));
+		System.out.println("add Step: Edge("+edge+") - "+color);
 	}
 	
 	
@@ -86,6 +91,7 @@ public class EasyGraph {
 
 	public static void setDisabled(Vertex<?> vertex, Color color) {
 		FORWARD_STEPS.add(new Step<Vertex<?>>(vertex, EGProperty.EG_COLOR, color));
+		System.out.println("add Step: Vertex("+vertex+") - "+color);
 	}
 	
 	
@@ -111,6 +117,12 @@ public class EasyGraph {
 	 * Increase the step-index.
 	 */
 	public static void forward() {
+		if(FORWARD_STEP_INDEX>=FORWARD_STEPS.size()){
+			System.out.println("! no next forward step");
+			return;
+		}
+		System.out.println("do forward step");
+		
 		// get next step
 		Step<? extends Decorable> step = FORWARD_STEPS.get(FORWARD_STEP_INDEX);
 		
@@ -131,6 +143,8 @@ public class EasyGraph {
 	 * Decrease the step-index.
 	 */
 	public static void backward() {
+		System.out.println("do backward step");
+		
 		Step<? extends Decorable> step = BACKWARD_STEPS.pop();
 		step.apply();
 		

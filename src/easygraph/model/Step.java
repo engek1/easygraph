@@ -30,10 +30,17 @@ public class Step<T extends Decorable> {
 
 	/**
 	 * Saves the current state of the property to a new Step to ensure backward functionality.
-	 * @return
+	 * @return 
 	 */
 	public Step<T> origin() {
-		return new Step<T>(this.object, getProperty(), object.get(this.getProperty()));
+		// prevent RuntimeException when no property was set before.
+		Object propertyValue = null;
+		try{
+			propertyValue = object.get(property);
+		}catch(RuntimeException e){
+			System.out.println("! "+e.getMessage());
+		}
+		return new Step<T>(this.object, property, propertyValue);
 	}
 
 	/**
