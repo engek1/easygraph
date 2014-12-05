@@ -9,5 +9,6 @@ public class EGProperty extends Property {
 	public static final String EG_RADIUS = "EG_RADIUS";
 	public static final String EG_COLOR = "EG_COLOR";
 	public static final String EG_NAME = "EG_NAME";
+	public static final String EG_GUI_EDGE_REFERENCE = "EG_GUI_EDGE_REFERENCE";
 
 }

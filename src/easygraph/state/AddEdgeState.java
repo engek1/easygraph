@@ -46,5 +46,14 @@ public class AddEdgeState extends State {
 			this.editor.getState().changeState(new AddEdgeState(this.editor));
 		}
 	}
+	
+	
+	@Override
+	public void leave() {
+		if (this.origin != null) {
+			this.origin.unmark();
+		}
+		super.leave();
+	}
 
 }

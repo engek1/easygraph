@@ -8,7 +8,6 @@ import easygraph.events.PaneMouseReleasedEvent;
 import easygraph.guielements.GuiEdge;
 import easygraph.guielements.GuiVertex;
 import easygraph.model.EGProperty;
-import easygraph.utils.Config;
 import graphlib.Edge;
 import graphlib.Vertex;
 
@@ -24,8 +23,11 @@ public class MoveVertexState extends State {
 	
 	@Override
 	public void handle(PaneMouseReleasedEvent event) {
-		double coordX = event.getMouseEvent().getX() - GuiVertex.RADIUS;
-		double coordY = event.getMouseEvent().getY() - GuiVertex.RADIUS;
+		double eventX = event.getMouseEvent().getX();
+		double eventY = event.getMouseEvent().getY();
+		
+		double coordX = eventX - GuiVertex.RADIUS;
+		double coordY = eventY - GuiVertex.RADIUS;
 
 		if (coordX < GuiVertex.RADIUS) {
 			coordX = GuiVertex.RADIUS;
@@ -33,17 +35,16 @@ public class MoveVertexState extends State {
 		if (coordY < GuiVertex.RADIUS) {
 			coordY = GuiVertex.RADIUS;
 		}
+		
 		// TODO: prevent maximum sizes exceeded.
 		
-		 // set new coordinates
 		this.guiVertex.setLayoutX(coordX);
 		this.guiVertex.setLayoutY(coordY);
-		this.guiVertex.getVertex().set(EGProperty.EG_COORDINATE_X, event.getMouseEvent().getX());
-		this.guiVertex.getVertex().set(EGProperty.EG_COORDINATE_Y, event.getMouseEvent().getY());
+		this.guiVertex.getVertex().set(EGProperty.EG_COORDINATE_X, eventX);
+		this.guiVertex.getVertex().set(EGProperty.EG_COORDINATE_Y, eventY);
 
 		this.guiVertex.setCursor(Cursor.DEFAULT);
 		this.guiVertex.unmark();
-		this.guiVertex.effectProperty();
 		
 		// TODO : update all connecting Edges.
 		Iterator<?> it = this.editor.getGraph().incidentEdges((Vertex) this.guiVertex.getVertex());

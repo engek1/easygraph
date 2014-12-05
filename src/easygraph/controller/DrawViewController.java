@@ -13,6 +13,7 @@ import easygraph.events.PaneLeftClickEvent;
 import easygraph.events.PaneMouseReleasedEvent;
 import easygraph.guielements.GuiEdge;
 import easygraph.guielements.GuiVertex;
+import easygraph.model.EGProperty;
 import graphlib.Edge;
 import graphlib.Graph;
 import graphlib.Vertex;
@@ -86,6 +87,7 @@ public class DrawViewController extends BaseController {
 			Edge e = (Edge) eIt.next();
 			Vertex<?>[] endVertices = graph.endVertices(e);
 			GuiEdge elem = new GuiEdge(e, endVertices[0], endVertices[1]);
+			e.set(EGProperty.EG_GUI_EDGE_REFERENCE, elem);
 			drawPane.getChildren().add(elem);
 			elem.toBack();
 		}
@@ -100,6 +102,7 @@ public class DrawViewController extends BaseController {
 	
 	void addEdge(Edge<?> newEdge, Vertex<?> fromVertex, Vertex<?> toVertex) {
 		GuiEdge guiEdge = new GuiEdge(newEdge, fromVertex, toVertex);
+		newEdge.set(EGProperty.EG_GUI_EDGE_REFERENCE, guiEdge);
 		Platform.runLater(new Runnable() {
 			public void run() {
 				drawPane.getChildren().add(guiEdge);

@@ -9,16 +9,16 @@ import graphlib.Vertex;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 
-public class GuiEdge extends Line {
+public class GuiEdge extends Line implements Repaintable {
 	
 	private Edge<?> edge;
 	private Vertex<?> origin;
 	private Vertex<?> destination;
 	
 	public GuiEdge(Edge<?> edge, Vertex<?> origin, Vertex<?> destination) {
-		super();
 		this.edge = edge;
 		this.origin = origin;
 		this.destination = destination;
@@ -50,5 +50,23 @@ public class GuiEdge extends Line {
 				event.consume();
 			}
         });
+	}
+
+	@Override
+	public void mark() {
+		this.setStroke(Config.getMarkColor());
+		this.effectProperty();	
+	}
+
+	@Override
+	public void mark(Color color) {
+		this.setStroke(color);
+		this.effectProperty();	
+	}
+
+	@Override
+	public void unmark() {
+		this.setStroke(Config.getUnmarkColor());
+		this.effectProperty();		
 	}
 }

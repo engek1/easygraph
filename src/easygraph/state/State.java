@@ -35,14 +35,14 @@ public abstract class State implements EventHandler<Event> {
 	}
 	
 
-	public final void enter() {
+	public void enter() {
 		System.out.println("entering new State '" + this.getClass().getSimpleName() + "' ...");
 		this.editor.getPrimaryStage().getScene().addEventHandler(Event.ANY, this);
 	}
 	
 	
 
-	public final void leave() {
+	public void leave() {
 		System.out.println("leaving old State '" + this.getClass().getSimpleName() + "' ...");
 		this.editor.getPrimaryStage().getScene().removeEventHandler(Event.ANY, this);
 	}
