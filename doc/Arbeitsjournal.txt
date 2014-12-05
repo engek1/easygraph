@@ -8,8 +8,11 @@ Arbeitsjournal - Projekt1 - easyGraph - Team WEW
 - 2 Bugs behoben
 - optische Erkennung fertig implementiert
 - Update der ankommenden Edges bei Vertex Verschiebung implementiert
+- Anforderungskatalog fertiggestellt für die Dokumentation
+- Anforderungen anhand der RUP Satzschablone angepasst
+- Anforderungen qualifiziert und kategorisiert
 ============================================================================
-26.11.2014 - 03.12.2014 webel3
+26.11.2014 - 03.12.2014 webel3 / wengm17
 
 Refactoring an den Events und Eventhandlern.
 Einbau einer Statemachine, welche neu die Eventhandler inkludiert (dafür 
