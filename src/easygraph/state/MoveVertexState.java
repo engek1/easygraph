@@ -21,6 +21,7 @@ public class MoveVertexState extends State {
 		guiVertex.mark();
 	}
 	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public void handle(PaneMouseReleasedEvent event) {
 		

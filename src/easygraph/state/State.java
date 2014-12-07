@@ -14,6 +14,7 @@ import easygraph.events.EdgeLeftClickEvent;
 import easygraph.events.EdgeRightClickEvent;
 import easygraph.events.PaneMouseReleasedEvent;
 import easygraph.events.PaneLeftClickEvent;
+import easygraph.events.PlayEvent;
 import easygraph.events.StateChangeEvent;
 import easygraph.events.VertexLeftClickEvent;
 import easygraph.events.VertexLeftPressedEvent;
@@ -97,6 +98,8 @@ public abstract class State implements EventHandler<Event> {
 			this.handle((EdgeRightClickEvent)event);
 		} else if (event instanceof PaneMouseReleasedEvent) {
 			this.handle((PaneMouseReleasedEvent)event);
+		}else if (event instanceof PlayEvent) {
+			this.handle((PlayEvent)event);
 		} else {
 			// fallback is quite difficult because of each mouse-move events, etc.
 		}
@@ -129,6 +132,11 @@ public abstract class State implements EventHandler<Event> {
 	
 	public void handle(PaneMouseReleasedEvent event) {
 		System.out.println("State does nothing with PaneMouseReleasedEvent.");
+	}
+	
+	public void handle(PlayEvent event) {
+		//this.changeState(new PlayState(this.editor));
+		
 	}
 	
 }

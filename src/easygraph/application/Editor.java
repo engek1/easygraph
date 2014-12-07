@@ -156,7 +156,6 @@ public class Editor extends Application implements GraphController {
 		try {
 			BorderPane borderPane = (BorderPane) editorLoader.load();
 			editorScene = new Scene(borderPane);
-            
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

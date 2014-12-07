@@ -53,7 +53,6 @@ public class DrawViewController extends BaseController {
 					event.consume();
 				}
 			}
-			
 		});
 		
 		// add a MouseReleased EventHandler to the draw pane.
@@ -62,7 +61,6 @@ public class DrawViewController extends BaseController {
 			public void handle(MouseEvent event) {
 				Event.fireEvent(drawPane, new PaneMouseReleasedEvent(event));
 			}
-			
 		});
 		
 		// TODO set default width and heigth to draw pane		
