@@ -226,4 +226,16 @@ public class Editor extends Application implements GraphController {
 		}
 	}
 
+
+	public void removeEdge(Edge<?> edge) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	public void removeEdge(Vertex<?> vertex) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

@@ -1,23 +1,31 @@
 package easygraph.events;
 
+import graphlib.Vertex;
 import javafx.event.Event;
 import javafx.event.EventType;
-import easygraph.guielements.GuiVertex;
+import javafx.scene.input.MouseEvent;
 
 public class VertexRightClickEvent extends Event {
 
-	private GuiVertex guiVertex;
+	private Vertex<?> vertex;
+	private MouseEvent event;
 	
 	private static final long serialVersionUID = 1L;
 
 	public static final EventType<VertexRightClickEvent> VERTEX_RIGHT_CLICK = new EventType<VertexRightClickEvent>(ANY, "VERTEX_RIGHT_CLICK");
 
-	public VertexRightClickEvent(GuiVertex guiVertex) {
+	public VertexRightClickEvent(Vertex<?> vertex, MouseEvent event) {
 		super(VERTEX_RIGHT_CLICK);
-		this.guiVertex = guiVertex;
+		this.vertex = vertex;
+		this.event = event;
 	}
 	
-	public GuiVertex getGuiVertex() {
-		return this.guiVertex;
+	public Vertex<?> getVertex() {
+		return this.vertex;
 	}
+
+	public MouseEvent getEvent() {
+		return event;
+	}
+	
 }

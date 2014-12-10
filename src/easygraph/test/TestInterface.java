@@ -1,8 +1,5 @@
 package easygraph.test;
 
-import java.util.Iterator;
-
-import javafx.scene.paint.Color;
 import easygraph.EasyGraph;
 import easygraph.model.EGProperty;
 import graphlib.Edge;
@@ -12,6 +9,8 @@ import graphlib.IncidenceListGraph;
 import graphlib.Locator;
 import graphlib.Property;
 import graphlib.Vertex;
+
+import java.util.Iterator;
 
 public class TestInterface<V,E> {
 
@@ -97,6 +96,7 @@ public class TestInterface<V,E> {
 
 
 	
+	@SuppressWarnings("unchecked")
 	public void dijkstra(Graph<V,E> graph, Vertex<V> startVertex){
 		HeapPriorityQueue<Double,Vertex<V>> hq = new HeapPriorityQueue<>();
 		Iterator<Vertex<V>> it = graph.vertices();

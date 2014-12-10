@@ -1,10 +1,17 @@
 package easygraph.state;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Cursor;
+import javafx.scene.Node;
+import javafx.scene.control.ContextMenu;
+import javafx.scene.control.MenuItem;
 import easygraph.application.Editor;
 import easygraph.events.EdgeRightClickEvent;
 import easygraph.events.VertexLeftPressedEvent;
 import easygraph.events.VertexRightClickEvent;
+import easygraph.guielements.EdgeDialog;
+import easygraph.guielements.VertexDialog;
 
 public class SelectState extends State {
 
@@ -24,16 +31,74 @@ public class SelectState extends State {
 	@Override
 	public void handle(VertexRightClickEvent event) {
 		System.out.println("@Override :: SelectState handles VertexRightClickEvent.");
-		this.showPropertiesDialog();
+		
+		double screenX = event.getEvent().getScreenX();
+		double screenY = event.getEvent().getScreenY();
+		Node anchor = (Node) event.getEvent().getSource();
+		
+		// create context menu
+		ContextMenu cm = new ContextMenu();
+		// add edit action
+		MenuItem cmEdit = new MenuItem("Edit");
+		cmEdit.setOnAction(new EventHandler<ActionEvent>() {
+		    public void handle(ActionEvent e) {
+		    	// show dialog
+		    	VertexDialog dialog = new VertexDialog();
+		    	dialog.showIt();
+		    }
+		});
+		cm.getItems().add(cmEdit);
+		// add delete action
+		MenuItem cmDelete = new MenuItem("Delete");
+		cmDelete.setOnAction(new EventHandler<ActionEvent>() {
+		    public void handle(ActionEvent e) {
+		    	editor.removeEdge(event.getVertex());
+		    }
+		});
+		cm.getItems().add(cmDelete);
+		// add "set as start-vertex action delete" action
+		MenuItem cmAsStartVertex = new MenuItem("as Startvertex");
+		cmAsStartVertex.setOnAction(new EventHandler<ActionEvent>() {
+		    public void handle(ActionEvent e) {
+		    	// TODO @webel3: set vertex as start-vertex 
+		    }
+		});
+		cm.getItems().add(cmAsStartVertex);
+		// show context menu
+		cm.show(anchor, screenX, screenY);
 	}
 	
 	
 	@Override
 	public void handle(EdgeRightClickEvent event) {
 		System.out.println("@Override :: SelectState handles EdgeRightClickEvent.");
-		this.showPropertiesDialog();
+		
+		double screenX = event.getEvent().getScreenX();
+		double screenY = event.getEvent().getScreenY();
+		Node anchor = (Node) event.getEvent().getSource();
+		
+		// create context menu
+		ContextMenu cm = new ContextMenu();
+		// add edit action
+		MenuItem cmEdit = new MenuItem("Edit");
+		cmEdit.setOnAction(new EventHandler<ActionEvent>() {
+		    public void handle(ActionEvent e) {
+		    	// show dialog
+		    	EdgeDialog dialog = new EdgeDialog();
+		    	dialog.showIt();
+		    }
+		});
+		cm.getItems().add(cmEdit);
+		// add delete action
+		MenuItem cmDelete = new MenuItem("Delete");
+		cmDelete.setOnAction(new EventHandler<ActionEvent>() {
+		    public void handle(ActionEvent e) {
+		    	editor.removeEdge(event.getEdge());
+		    }
+		});
+		cm.getItems().add(cmDelete);
+		// show context menu
+		cm.show(anchor, screenX, screenY);
 	}
-	
-	
 
 }

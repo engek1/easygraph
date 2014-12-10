@@ -1,8 +1,6 @@
 package easygraph.state;
 
-import javafx.event.Event;
 import easygraph.application.Editor;
-import easygraph.events.StateChangeEvent;
 import easygraph.events.VertexLeftClickEvent;
 import easygraph.events.VertexRightClickEvent;
 import easygraph.guielements.GuiVertex;

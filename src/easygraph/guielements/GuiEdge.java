@@ -22,6 +22,7 @@ public class GuiEdge extends Line implements Repaintable {
 		this.edge = edge;
 		this.origin = origin;
 		this.destination = destination;
+		edge.set(EGProperty.EG_GUI_EDGE_REFERENCE, this);
 		init();
 	}
 	
@@ -40,7 +41,7 @@ public class GuiEdge extends Line implements Repaintable {
 					GuiEdge.this.fireEvent(new EdgeLeftClickEvent(GuiEdge.this.edge));
 				}
 				else if (btn == MouseButton.SECONDARY) {
-					GuiEdge.this.fireEvent(new EdgeRightClickEvent(GuiEdge.this.edge));
+					GuiEdge.this.fireEvent(new EdgeRightClickEvent(GuiEdge.this.edge, event));
 				}
 
 				event.consume();

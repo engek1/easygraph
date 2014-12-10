@@ -1,19 +1,12 @@
 package easygraph.state;
 
-import java.util.Optional;
-
 import javafx.event.Event;
 import javafx.event.EventHandler;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Dialog;
-import javafx.scene.control.ButtonBar.ButtonData;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import easygraph.application.Editor;
 import easygraph.events.EdgeLeftClickEvent;
 import easygraph.events.EdgeRightClickEvent;
-import easygraph.events.PaneMouseReleasedEvent;
 import easygraph.events.PaneLeftClickEvent;
+import easygraph.events.PaneMouseReleasedEvent;
 import easygraph.events.PlayEvent;
 import easygraph.events.StateChangeEvent;
 import easygraph.events.VertexLeftClickEvent;
@@ -28,53 +21,21 @@ public abstract class State implements EventHandler<Event> {
 		this.editor = editor;
 	}
 	
-	
 	public final void changeState(State newState) {
 		this.leave();
 		this.editor.setState(newState);
 		newState.enter();
 	}
 	
-
 	public void enter() {
 		System.out.println("entering new State '" + this.getClass().getSimpleName() + "' ...");
 		this.editor.getPrimaryStage().getScene().addEventHandler(Event.ANY, this);
 	}
-	
-	
 
 	public void leave() {
 		System.out.println("leaving old State '" + this.getClass().getSimpleName() + "' ...");
 		this.editor.getPrimaryStage().getScene().removeEventHandler(Event.ANY, this);
 	}
-
-
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public void showPropertiesDialog() {
-		Dialog dialog = new Dialog();
-		dialog.setTitle("dialog title");
-		dialog.setHeaderText("header text");
-	
-		dialog.setGraphic(new ImageView(new Image("file:resources/images/settings.png")));
-		
-		// Set the button types.
-		ButtonType buttonSave = new ButtonType("Speichern", ButtonData.OK_DONE);
-		ButtonType buttonCancle = new ButtonType("Abbrechen",
-				ButtonData.CANCEL_CLOSE);
-		dialog.getDialogPane().getButtonTypes()
-				.addAll(buttonSave, buttonCancle);
-	
-		// dialog.getDialogPane().getButtonTypes().addAll(ButtonType.CANCEL,
-		// ButtonType.APPLY);
-	
-		Optional<ButtonType> result = dialog.showAndWait();
-		System.out.println(result.toString());
-	
-		if (result.get().getButtonData() == ButtonData.OK_DONE) {
-			// update
-		}
-	}
-	
 	
 	@Override
 	public void handle(Event event) {

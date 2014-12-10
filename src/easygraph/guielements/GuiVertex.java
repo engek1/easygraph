@@ -27,8 +27,8 @@ public class GuiVertex extends StackPane implements Repaintable {
 	
 	public GuiVertex(Vertex<?> v) {
 		this.vertex = v;
-		this.init();
 		v.set(EGProperty.EG_GUI_VERTEX_REFERENCE, this);
+		this.init();
 	}
 	
 	private void init() {
@@ -84,7 +84,7 @@ public class GuiVertex extends StackPane implements Repaintable {
 					GuiVertex.this.fireEvent(new VertexLeftClickEvent(GuiVertex.this));
 				}
 				else if (btn == MouseButton.SECONDARY) {
-					GuiVertex.this.fireEvent(new VertexRightClickEvent(GuiVertex.this));
+					GuiVertex.this.fireEvent(new VertexRightClickEvent(GuiVertex.this.vertex, event));
 				}
 			}
         });
