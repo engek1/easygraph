@@ -1,7 +1,13 @@
 ----------------------------------------------------------------------------
 Arbeitsjournal - Projekt1 - easyGraph - Team WEW 
 ----------------------------------------------------------------------------
+============================================================================
+10.12.2014 webel3 / wengm17 / engek1
 
+- fertigstellen des Anforderungskatalogs
+- aufrufen der Algorithmen aus dem Programm begonnen
+- Kontextmenü für Vertices und Edges hinzugefügt.
+- Neue Dialoge zum Editieren von Vertices und Edges hinzugefügt.
 ============================================================================
 05.12.2014 webel3 / wengm17 / engek1
 
