@@ -1,11 +1,7 @@
 package easygraph.test;
 
 import easygraph.EasyGraph;
-import easygraph.model.EGProperty;
-import graphlib.AlgorithmsCollection;
 import graphlib.Edge;
-import graphlib.Graph;
-import graphlib.GraphExamples;
 import graphlib.IncidenceListGraph;
 import graphlib.Vertex;
 

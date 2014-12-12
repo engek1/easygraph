@@ -1,5 +1,13 @@
 package easygraph.controller;
 
+import java.lang.reflect.Method;
+
+import javafx.event.Event;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import easygraph.annotations.AlgorithmClazz;
 import easygraph.annotations.AlgorithmMethod;
 import easygraph.events.PlayEvent;
@@ -9,16 +17,6 @@ import easygraph.state.AddVertexState;
 import easygraph.state.PlayState;
 import easygraph.state.SelectState;
 import easygraph.utils.Config;
-import graphlib.AlgorithmsCollection;
-
-import java.lang.reflect.Method;
-
-import javafx.event.Event;
-import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 
 /**
  * 
