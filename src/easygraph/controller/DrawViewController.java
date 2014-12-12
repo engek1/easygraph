@@ -105,5 +105,13 @@ public class DrawViewController extends BaseController {
 			}
 		});
 	}
+
+	public void removeEdge(GuiEdge guiEdge) {
+		drawPane.getChildren().remove(guiEdge);
+	}
+
+	public void removeVertex(GuiVertex guiVertex) {
+		drawPane.getChildren().remove(guiVertex);
+	}
 	
 }

@@ -1,6 +1,8 @@
 package easygraph.controller;
 
 import easygraph.application.Editor;
+import easygraph.guielements.GuiEdge;
+import easygraph.guielements.GuiVertex;
 import graphlib.Edge;
 import graphlib.Graph;
 import graphlib.Vertex;
@@ -89,6 +91,16 @@ public class EditorLayoutController extends BaseController {
 	@FXML
 	private void aboutUs() {
 		System.out.println("-- ABOUT clicked.");
+	}
+
+	public void removeEdge(GuiEdge guiEdge) {
+		drawViewController.removeEdge(guiEdge);
+	}
+
+
+	public void removeVertex(GuiVertex guiVertex) {
+		drawViewController.removeVertex(guiVertex);
+		
 	}
 
 }

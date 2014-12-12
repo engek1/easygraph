@@ -13,7 +13,9 @@ import graphlib.Graph;
 import graphlib.Vertex;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -189,6 +191,31 @@ public class Editor extends Application implements GraphController {
 	}
 	
 	
+	public void removeEdge(Edge edge) {
+		// remove from gui
+		GuiEdge guiEdge = (GuiEdge) edge.get(EGProperty.EG_GUI_EDGE_REFERENCE);
+		editorController.removeEdge(guiEdge);
+		// remove from gui
+		graph.removeEdge(edge);
+	}
+
+
+	public void removeEdge(Vertex vertex) {
+		// remove from gui
+		GuiVertex guiVertex = (GuiVertex) vertex.get(EGProperty.EG_GUI_VERTEX_REFERENCE);
+		editorController.removeVertex(guiVertex);
+		Iterator<?> edges = graph.incidentEdges(vertex);
+		// remove from model
+		List<Edge> toRemove = new ArrayList<Edge>();
+		while(edges.hasNext()){
+			toRemove.add( (Edge) edges.next());
+		}
+		for (Edge edge : toRemove) {
+			removeEdge(edge);
+		}
+		graph.removeVertex(vertex);	
+	}
+
 	public void showConfirmDialog(String text) {
 		Alert alert = new Alert(AlertType.WARNING);
 		alert.setTitle("Warning");
@@ -253,18 +280,6 @@ public class Editor extends Application implements GraphController {
 			GuiEdge guiEdge = (GuiEdge) edge.get(EGProperty.EG_GUI_EDGE_REFERENCE);
 			guiEdge.repaint();
 		}
-	}
-
-
-	public void removeEdge(Edge<?> edge) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	public void removeEdge(Vertex<?> vertex) {
-		// TODO Auto-generated method stub
-		
 	}
 
 }
