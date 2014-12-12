@@ -10,7 +10,11 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import easygraph.annotations.AlgorithmClazz;
 import easygraph.annotations.AlgorithmMethod;
+import easygraph.events.BackwardEvent;
+import easygraph.events.ForwardEvent;
+import easygraph.events.PauseEvent;
 import easygraph.events.PlayEvent;
+import easygraph.events.ResetEvent;
 import easygraph.events.StateChangeEvent;
 import easygraph.state.AddEdgeState;
 import easygraph.state.AddVertexState;
@@ -98,18 +102,21 @@ public class ToolboxViewController extends BaseController {
 	@FXML
 	private void handlePauseClick() {
 		System.out.println("-- PAUSE clicked.");
+		Event.fireEvent(toolboxPane, new PauseEvent());
 	}
 	
 	
 	@FXML
 	private void handleForwardClick() {
 		System.out.println("-- FORWARD clicked.");
+		Event.fireEvent(toolboxPane, new ForwardEvent());
 	}
 	
 	
 	@FXML
 	private void handleBackwardClick() {
 		System.out.println("-- BACKWARD clicked.");
+		Event.fireEvent(toolboxPane, new BackwardEvent());
 	}
 	
 	
@@ -117,6 +124,7 @@ public class ToolboxViewController extends BaseController {
 	private void handleResetClick() {
 		System.out.println("-- RESET clicked -> enable Buttons");
 		this.disableButtons(false);
+		Event.fireEvent(toolboxPane, new ResetEvent());
 	}
 	
 	

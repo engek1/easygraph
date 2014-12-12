@@ -4,17 +4,16 @@ import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Dialog;
-import javafx.scene.control.ButtonBar.ButtonData;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import easygraph.application.Editor;
+import easygraph.events.BackwardEvent;
 import easygraph.events.EdgeLeftClickEvent;
 import easygraph.events.EdgeRightClickEvent;
+import easygraph.events.ForwardEvent;
 import easygraph.events.PaneLeftClickEvent;
 import easygraph.events.PaneMouseReleasedEvent;
+import easygraph.events.PauseEvent;
 import easygraph.events.PlayEvent;
+import easygraph.events.ResetEvent;
 import easygraph.events.StateChangeEvent;
 import easygraph.events.VertexLeftClickEvent;
 import easygraph.events.VertexLeftPressedEvent;
@@ -75,8 +74,16 @@ public abstract class State implements EventHandler<Event> {
 			this.handle((EdgeRightClickEvent)event);
 		} else if (event instanceof PaneMouseReleasedEvent) {
 			this.handle((PaneMouseReleasedEvent)event);
-		}else if (event instanceof PlayEvent) {
+		} else if (event instanceof PlayEvent) {
 			this.handle((PlayEvent)event);
+		} else if(event instanceof PauseEvent){
+			this.handle((PauseEvent)event);
+		} else if(event instanceof ForwardEvent){
+			this.handle((ForwardEvent)event);
+		} else if(event instanceof BackwardEvent){
+			this.handle((BackwardEvent)event);
+		} else if(event instanceof ResetEvent){
+			this.handle((ResetEvent)event);
 		} else {
 			// fallback is quite difficult because of each mouse-move events, etc.
 		}
@@ -112,8 +119,23 @@ public abstract class State implements EventHandler<Event> {
 	}
 	
 	public void handle(PlayEvent event) {
-		//this.changeState(new PlayState(this.editor));
-		
+		System.out.println("State does nothing with PlayEvent.");
+	}
+	
+	public void handle(PauseEvent event) {
+		System.out.println("State does nothing with PauseEvent.");
+	}
+	
+	public void handle(ForwardEvent event) {
+		System.out.println("State does nothing with ForwardEvent.");
+	}
+	
+	public void handle(BackwardEvent event) {
+		System.out.println("State does nothing with BackwardEvent.");
+	}
+	
+	public void handle(ResetEvent event) {
+		System.out.println("State does nothing with ResetEvent.");
 	}
 	
 }
