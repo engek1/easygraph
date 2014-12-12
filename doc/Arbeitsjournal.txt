@@ -9,8 +9,9 @@ Arbeitsjournal - Projekt1 - easyGraph - Team WEW
 - Serialisieren und Speichern des Graphs.
 - Löschen von Knoten und Kanten.
 - Events für AbspielButtons.
-- ...
-
+- Löschen der nicht mehr benötigten PropertieView 
+- Hinzufügen des Menuitem "New" 
+- Hinzufügen eines neues Menus "Graph" mit dem Menuitem "Arrange in a circle"
 ============================================================================
 10.12.2014 webel3 / wengm17 / engek1
 
