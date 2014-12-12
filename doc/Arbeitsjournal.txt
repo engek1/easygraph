@@ -1,6 +1,16 @@
 ----------------------------------------------------------------------------
 Arbeitsjournal - Projekt1 - easyGraph - Team WEW 
 ----------------------------------------------------------------------------
+
+============================================================================
+12.12.2014 webel3 / wengm17 / engek1
+
+- Starten der Algorithmen aus Easygraph.
+- Serialisieren und Speichern des Graphs.
+- Löschen von Knoten und Kanten.
+- Events für AbspielButtons.
+- ...
+
 ============================================================================
 10.12.2014 webel3 / wengm17 / engek1
 
