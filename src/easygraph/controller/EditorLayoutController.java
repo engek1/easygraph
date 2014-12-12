@@ -48,7 +48,6 @@ public class EditorLayoutController extends BaseController {
 	public void distributeEditor(Editor editor) {
 		this.setEditor(editor);
 		this.toolboxViewController.setEditor(editor);
-		this.propertiesViewController.setEditor(editor);
 		this.drawViewController.setEditor(editor);
 	}
 	

@@ -121,7 +121,5 @@
    <center>
       <fx:include fx:id="drawView" source="DrawView.fxml" />
    </center>
-   <right>
-      <fx:include fx:id="propertiesView" source="PropertiesView.fxml" />
-   </right>
+   
 </BorderPane>
