@@ -13,6 +13,7 @@ public class Step<T extends Decorable> {
 	private String property = null;
 	private Object value = null;
 
+	
 	public Step(T object, String property, Object value) {
 		this.object = object;
 		this.property = property;
@@ -38,13 +39,9 @@ public class Step<T extends Decorable> {
 	 * @return 
 	 */
 	public Step<T> origin() {
-		// prevent RuntimeException when no property was set before.
 		Object propertyValue = null;
-		try{
+		if (object.has(property)) {
 			propertyValue = object.get(property);
-		}catch(RuntimeException e){
-			// FIXME try to solve this problem.
-			System.out.println("! "+e.getMessage());
 		}
 		return new Step<T>(this.object, property, propertyValue);
 	}

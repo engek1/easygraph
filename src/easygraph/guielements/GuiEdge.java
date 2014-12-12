@@ -59,8 +59,7 @@ public class GuiEdge extends Line implements Repaintable {
 
 	@Override
 	public void mark() {
-		this.setStroke(Config.getMarkColor());
-		this.effectProperty();	
+		this.mark(Config.getMarkColor());
 	}
 
 	@Override
@@ -71,14 +70,16 @@ public class GuiEdge extends Line implements Repaintable {
 
 	@Override
 	public void unmark() {
-		System.out.println("SCHNABBER");
 		this.setStroke(Config.getUnmarkColor());
 		this.effectProperty();		
 	}
 
 	@Override
 	public void repaint() {
-		Color color = (Color) edge.get(EGProperty.EG_COLOR);
+		Color color = Config.getMarkColor();
+		if (edge.has(EGProperty.EG_COLOR)) {
+			color = (Color) edge.get(EGProperty.EG_COLOR);
+		}
 		mark(color);
 		// TODO paint other gui properties...
 	}

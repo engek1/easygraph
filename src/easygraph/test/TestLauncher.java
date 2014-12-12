@@ -2,8 +2,10 @@ package easygraph.test;
 
 import easygraph.EasyGraph;
 import easygraph.model.EGProperty;
+import graphlib.AlgorithmsCollection;
 import graphlib.Edge;
 import graphlib.Graph;
+import graphlib.GraphExamples;
 import graphlib.IncidenceListGraph;
 import graphlib.Vertex;
 
@@ -18,7 +20,7 @@ public class TestLauncher {
 				|   \ |
 				C --- D
 		 */
-		
+		/*
 		Graph<String, String> g = new IncidenceListGraph<String, String>(false);
 		Vertex<String> vA = g.insertVertex("A");
 		Vertex<String> vB = g.insertVertex("B");
@@ -42,6 +44,7 @@ public class TestLauncher {
 		Edge<String> eAD = g.insertEdge(vA, vD, "A-D");
 		Edge<String> eBD = g.insertEdge(vB, vD, "B-D");
 		Edge<String> eCD = g.insertEdge(vC, vD, "C-D");
+		*/
 		
 		// example graph from graphlib:
 		//
@@ -59,8 +62,7 @@ public class TestLauncher {
 		// v  v v  v   v
 		// M-->N-->O-->P
 		
-		/*
-		IncidenceListGraph<String,String> g = new IncidenceListGraph<String,String> (true);
+		IncidenceListGraph<String,String> g = new IncidenceListGraph<String,String> (false);
 		// vertices
 		Vertex<String> vA = g.insertVertex("A");
 		Vertex<String> vB = g.insertVertex("B");
@@ -105,12 +107,10 @@ public class TestLauncher {
 		Edge<String> eLP = g.insertEdge(vL, vP, "LP"); 
 		Edge<String> eMN = g.insertEdge(vM, vN, "MN"); 
 		Edge<String> eNO = g.insertEdge(vN, vO, "NO"); 
-		Edge<String> eOP = g.insertEdge(vO, vP, "OP"); 	
-		*/
+		Edge<String> eOP = g.insertEdge(vO, vP, "OP");
 		
-		
+
 		EasyGraph.launchGui(g);
-		
 	}
 
 }

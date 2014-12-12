@@ -4,15 +4,15 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-import easygraph.annotations.AlgorithmMethod;
 import easygraph.annotations.AlgorithmClazz;
-
+import easygraph.annotations.AlgorithmMethod;
 
 @AlgorithmClazz
 public class GraphExamples<V,E> {
 
 	@AlgorithmMethod
-	final int kruskal(Graph<V,E> g){
+	public int kruskal(Graph<V,E> g){
+		System.out.println("starting kruskal ...");
 		if (g.isDirected()) throw new RuntimeException("We need an undirected graph!");
 		// Returns the number of connected components
 		// Finds the minimum spanning forrest:
@@ -64,12 +64,15 @@ public class GraphExamples<V,E> {
 				c1.clear();
 			}
 		}		
+		System.out.println("kruskal done.");
 		return num;
 	}
 	
 	
 
+	@AlgorithmMethod(needsDijkstraFlag = true)
 	public void findGateways(Graph<V,E> g, boolean dijkstra){
+		System.out.println("starting findGateways ...");
 		// if 'v' and 'w' are vertices of 'g' then 
 		// 'v' has a attribute 'w'. The the value of 
 		// this attribute is (say) 'u'. Then 'u' has 
@@ -97,11 +100,13 @@ public class GraphExamples<V,E> {
 			if ( dijkstra) dijkstra(g,v);
 			else bfs(g,v);
 		}
+		System.out.println("findGateways done.");
 	}
 	
 
-	@AlgorithmMethod
+	@AlgorithmMethod(needsStartVertex = true)
 	public void dijkstra(Graph<V,E> g, Vertex<V> s){
+		System.out.println("starting dijkstra ...");
 		HeapPriorityQueue<Double,Vertex<V>> hq = new HeapPriorityQueue<>();
 		Iterator<Vertex<V>> it = g.vertices();
 		while (it.hasNext()){
@@ -137,7 +142,7 @@ public class GraphExamples<V,E> {
 			}
 			
 		}
-		
+		System.out.println("dijkstra done.");
 	}
 	
 	
@@ -168,7 +173,9 @@ public class GraphExamples<V,E> {
 	}
 	
 
+	@AlgorithmMethod(needsStartVertex = true)
 	public void bfs(Graph<V,E> g, Vertex<V> v){
+		System.out.println("starting bfs ...");
 		// add the attribute v to all vertices w
 		// the value of this attribute is the first
 		// vertex on a shortest path from w to v
@@ -191,6 +198,7 @@ public class GraphExamples<V,E> {
 			}
 			
 		}
+		System.out.println("bfs done.");
 	}
 	
 	public  LinkedList<Vertex<V>> findPath(

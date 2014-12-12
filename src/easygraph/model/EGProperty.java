@@ -10,6 +10,7 @@ public class EGProperty extends Property {
 	public static final String EG_COLOR = "EG_COLOR";
 	public static final String EG_NAME = "EG_NAME";
 	public static final String EG_GUI_EDGE_REFERENCE = "EG_GUI_EDGE_REFERENCE";
-	public static final Object EG_GUI_VERTEX_REFERENCE = "EG_GUI_VERTEX_REFERENCE";
+	public static final String EG_GUI_VERTEX_REFERENCE = "EG_GUI_VERTEX_REFERENCE";
+	public static final String EG_IS_START_VERTEX = "EG_IS_START_VERTEX";
 
 }

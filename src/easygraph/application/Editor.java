@@ -195,7 +195,6 @@ public class Editor extends Application implements GraphController {
 		alert.setHeaderText("Invalid Selection");
 		alert.setContentText(text);
 		alert.showAndWait();
-		
 	}
 
 	public State getState() {
@@ -209,17 +208,47 @@ public class Editor extends Application implements GraphController {
 	public Graph<?, ?> getGraph() {
 		return Editor.graph;
 	}
+	
+	public int getNumberOfStartVertices() {
+		int quantity = 0;
+		
+		Iterator<?> it = Editor.graph.vertices();
+		while (it.hasNext()) {
+			Vertex<?> v = (Vertex<?>) it.next();
+			
+			if (v.has(EGProperty.EG_IS_START_VERTEX)) {
+				if ((boolean)v.get(EGProperty.EG_IS_START_VERTEX) == true) {
+					quantity++;
+				}
+			}
+		}
+		return quantity;
+	}
+	
+	public Vertex<?> getStartVertex() {
+		Iterator<?> it = Editor.graph.vertices();
+		while (it.hasNext()) {
+			Vertex<?> v = (Vertex<?>) it.next();
+			
+			if (v.has(EGProperty.EG_IS_START_VERTEX)) {
+				if ((boolean)v.get(EGProperty.EG_IS_START_VERTEX) == true) {
+					return v;
+				}
+			}
+		}
+		return null;
+	}
 
 	public static String getIdentifier() {
-		return "v-" + ++Editor.VertexNumber;
+		return "id-" + ++Editor.VertexNumber;
 	}
 
 	public void repaint(Decorable object) {
-		if(object instanceof Vertex<?>){
+		if (object instanceof Vertex<?>) {
 			Vertex<?> vertex = (Vertex<?>) object;
 			GuiVertex guiVertex = (GuiVertex) vertex.get(EGProperty.EG_GUI_VERTEX_REFERENCE);
 			guiVertex.repaint();
-		}else if (object instanceof Edge<?>){
+		} else if (object instanceof Edge<?>) {
 			Edge<?> edge = (Edge<?>) object;
 			GuiEdge guiEdge = (GuiEdge) edge.get(EGProperty.EG_GUI_EDGE_REFERENCE);
 			guiEdge.repaint();

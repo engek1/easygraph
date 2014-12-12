@@ -32,6 +32,8 @@ public class GuiVertex extends StackPane implements Repaintable {
 	}
 	
 	private void init() {
+		
+		// TODO : add another ellipse for 'startVertex' vertices and handle this one additionally in methods
 				
 		// use an ellipse to make border visible
 		ellipse = new Ellipse();
@@ -128,7 +130,10 @@ public class GuiVertex extends StackPane implements Repaintable {
 
 	@Override
 	public void repaint() {
-		Color color = (Color) vertex.get(EGProperty.EG_COLOR);
+		Color color = Config.getMarkColor();
+		if (vertex.has(EGProperty.EG_COLOR)) {
+			color = (Color) vertex.get(EGProperty.EG_COLOR);
+		}
 		mark(color);
 		// TODO paint other gui properties...
 	}

@@ -11,4 +11,10 @@ public @interface AlgorithmMethod {
 
 	boolean needsStartVertex() default false;
 	
+	boolean needsDijkstraFlag() default false;
+	
+	/*
+	 * add further properties here ...
+	 */
+	
 }

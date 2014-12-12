@@ -2,6 +2,13 @@ package easygraph.state;
 
 import javafx.event.Event;
 import javafx.event.EventHandler;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Dialog;
+import javafx.scene.control.ButtonBar.ButtonData;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import easygraph.application.Editor;
 import easygraph.events.EdgeLeftClickEvent;
 import easygraph.events.EdgeRightClickEvent;
@@ -36,6 +43,15 @@ public abstract class State implements EventHandler<Event> {
 		System.out.println("leaving old State '" + this.getClass().getSimpleName() + "' ...");
 		this.editor.getPrimaryStage().getScene().removeEventHandler(Event.ANY, this);
 	}
+	
+	public void showErrorDialog(String text) {
+		Alert alert = new Alert(AlertType.ERROR);
+		alert.setTitle("Error");
+		alert.setHeaderText("oops, something went wrong ...");
+		alert.setContentText(text);
+		alert.showAndWait();
+	}
+	
 	
 	@Override
 	public void handle(Event event) {

@@ -8,7 +8,8 @@ import easygraph.state.AddEdgeState;
 import easygraph.state.AddVertexState;
 import easygraph.state.PlayState;
 import easygraph.state.SelectState;
-import graphlib.GraphExamples;
+import easygraph.utils.Config;
+import graphlib.AlgorithmsCollection;
 
 import java.lang.reflect.Method;
 
@@ -50,7 +51,7 @@ public class ToolboxViewController extends BaseController {
 	
 	private void lookupMethods() {
 		try {
-			Class<?> clazz = ClassLoader.getSystemClassLoader().loadClass(GraphExamples.class.getCanonicalName());
+			Class<?> clazz = ClassLoader.getSystemClassLoader().loadClass(Config.getLookupAlgorithmClassName());
 
 			if (clazz.isAnnotationPresent(AlgorithmClazz.class)) {
 				for (Method method : clazz.getDeclaredMethods()) {
@@ -88,8 +89,11 @@ public class ToolboxViewController extends BaseController {
 	private void handlePlayClick() {
 		System.out.println("-- PLAY clicked -> disable Buttons");
 		this.disableButtons(true);
-		Event.fireEvent(toolboxPane, new StateChangeEvent(new PlayState(this.getEditor())));
-		Event.fireEvent(toolboxPane, new PlayEvent());
+		if (this.methodsBox.getValue() != null && !this.methodsBox.getValue().equals("")) {
+			Event.fireEvent(toolboxPane, new StateChangeEvent(new PlayState(this.getEditor(), this.methodsBox.getValue())));
+			Event.fireEvent(toolboxPane, new PlayEvent());
+		}
+		// TODO : error hint when no algo is selected.
 	}
 	
 	

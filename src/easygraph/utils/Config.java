@@ -11,6 +11,8 @@ public class Config {
 	private static final String FONT_FAMILY = "Verdana";
 	private static final double FONT_SIZE = 15.0;
 	private static final String FONT_COLOR = "#333333";
+	
+	private static final String ALGORITHM_CLASS_NAME = "graphlib.GraphExamples";
 
 	
 	public static double getPadding() {
@@ -35,5 +37,9 @@ public class Config {
 	
 	public static Color getFontColor() {
 		return Color.valueOf(Config.FONT_COLOR);
+	}
+	
+	public static String getLookupAlgorithmClassName() {
+		return Config.ALGORITHM_CLASS_NAME;
 	}
 }
