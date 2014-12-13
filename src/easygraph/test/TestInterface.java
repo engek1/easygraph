@@ -87,7 +87,7 @@ public class TestInterface<V,E> {
 		// then execute steps
 		for (int i = 0; i < 20; i++) {
 			Thread.sleep(1000);
-			EasyGraph.forward();
+			//EasyGraph.forward();
 		}
 		
 		System.out.println("##### FINISHED");

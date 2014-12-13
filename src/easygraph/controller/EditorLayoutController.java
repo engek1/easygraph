@@ -6,9 +6,6 @@ import easygraph.guielements.GuiVertex;
 import graphlib.Edge;
 import graphlib.Graph;
 import graphlib.Vertex;
-
-import java.awt.Dialog;
-
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 
@@ -53,11 +50,46 @@ public class EditorLayoutController extends BaseController {
 	@FXML
 	private void save() {
 		System.out.println("-- SAVE clicked.");
+		
+		/*
+		System.out.println("number of vertices in graph before 'save': " + this.getEditor().getGraph().numberOfVertices());
+		
+		try {			
+			File file = new File("C:\\Development\\graph.gr");			
+			FileOutputStream fout = new FileOutputStream(file);
+			ObjectOutputStream oos = new ObjectOutputStream(fout);
+			oos.writeObject(this.getEditor().getGraph());
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		*/
+
 	}
+	
 	
 	@FXML
 	private void open() {
 		System.out.println("-- OPEN clicked.");
+		
+		/*
+		try {
+			FileInputStream fin = new FileInputStream("C:\\Development\\graph.gr");
+			ObjectInputStream ois = new ObjectInputStream(fin);
+			IncidenceListGraph<?, ?> graph = (IncidenceListGraph<?, ?>) ois.readObject();
+			
+			System.out.println("number of vertices in graph after 'open': " + graph.numberOfVertices());
+			
+			
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		*/
 	}
 	
 	@FXML

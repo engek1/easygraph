@@ -1,9 +1,25 @@
 package easygraph.application;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Stack;
+
+import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 import easygraph.controller.EditorLayoutController;
 import easygraph.guielements.GuiEdge;
 import easygraph.guielements.GuiVertex;
 import easygraph.model.EGProperty;
+import easygraph.model.Step;
 import easygraph.state.SelectState;
 import easygraph.state.State;
 import easygraph.utils.Config;
@@ -12,20 +28,6 @@ import graphlib.Edge;
 import graphlib.Graph;
 import graphlib.Vertex;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.image.Image;
-import javafx.scene.layout.BorderPane;
-import javafx.stage.Stage;
-
 /**
  * 
  * @author engek1, webel3, wenger
@@ -33,6 +35,10 @@ import javafx.stage.Stage;
  */
 public class Editor extends Application implements GraphController {
 
+	private static int FORWARD_STEP_INDEX = 0;
+	private static final List<Step<? extends Decorable>> FORWARD_STEPS = new ArrayList<Step<? extends Decorable>>();
+	private static final Stack<Step<? extends Decorable>> BACKWARD_STEPS = new Stack<Step<? extends Decorable>>();
+	
 	private static final String TITLE = "EasyGraph Editor GUI";
 	private static final String EDITOR_LAYOUT = "../view/EditorLayout.fxml";
 
@@ -271,15 +277,76 @@ public class Editor extends Application implements GraphController {
 	}
 
 	public void repaint(Decorable object) {
+		System.out.println(object.getClass().getName());
 		if (object instanceof Vertex<?>) {
 			Vertex<?> vertex = (Vertex<?>) object;
 			GuiVertex guiVertex = (GuiVertex) vertex.get(EGProperty.EG_GUI_VERTEX_REFERENCE);
 			guiVertex.repaint();
+			System.out.println("instance was VERTEX --> repainted.");
 		} else if (object instanceof Edge<?>) {
 			Edge<?> edge = (Edge<?>) object;
 			GuiEdge guiEdge = (GuiEdge) edge.get(EGProperty.EG_GUI_EDGE_REFERENCE);
 			guiEdge.repaint();
+			System.out.println("instance was EDGE --> repainted.");
 		}
 	}
 
+	
+	public List<Step<? extends Decorable>> getForwardSteps() {
+		return Editor.FORWARD_STEPS;
+	}
+	
+	
+	public boolean hasForwardSteps() {
+		return FORWARD_STEP_INDEX < FORWARD_STEPS.size();
+	}
+	
+	
+	/**
+	 * Make a forward-step. Take the next forward-step. Save the backward-step.
+	 * Save the property-changes to the model and make them on the UI.
+	 * Increase the step-index.
+	 */
+	public void forward() {
+		if (FORWARD_STEP_INDEX >= FORWARD_STEPS.size()) {
+			System.out.println("no next forward step.");
+			return;
+		}
+		System.out.println("do forward step");
+		
+		// get next step
+		Step<? extends Decorable> step = FORWARD_STEPS.get(FORWARD_STEP_INDEX);
+		
+		// add backward step to history 
+		// FIXME check if originally the property was not set.
+		BACKWARD_STEPS.push(step.origin());
+		
+		// make changes on model
+		step.apply();
+		
+		// make changes on UI as well. Important let it run in the JavaFx thread when called from outside.
+		//Platform.runLater(() -> this.repaint(step.getObject()));
+		this.repaint(step.getObject());
+		System.out.println("repaint DONE.");
+		
+		// finally increase the index
+		FORWARD_STEP_INDEX++;
+	}
+	
+	/**
+	 * Make a backward-step. Take the last backward-step and execute the property changes on model and UI.
+	 * Decrease the step-index.
+	 */
+	public void backward() {
+		System.out.println("do backward step");
+		
+		Step<? extends Decorable> step = BACKWARD_STEPS.pop();
+		step.apply();
+		
+		// make changes on UI as well. Important let it run in the JavaFx thread when called from outside.
+		Platform.runLater(() -> this.repaint(step.getObject()));
+				
+		FORWARD_STEP_INDEX--;
+	}
+	
 }

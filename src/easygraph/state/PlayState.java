@@ -12,16 +12,41 @@ import easygraph.utils.Config;
 public class PlayState extends State {
 	
 	private String algorithm;
+	private boolean autoPlay = true;
 
 	public PlayState(Editor editor, String algorithm) {
 		super(editor);
+		System.out.println();
+		System.out.println();
 		this.algorithm = algorithm;
+		this.call();
 	}
+	
 	
 	@Override
 	public void handle(PlayEvent event) {
 		System.out.println("start playing now -- selected algorithm = '" + this.algorithm + "' ...");
-
+		System.out.println("Found " + this.editor.getForwardSteps().size() + " Forward-Steps to do.");
+		
+		try {
+			do {
+				if (this.editor.hasForwardSteps()) {
+					this.editor.forward();
+					System.out.println("FORWARD done, now sleep for 1000ms ...");
+					Thread.sleep(1000);
+				} else {
+					this.autoPlay = false;
+					System.out.println("PLAY_STATE FINISHED.");
+				}
+			} while (this.autoPlay);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	
+	private void call() {
 		try {
 			// load instance of AlgorithmsCollection and try to reference the Method with by its name
 			Class<?> clazz = ClassLoader.getSystemClassLoader().loadClass(Config.getLookupAlgorithmClassName());
@@ -51,8 +76,13 @@ public class PlayState extends State {
 			// thanks to the annotation, we chan easily check whether the method needs a start vertex
 			if (annotation.needsStartVertex()) {
 				int nr = this.editor.getNumberOfStartVertices();
+				
+				// for test reasons, just use dijkstra algorithm
+				nr = 1;
+				
 				if (nr == 1) {
-					params.add(this.editor.getStartVertex());
+					//params.add(this.editor.getStartVertex());
+					params.add(this.editor.getGraph().vertices().next());
 				}
 				else {
 					String text = "";
@@ -81,6 +111,5 @@ public class PlayState extends State {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 	}
 }

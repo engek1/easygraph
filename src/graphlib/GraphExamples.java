@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 
+import easygraph.EasyGraph;
 import easygraph.annotations.AlgorithmClazz;
 import easygraph.annotations.AlgorithmMethod;
 
@@ -112,6 +113,7 @@ public class GraphExamples<V,E> {
 		while (it.hasNext()){
 			Vertex<V> v = it.next();
 			v.set(Property.DISTANCE,Double.POSITIVE_INFINITY);
+			EasyGraph.setDiscovered(v);
 			Locator<Double,Vertex<V>> loc = hq.insert((Double)v.get(Property.DISTANCE),v);
 			v.set(Property.PQLOCATOR, loc);
 			s.set(v,null);
@@ -137,7 +139,10 @@ public class GraphExamples<V,E> {
 					// now set as best gateway (until now) v
 					// i.e v is the gateway from u to s.
 					if(v==s) s.set(u,u);
-					else s.set(u,s.get(v));				
+					else {
+						s.set(u,s.get(v));
+						EasyGraph.setSelected(s);
+					}				
 				}
 			}
 			
