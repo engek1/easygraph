@@ -13,7 +13,7 @@
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
-                  <MenuItem mnemonicParsing="false" text="New">
+                  <MenuItem id="menuNew" mnemonicParsing="false" text="New">
                      <graphic>
                         <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -25,7 +25,7 @@
                         <KeyCodeCombination alt="UP" code="N" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                      </accelerator>
                   </MenuItem>
-              <MenuItem mnemonicParsing="false" onAction="#open" text="Open">
+              <MenuItem id="menuOpen" mnemonicParsing="false" onAction="#open" text="Open">
                      <graphic>
                         <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -36,7 +36,7 @@
                      <accelerator>
                         <KeyCodeCombination alt="UP" code="O" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                      </accelerator></MenuItem>
-              <MenuItem mnemonicParsing="false" onAction="#save" text="Save">
+              <MenuItem id="menuSave" mnemonicParsing="false" onAction="#save" text="Save">
                      <graphic>
                         <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -47,7 +47,7 @@
                      <accelerator>
                         <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                      </accelerator></MenuItem>
-              <MenuItem mnemonicParsing="false" onAction="#quit" text="Quit">
+              <MenuItem id="menuQuit" mnemonicParsing="false" onAction="#quit" text="Quit">
                      <graphic>
                         <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -62,7 +62,7 @@
           </Menu>
             <Menu mnemonicParsing="false" text="Graph">
               <items>
-                <MenuItem mnemonicParsing="false" text="Arrange in a circle">
+                <MenuItem id="menuArrangeGraph" mnemonicParsing="false" text="Arrange in a circle">
                      <graphic>
                         <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -78,7 +78,7 @@
             </Menu>
           <Menu mnemonicParsing="false" text="Example">
             <items>
-              <MenuItem mnemonicParsing="false" onAction="#exampleOne" text="Example 1 (small graph)">
+              <MenuItem id="menuExample1" mnemonicParsing="false" onAction="#exampleOne" text="Example 1 (small graph)">
                      <graphic>
                         <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -89,7 +89,7 @@
                      <accelerator>
                         <KeyCodeCombination alt="UP" code="DIGIT1" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                      </accelerator></MenuItem>
-                  <MenuItem mnemonicParsing="false" onAction="#exampleTwo" text="Example 2 (big graph)">
+                  <MenuItem id="menuExample2" mnemonicParsing="false" onAction="#exampleTwo" text="Example 2 (big graph)">
                      <graphic>
                         <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -100,7 +100,7 @@
                      <accelerator>
                         <KeyCodeCombination alt="UP" code="DIGIT2" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                      </accelerator></MenuItem>
-                  <MenuItem mnemonicParsing="false" onAction="#exampleThree" text="Example 3 (negativ edges)">
+                  <MenuItem id="menuExample3" mnemonicParsing="false" onAction="#exampleThree" text="Example 3 (negativ edges)">
                      <graphic>
                         <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -111,7 +111,7 @@
                      <accelerator>
                         <KeyCodeCombination alt="UP" code="DIGIT3" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                      </accelerator></MenuItem>
-                  <MenuItem mnemonicParsing="false" onAction="#exampleFour" text="Example 4 (undirected edges)">
+                  <MenuItem id="menuExample4" mnemonicParsing="false" onAction="#exampleFour" text="Example 4 (undirected edges)">
                      <graphic>
                         <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -126,7 +126,7 @@
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
             <items>
-              <MenuItem mnemonicParsing="false" onAction="#aboutUs" text="About the project...">
+              <MenuItem id="menuAbout" mnemonicParsing="false" onAction="#aboutUs" text="About the project...">
                      <graphic>
                         <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                            <image>
