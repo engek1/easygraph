@@ -2,7 +2,6 @@ package easygraph.state;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import javafx.application.Platform;
@@ -12,10 +11,7 @@ import easygraph.annotations.AlgorithmMethod;
 import easygraph.application.Editor;
 import easygraph.events.PlayEvent;
 import easygraph.events.ResetEvent;
-import easygraph.guielements.GuiVertex;
-import easygraph.model.EGProperty;
 import easygraph.utils.Config;
-import graphlib.Vertex;
 
 public class PlayState extends State {
 	
