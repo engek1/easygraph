@@ -1,7 +1,9 @@
 package easygraph.controller;
 
 import java.lang.reflect.Method;
+import java.util.Iterator;
 
+import javafx.application.Platform;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -92,7 +94,7 @@ public class ToolboxViewController extends BaseController {
 		System.out.println("-- PLAY clicked -> disable Buttons");
 		this.disableButtons(true);
 		if (this.methodsBox.getValue() != null && !this.methodsBox.getValue().equals("")) {
-			Event.fireEvent(toolboxPane, new StateChangeEvent(new PlayState(this.getEditor(), this.methodsBox.getValue())));
+			Event.fireEvent(toolboxPane, new StateChangeEvent(new PlayState(this.getEditor(), toolboxPane, this.methodsBox.getValue())));
 			Event.fireEvent(toolboxPane, new PlayEvent());
 		}
 		// TODO : error hint when no algo is selected.

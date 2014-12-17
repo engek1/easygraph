@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 import easygraph.controller.EditorLayoutController;
 import easygraph.guielements.GuiEdge;
 import easygraph.guielements.GuiVertex;
+import easygraph.guielements.Repaintable;
 import easygraph.model.EGProperty;
 import easygraph.model.Step;
 import easygraph.state.SelectState;
@@ -199,7 +200,7 @@ public class Editor extends Application implements GraphController {
 	
 	public void removeEdge(Edge edge) {
 		// remove from gui
-		GuiEdge guiEdge = (GuiEdge) edge.get(EGProperty.EG_GUI_EDGE_REFERENCE);
+		GuiEdge guiEdge = (GuiEdge) edge.get(EGProperty.EG_GUI_REFERENCE);
 		editorController.removeEdge(guiEdge);
 		// remove from gui
 		graph.removeEdge(edge);
@@ -208,7 +209,7 @@ public class Editor extends Application implements GraphController {
 
 	public void removeEdge(Vertex vertex) {
 		// remove from gui
-		GuiVertex guiVertex = (GuiVertex) vertex.get(EGProperty.EG_GUI_VERTEX_REFERENCE);
+		GuiVertex guiVertex = (GuiVertex) vertex.get(EGProperty.EG_GUI_REFERENCE);
 		editorController.removeVertex(guiVertex);
 		Iterator<?> edges = graph.incidentEdges(vertex);
 		// remove from model
@@ -277,17 +278,9 @@ public class Editor extends Application implements GraphController {
 	}
 
 	public void repaint(Decorable object) {
-		System.out.println(object.getClass().getName());
-		if (object instanceof Vertex<?>) {
-			Vertex<?> vertex = (Vertex<?>) object;
-			GuiVertex guiVertex = (GuiVertex) vertex.get(EGProperty.EG_GUI_VERTEX_REFERENCE);
-			guiVertex.repaint();
-			System.out.println("instance was VERTEX --> repainted.");
-		} else if (object instanceof Edge<?>) {
-			Edge<?> edge = (Edge<?>) object;
-			GuiEdge guiEdge = (GuiEdge) edge.get(EGProperty.EG_GUI_EDGE_REFERENCE);
-			guiEdge.repaint();
-			System.out.println("instance was EDGE --> repainted.");
+		if (object.has(EGProperty.EG_GUI_REFERENCE)) {
+			Repaintable r = (Repaintable)object.get(EGProperty.EG_GUI_REFERENCE);
+			r.repaint();
 		}
 	}
 
@@ -309,10 +302,8 @@ public class Editor extends Application implements GraphController {
 	 */
 	public void forward() {
 		if (FORWARD_STEP_INDEX >= FORWARD_STEPS.size()) {
-			System.out.println("no next forward step.");
 			return;
 		}
-		System.out.println("do forward step");
 		
 		// get next step
 		Step<? extends Decorable> step = FORWARD_STEPS.get(FORWARD_STEP_INDEX);
@@ -327,7 +318,6 @@ public class Editor extends Application implements GraphController {
 		// make changes on UI as well. Important let it run in the JavaFx thread when called from outside.
 		//Platform.runLater(() -> this.repaint(step.getObject()));
 		this.repaint(step.getObject());
-		System.out.println("repaint DONE.");
 		
 		// finally increase the index
 		FORWARD_STEP_INDEX++;
@@ -338,7 +328,6 @@ public class Editor extends Application implements GraphController {
 	 * Decrease the step-index.
 	 */
 	public void backward() {
-		System.out.println("do backward step");
 		
 		Step<? extends Decorable> step = BACKWARD_STEPS.pop();
 		step.apply();
@@ -347,6 +336,29 @@ public class Editor extends Application implements GraphController {
 		Platform.runLater(() -> this.repaint(step.getObject()));
 				
 		FORWARD_STEP_INDEX--;
+	}
+	
+	
+	public void unmarkVertices() {
+		Iterator<?> it = graph.vertices();
+		while (it.hasNext()) {
+			Vertex<?> v = (Vertex<?>) it.next();
+			if (v.has(EGProperty.EG_GUI_REFERENCE)) {
+				GuiVertex gv = (GuiVertex) v.get(EGProperty.EG_GUI_REFERENCE);
+				gv.unmark();
+			}
+		}
+	}
+	
+	public void unmarkEdges() {
+		Iterator<?> it = graph.edges();
+		while (it.hasNext()) {
+			Edge<?> e = (Edge<?>) it.next();
+			if (e.has(EGProperty.EG_GUI_REFERENCE)) {
+				GuiEdge ge = (GuiEdge) e.get(EGProperty.EG_GUI_REFERENCE);
+				ge.unmark();
+			}
+		}
 	}
 	
 }

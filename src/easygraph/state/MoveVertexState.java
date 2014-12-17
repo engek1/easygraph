@@ -52,8 +52,8 @@ public class MoveVertexState extends State {
 		Iterator<?> it = this.editor.getGraph().incidentEdges((Vertex) this.guiVertex.getVertex());
 		while (it.hasNext()) {
 			Edge<?> e = (Edge<?>) it.next();
-			if (e.has(EGProperty.EG_GUI_EDGE_REFERENCE)) {
-				GuiEdge ge = (GuiEdge) e.get(EGProperty.EG_GUI_EDGE_REFERENCE);
+			if (e.has(EGProperty.EG_GUI_REFERENCE)) {
+				GuiEdge ge = (GuiEdge) e.get(EGProperty.EG_GUI_REFERENCE);
 				ge.setCoordinates();
 			}
 		}

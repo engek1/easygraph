@@ -22,7 +22,7 @@ public class GuiEdge extends Line implements Repaintable {
 		this.edge = edge;
 		this.origin = origin;
 		this.destination = destination;
-		edge.set(EGProperty.EG_GUI_EDGE_REFERENCE, this);
+		edge.set(EGProperty.EG_GUI_REFERENCE, this);
 		init();
 	}
 	
@@ -65,7 +65,7 @@ public class GuiEdge extends Line implements Repaintable {
 	@Override
 	public void mark(Color color) {
 		this.setStroke(color);
-		this.effectProperty();	
+		this.effectProperty();
 	}
 
 	@Override

@@ -21,8 +21,8 @@ public class EasyGraph {
 	private static final Editor GUI = new Editor();
 
 	/* default values */
-	private static final Color DEFAULT_COLOR_DISCOVERED = Color.BLUE;
-	private static final Color DEFAULT_COLOR_SELECTED = Color.RED;
+	private static final Color DEFAULT_COLOR_DISCOVERED = Color.BLACK;
+	private static final Color DEFAULT_COLOR_SELECTED = Color.ORANGE;
 	private static final Color DEFAULT_COLOR_DISABLED = Color.GRAY;
 
 

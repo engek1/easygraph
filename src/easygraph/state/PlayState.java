@@ -2,22 +2,30 @@ package easygraph.state;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
+import javafx.application.Platform;
+import javafx.event.Event;
+import javafx.scene.layout.Pane;
 import easygraph.annotations.AlgorithmMethod;
 import easygraph.application.Editor;
 import easygraph.events.PlayEvent;
+import easygraph.events.ResetEvent;
+import easygraph.guielements.GuiVertex;
+import easygraph.model.EGProperty;
 import easygraph.utils.Config;
+import graphlib.Vertex;
 
 public class PlayState extends State {
 	
+	private Pane pane;
 	private String algorithm;
 	private boolean autoPlay = true;
 
-	public PlayState(Editor editor, String algorithm) {
+	public PlayState(Editor editor, Pane pane, String algorithm) {
 		super(editor);
-		System.out.println();
-		System.out.println();
+		this.pane = pane;
 		this.algorithm = algorithm;
 		this.call();
 	}
@@ -25,23 +33,48 @@ public class PlayState extends State {
 	
 	@Override
 	public void handle(PlayEvent event) {
-		System.out.println("start playing now -- selected algorithm = '" + this.algorithm + "' ...");
-		System.out.println("Found " + this.editor.getForwardSteps().size() + " Forward-Steps to do.");
-		
+		System.out.println("PlayEvent fired.");
+
 		try {
+			/*
 			do {
+				System.out.println("sdfgn");
 				if (this.editor.hasForwardSteps()) {
 					this.editor.forward();
-					System.out.println("FORWARD done, now sleep for 1000ms ...");
 					Thread.sleep(1000);
-				} else {
-					this.autoPlay = false;
-					System.out.println("PLAY_STATE FINISHED.");
 				}
-			} while (this.autoPlay);
+			} while (this.autoPlay && this.editor.hasForwardSteps());
+			*/
+			
+			// make a forward step if there is at least one.
+			if (this.editor.hasForwardSteps()) {
+				if (!Thread.interrupted()) {
+					//Platform.runLater(() -> this.editor.forward());
+					this.editor.forward();
+				}
+			}
+			
+			// if we are in autoplay and there are more forward steps,
+			// wait for some time, then fire the next event.
+			if (this.editor.hasForwardSteps() && this.autoPlay) {
+				Thread.sleep(1000);
+				Platform.runLater(() -> Event.fireEvent(PlayState.this.pane, new PlayEvent()));
+				//Event.fireEvent(this.pane, new PlayEvent());
+				//this.handle(event);
+			}
+			
 		} catch (InterruptedException e) {
-			e.printStackTrace();
+			System.out.println("WARNING: InterruptedException catched in PlayState.");
 		}
+	}
+	
+	
+	@Override
+	public void handle(ResetEvent event) {
+		this.autoPlay = false;
+		Thread.currentThread().interrupt();
+		this.editor.unmarkVertices();
+		this.editor.unmarkEdges();
 	}
 	
 	

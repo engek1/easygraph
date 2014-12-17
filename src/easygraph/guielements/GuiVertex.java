@@ -27,7 +27,7 @@ public class GuiVertex extends StackPane implements Repaintable {
 	
 	public GuiVertex(Vertex<?> v) {
 		this.vertex = v;
-		v.set(EGProperty.EG_GUI_VERTEX_REFERENCE, this);
+		v.set(EGProperty.EG_GUI_REFERENCE, this);
 		this.init();
 	}
 	

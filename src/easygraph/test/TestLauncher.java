@@ -110,7 +110,7 @@ public class TestLauncher {
 		Edge<String> OP = schwabGraph.insertEdge(O, P, "OP");
 		
 
-		EasyGraph.launchGui(egGraph);
+		EasyGraph.launchGui(schwabGraph);
 	}
 
 }
