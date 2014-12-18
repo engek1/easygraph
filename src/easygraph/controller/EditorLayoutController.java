@@ -94,7 +94,7 @@ public class EditorLayoutController extends BaseController {
 	
 	@FXML
 	private void quit() {
-		Platform.exit();
+		// TODO : how to exit and finish a FX application?
 	}
 	
 	@FXML
