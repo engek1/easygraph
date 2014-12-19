@@ -1,6 +1,5 @@
 package easygraph.state;
 
-import javafx.application.Platform;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
@@ -19,6 +18,7 @@ import easygraph.events.StateChangeEvent;
 import easygraph.events.VertexLeftClickEvent;
 import easygraph.events.VertexLeftPressedEvent;
 import easygraph.events.VertexRightClickEvent;
+import easygraph.guielements.Texts;
 
 public abstract class State implements EventHandler<Event> {
 	
@@ -29,25 +29,25 @@ public abstract class State implements EventHandler<Event> {
 	}
 	
 	public final void changeState(State newState) {
+		System.out.println("leaving old State '" + this.getClass().getSimpleName() + "'...");
 		this.leave();
 		this.editor.setState(newState);
+		System.out.println("entering new State '" + this.getClass().getSimpleName() + "'...");
 		newState.enter();
 	}
 	
 	public void enter() {
-		System.out.println("entering new State '" + this.getClass().getSimpleName() + "' ...");
 		this.editor.getPrimaryStage().getScene().addEventHandler(Event.ANY, this);
 	}
 
 	public void leave() {
-		System.out.println("leaving old State '" + this.getClass().getSimpleName() + "' ...");
 		this.editor.getPrimaryStage().getScene().removeEventHandler(Event.ANY, this);
 	}
 	
 	public void showErrorDialog(String text) {
 		Alert alert = new Alert(AlertType.ERROR);
-		alert.setTitle("Error");
-		alert.setHeaderText("oops, something went wrong ...");
+		alert.setTitle(Texts.ERROR_DIALOG_TITLE);
+		alert.setHeaderText(Texts.ERROR_DIALOG_HEADER);
 		alert.setContentText(text);
 		alert.showAndWait();
 	}

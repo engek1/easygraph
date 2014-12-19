@@ -30,10 +30,7 @@ public class VertexDialog extends Dialog {
 	}
 
 	public void showIt() {
-
 		Optional<ButtonType> result = this.showAndWait();
-		System.out.println(result.toString());
-
 		if (result.get().getButtonData() == ButtonData.OK_DONE) {
 			// update
 		}

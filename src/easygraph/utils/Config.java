@@ -12,6 +12,8 @@ public class Config {
 	private static final double FONT_SIZE = 15.0;
 	private static final String FONT_COLOR = "#333333";
 	
+	private static final int PLAY_DELAY = 1000;
+	
 	private static final String ALGORITHM_CLASS_NAME = "graphlib.GraphExamples";
 	
 	// VERTEX
@@ -47,5 +49,9 @@ public class Config {
 	
 	public static String getLookupAlgorithmClassName() {
 		return Config.ALGORITHM_CLASS_NAME;
+	}
+	
+	public static int getDelay() {
+		return Config.PLAY_DELAY;
 	}
 }

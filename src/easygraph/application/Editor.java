@@ -8,6 +8,7 @@ import java.util.Stack;
 
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -15,6 +16,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import easygraph.controller.EditorLayoutController;
 import easygraph.guielements.GuiEdge;
 import easygraph.guielements.GuiVertex;
@@ -50,6 +52,7 @@ public class Editor extends Application implements GraphController {
 	private Stage stage;
 	private Scene editorScene;
 	private EditorLayoutController editorController;
+	private long speed = 1;
 
 	public static final double SIZE_X = 600;
 	public static final double SIZE_Y = 400;
@@ -155,6 +158,13 @@ public class Editor extends Application implements GraphController {
 		this.state = new SelectState(this);
 		this.state.enter();
 		
+		this.stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+			@Override
+			public void handle(WindowEvent event) {
+				Editor.this.stage.close();
+			}
+		});
+
 		stage.show();
 	}
 
@@ -266,6 +276,7 @@ public class Editor extends Application implements GraphController {
 			
 			if (v.has(EGProperty.EG_IS_START_VERTEX)) {
 				if ((boolean)v.get(EGProperty.EG_IS_START_VERTEX) == true) {
+					System.out.println("START_VERTEX IS: " + v.element());
 					return v;
 				}
 			}
@@ -338,6 +349,14 @@ public class Editor extends Application implements GraphController {
 		FORWARD_STEP_INDEX--;
 	}
 	
+	public void reset() {
+		this.unmarkVertices();
+		this.unmarkEdges();
+		FORWARD_STEPS.clear();
+		BACKWARD_STEPS.clear();
+		FORWARD_STEP_INDEX = 0;
+	}
+	
 	
 	public void unmarkVertices() {
 		Iterator<?> it = graph.vertices();
@@ -359,6 +378,18 @@ public class Editor extends Application implements GraphController {
 				ge.unmark();
 			}
 		}
+	}
+	
+	/*
+	 * Speed is in range of [1..5].
+	 * For this, use base value of 5000 which will return a delay speed from 1s to 5s.
+	 */
+	public long getSpeed() {
+		return 5000 / this.speed;
+	}
+	
+	public void setSpeed(long speed) {
+		this.speed = speed;
 	}
 	
 }

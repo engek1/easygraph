@@ -3,6 +3,7 @@ package easygraph.controller;
 import easygraph.application.Editor;
 import easygraph.guielements.GuiEdge;
 import easygraph.guielements.GuiVertex;
+import easygraph.guielements.Texts;
 import graphlib.Edge;
 import graphlib.Graph;
 import graphlib.Vertex;
@@ -94,7 +95,13 @@ public class EditorLayoutController extends BaseController {
 	
 	@FXML
 	private void quit() {
-		// TODO : how to exit and finish a FX application?
+		try {
+			Platform.exit();
+			this.getEditor().stop();
+		} catch (Exception e) {
+			System.out.println(Texts.ERROR_STOP_APPLICATION);
+			e.printStackTrace();
+		}
 	}
 	
 	@FXML

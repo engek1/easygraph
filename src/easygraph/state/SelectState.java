@@ -12,6 +12,7 @@ import easygraph.events.VertexLeftPressedEvent;
 import easygraph.events.VertexRightClickEvent;
 import easygraph.guielements.EdgeDialog;
 import easygraph.guielements.GuiVertex;
+import easygraph.guielements.Texts;
 import easygraph.guielements.VertexDialog;
 import easygraph.model.EGProperty;
 
@@ -31,9 +32,7 @@ public class SelectState extends State {
 
 
 	@Override
-	public void handle(VertexRightClickEvent event) {
-		System.out.println("@Override :: SelectState handles VertexRightClickEvent.");
-		
+	public void handle(VertexRightClickEvent event) {		
 		double screenX = event.getEvent().getScreenX();
 		double screenY = event.getEvent().getScreenY();
 		Node anchor = (Node) event.getEvent().getSource();
@@ -61,7 +60,7 @@ public class SelectState extends State {
 
     	GuiVertex guiVertex = (GuiVertex) event.getVertex().get(EGProperty.EG_GUI_REFERENCE);
     	boolean isStartV = guiVertex.isStartVertex();
-		String itemText = isStartV ? "remove as Startvertex" : "set as Startvertex";
+		String itemText = isStartV ? Texts.REMOVE_AS_START_VERTEX : Texts.SET_AS_START_VERTEX;
 		MenuItem cmAsStartVertex = new MenuItem(itemText);
 		cmAsStartVertex.setOnAction(new EventHandler<ActionEvent>() {
 		    public void handle(ActionEvent e) {
@@ -75,9 +74,7 @@ public class SelectState extends State {
 	
 	
 	@Override
-	public void handle(EdgeRightClickEvent event) {
-		System.out.println("@Override :: SelectState handles EdgeRightClickEvent.");
-		
+	public void handle(EdgeRightClickEvent event) {		
 		double screenX = event.getEvent().getScreenX();
 		double screenY = event.getEvent().getScreenY();
 		Node anchor = (Node) event.getEvent().getSource();

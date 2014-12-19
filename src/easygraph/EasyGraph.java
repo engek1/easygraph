@@ -32,9 +32,7 @@ public class EasyGraph {
 	
 	public static void setDiscovered(Edge<?> edge, Color color) {
 		GUI.getForwardSteps().add(new Step<Edge<?>>(edge, EGProperty.EG_COLOR, color));
-		
-		System.out.println("add Step: Edge("+edge+") - "+color);
-	}
+			}
 
 	
 	public static void setDiscovered(Vertex<?> vertex) {
@@ -43,7 +41,6 @@ public class EasyGraph {
 	
 	public static void setDiscovered(Vertex<?> vertex, Color color) {
 		GUI.getForwardSteps().add(new Step<Vertex<?>>(vertex, EGProperty.EG_COLOR, color));
-		System.out.println("add Step: Vertex("+vertex+") - "+color);
 	}
 	
 	
@@ -53,8 +50,6 @@ public class EasyGraph {
 
 	public static void setSelected(Edge<?> edge, Color color) {
 		GUI.getForwardSteps().add(new Step<Edge<?>>(edge, EGProperty.EG_COLOR, color));
-		
-		System.out.println("add Step: Edge("+edge+") - "+color);
 	}
 	
 
@@ -64,7 +59,6 @@ public class EasyGraph {
 	
 	public static void setSelected(Vertex<?> vertex, Color color) {
 		GUI.getForwardSteps().add(new Step<Vertex<?>>(vertex, EGProperty.EG_COLOR, color));
-		System.out.println("add Step: Vertex("+vertex.element().toString() +") - "+color);
 	}
 	
 	
@@ -74,7 +68,6 @@ public class EasyGraph {
 
 	public static void setDisabled(Edge<?> edge, Color color) {
 		GUI.getForwardSteps().add(new Step<Edge<?>>(edge, EGProperty.EG_COLOR, color));
-		System.out.println("add Step: Edge("+edge+") - "+color);
 	}
 	
 	
@@ -84,8 +77,6 @@ public class EasyGraph {
 
 	public static void setDisabled(Vertex<?> vertex, Color color) {
 		GUI.getForwardSteps().add(new Step<Vertex<?>>(vertex, EGProperty.EG_COLOR, color));
-		
-		System.out.println("add Step: Vertex("+vertex+") - "+color);
 	}
 	
 	

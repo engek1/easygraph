@@ -11,7 +11,6 @@ public class AddVertexState extends State {
 	
 	@Override
 	public void handle(PaneLeftClickEvent event) {
-		System.out.println("handle PaneLeftClickEvent ...");
 		this.editor.addVertex(event.getMouseEvent().getX(), event.getMouseEvent().getY());
 	}
 

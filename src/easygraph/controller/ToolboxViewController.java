@@ -1,13 +1,11 @@
 package easygraph.controller;
 
 import java.lang.reflect.Method;
-import java.util.Iterator;
 
-import javafx.application.Platform;
 import javafx.event.Event;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Slider;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import easygraph.annotations.AlgorithmClazz;
@@ -18,6 +16,7 @@ import easygraph.events.PauseEvent;
 import easygraph.events.PlayEvent;
 import easygraph.events.ResetEvent;
 import easygraph.events.StateChangeEvent;
+import easygraph.guielements.Texts;
 import easygraph.state.AddEdgeState;
 import easygraph.state.AddVertexState;
 import easygraph.state.PlayState;
@@ -35,14 +34,29 @@ public class ToolboxViewController extends BaseController {
 	private Pane toolboxPane;
 	
 	@FXML
-	private VBox vbox;
+	private VBox editBox;
 
 	@FXML
 	private ComboBox<String> methodsBox = new ComboBox<String>();
 
 	@FXML
-	private Button playButton = new Button();
-		
+	private VBox playBox;
+	
+	@FXML
+	private VBox pauseBox;
+	
+	@FXML
+	private VBox resetBox;
+	
+	@FXML
+	private VBox forwardBox;
+	
+	@FXML
+	private VBox backwardBox;
+	
+	@FXML
+	private VBox speedBox;
+
 	/**
 	 * Initializes the controller class. This method is automatically called
 	 * after the fxml file has been loaded.
@@ -91,48 +105,69 @@ public class ToolboxViewController extends BaseController {
 	
 	@FXML
 	private void handlePlayClick() {
-		System.out.println("-- PLAY clicked -> disable Buttons");
-		this.disableButtons(true);
-		if (this.methodsBox.getValue() != null && !this.methodsBox.getValue().equals("")) {
-			Event.fireEvent(toolboxPane, new StateChangeEvent(new PlayState(this.getEditor(), toolboxPane, this.methodsBox.getValue())));
-			Event.fireEvent(toolboxPane, new PlayEvent());
+		System.out.println("PLAY clicked.");
+		
+		if (this.methodsBox.getValue() == null || this.methodsBox.getValue().equals("")) {
+			this.getEditor().getState().showErrorDialog(Texts.ERROR_NO_METHOD_SELECTED);
+			return;
 		}
-		// TODO : error hint when no algo is selected.
+		
+		// quite ugly, but works : the 2nd child of the speedbox is the speed slider.
+		Slider s = (Slider)this.speedBox.getChildren().get(1);
+		this.getEditor().setSpeed((long)s.getValue());
+		
+		this.editBox.setDisable(true);
+		this.methodsBox.setDisable(true);
+		
+		this.playBox.setDisable(true);
+		this.forwardBox.setDisable(true);
+		this.backwardBox.setDisable(true);
+		this.pauseBox.setDisable(false);
+		this.resetBox.setDisable(false);
+		this.speedBox.setDisable(true);
+		
+		Event.fireEvent(toolboxPane, new StateChangeEvent(new PlayState(this.getEditor(), this.methodsBox.getValue())));
+		Event.fireEvent(toolboxPane, new PlayEvent());
 	}
 	
 	
 	@FXML
 	private void handlePauseClick() {
-		System.out.println("-- PAUSE clicked.");
+		this.playBox.setDisable(false);
+		this.forwardBox.setDisable(false);
+		this.backwardBox.setDisable(false);
+		this.pauseBox.setDisable(true);
+		this.resetBox.setDisable(false);
+		this.speedBox.setDisable(false);
 		Event.fireEvent(toolboxPane, new PauseEvent());
 	}
 	
 	
 	@FXML
 	private void handleForwardClick() {
-		System.out.println("-- FORWARD clicked.");
 		Event.fireEvent(toolboxPane, new ForwardEvent());
 	}
 	
 	
 	@FXML
 	private void handleBackwardClick() {
-		System.out.println("-- BACKWARD clicked.");
 		Event.fireEvent(toolboxPane, new BackwardEvent());
 	}
 	
 	
 	@FXML
 	private void handleResetClick() {
-		System.out.println("-- RESET clicked -> enable Buttons");
-		this.disableButtons(false);
+		this.playBox.setDisable(false);
+		this.forwardBox.setDisable(true);
+		this.backwardBox.setDisable(true);
+		this.pauseBox.setDisable(true);
+		this.resetBox.setDisable(true);
+		this.speedBox.setDisable(false);
+		
+		this.editBox.setDisable(false);
+		this.methodsBox.setDisable(false);
+		
 		Event.fireEvent(toolboxPane, new ResetEvent());
 	}
-	
-	
-	private void disableButtons(boolean disabled) {
-		this.vbox.setDisable(disabled);
-		this.methodsBox.setDisable(disabled);
-	}
-	
+
 }

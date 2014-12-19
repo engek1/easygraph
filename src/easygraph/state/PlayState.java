@@ -5,111 +5,106 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import javafx.application.Platform;
-import javafx.scene.layout.Pane;
 import easygraph.annotations.AlgorithmMethod;
 import easygraph.application.Editor;
+import easygraph.events.BackwardEvent;
+import easygraph.events.ForwardEvent;
+import easygraph.events.PauseEvent;
 import easygraph.events.PlayEvent;
 import easygraph.events.ResetEvent;
+import easygraph.guielements.Texts;
 import easygraph.utils.Config;
 
 public class PlayState extends State {
 		
-	private Pane pane;
 	private String algorithm;
-	private boolean autoPlay = true;
+	private AtomicBoolean autoPlay;
 
-	public PlayState(Editor editor, Pane pane, String algorithm) {
+	public PlayState(Editor editor, String algorithm) {
 		super(editor);
-		this.pane = pane;
 		this.algorithm = algorithm;
-		this.call();
+		this.autoPlay = new AtomicBoolean(true);
+		//this.call();
 	}
 	
 	
 	@Override
 	public void handle(PlayEvent event) {
-		System.out.println("PlayEvent fired, starting a new TimerTask ...");
-		
-		TimerTask action = new TimerTask() {
-			@Override
-			public void run() {
-				System.out.println("TimerTask running ...");
-				if (!PlayState.this.autoPlay || !PlayState.this.editor.hasForwardSteps()) {
-					System.out.println("AutoPlay OFF or no further forward steps --> cancel TimerTask.");
-					this.cancel();
-				} else {
-					System.out.println("Let the Platform.runLater() forwardin the next step.");
-					Platform.runLater(() -> PlayState.this.editor.forward());
-				}
-			}
-		};
 
-		Timer caretaker = new Timer();
-		caretaker.schedule(action, 1000, 1000);
+		// only start TimerTask if method invoking was ok.
+		if (this.call()) {
+		
+			TimerTask action = new TimerTask() {
+				@Override
+				public void run() {
+					System.out.println("TimerTask running...");
+					if (!PlayState.this.autoPlay.get() || !PlayState.this.editor.hasForwardSteps()) {
+						this.cancel();
+						System.out.println("No AutoPlay or No ForwardSteps found, cancelling...");
+						PlayState.this.changeState(new SelectState(PlayState.this.editor));
+					} else {
+						Platform.runLater(() -> PlayState.this.editor.forward());
+					}
+				}
+			};
+			
+			new Timer().schedule(action, Config.getDelay(), this.editor.getSpeed());
+		}
+		else {
+			this.changeState(new SelectState(this.editor));
+		}
 	}
 	
 	
 	@Override
 	public void handle(ResetEvent event) {
-		System.out.println("RESET clicked --> set AutoPlay to false.");
-		this.autoPlay = false;
-		this.editor.unmarkVertices();
-		this.editor.unmarkEdges();
+		this.autoPlay.set(false);
+		this.editor.reset();
+		this.changeState(new SelectState(this.editor));
 	}
 	
+	@Override
+	public void handle(PauseEvent event) {
+		this.autoPlay.set(false);
+	}
 	
+	@Override
+	public void handle(ForwardEvent event) {
+		Platform.runLater(() -> PlayState.this.editor.forward());
+	}
 	
-	private void call() {
+	@Override
+	public void handle(BackwardEvent event) {
+		Platform.runLater(() -> PlayState.this.editor.backward());
+	}
+	
+
+	private boolean call() {
 		try {
 			// load instance of AlgorithmsCollection and try to reference the Method with by its name
 			Class<?> clazz = ClassLoader.getSystemClassLoader().loadClass(Config.getLookupAlgorithmClassName());
 			
-			List<Object> params = new ArrayList<Object>();
-			Method method = null;
-			AlgorithmMethod annotation = null;
-			
-			for (Method m : clazz.getDeclaredMethods()) {
-				if (m.isAnnotationPresent(AlgorithmMethod.class)) {
-					if (m.getName().equals(this.algorithm)) {
-						annotation = m.getDeclaredAnnotation(AlgorithmMethod.class);
-						method = m;
-					}
-				}
-			}
-			
-			if (method == null) {
-				System.out.println("no method found!");
-				// TODO error handling
-				return;
-			}
-			
 			// create a parameters object array for the method call
+			List<Object> params = new ArrayList<Object>();
 			params.add(this.editor.getGraph());
 			
+			// find out which method was selected and load its annotation
+			Method selectedMethod = this.getMethod(clazz.getDeclaredMethods());;
+			AlgorithmMethod annotation = selectedMethod.getDeclaredAnnotation(AlgorithmMethod.class);
+			
+
 			// thanks to the annotation, we chan easily check whether the method needs a start vertex
 			if (annotation.needsStartVertex()) {
 				int nr = this.editor.getNumberOfStartVertices();
 				
-				// for test reasons, just use dijkstra algorithm
-				nr = 1;
-				
 				if (nr == 1) {
-					//params.add(this.editor.getStartVertex());
-					params.add(this.editor.getGraph().vertices().next());
-				}
-				else {
-					String text = "";
-					if (nr == 0) {
-						text = "The selected algorithm needs to have a starting Vertex. " + 
-						  "Please define one by right-clicking on a Vertex, then selecting on 'mark as Start Vertex'.";
-					} else {
-						text = "The selected algorithm needs to have exactly one starting Vertex.";
-					}
-					this.showErrorDialog(text);
-					this.changeState(new SelectState(this.editor));
-					return;
+					params.add(this.editor.getStartVertex());
+				} else {
+					this.showErrorDialog(Texts.ERROR_WRONG_STARTVERTEX_NUMBER);
+					return false;
 				}
 			}
 			
@@ -119,12 +114,24 @@ public class PlayState extends State {
 			}
 			
 			// invoke the method on the clazz instance and deliver the necessary params to it
-			method.invoke(clazz.newInstance(), params.toArray());
-			
-			System.out.println("Invoking of '" + this.algorithm + "' finished, let the step-by-step mode begin ...");
+			selectedMethod.invoke(clazz.newInstance(), params.toArray());
+			return true;
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return false;
+	}
+	
+	
+	private Method getMethod(Method[] methods) {
+		for (Method method : methods) {
+			if (method.isAnnotationPresent(AlgorithmMethod.class)) {
+				if (method.getName().equals(this.algorithm)) {
+					return method;
+				}
+			}
+		}
+		return null;
 	}
 }

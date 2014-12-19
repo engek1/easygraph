@@ -81,6 +81,5 @@ public class GuiEdge extends Line implements Repaintable {
 			color = (Color) edge.get(EGProperty.EG_COLOR);
 		}
 		mark(color);
-		// TODO paint other gui properties...
 	}
 }

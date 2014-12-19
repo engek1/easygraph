@@ -4,6 +4,7 @@ import easygraph.application.Editor;
 import easygraph.events.VertexLeftClickEvent;
 import easygraph.events.VertexRightClickEvent;
 import easygraph.guielements.GuiVertex;
+import easygraph.guielements.Texts;
 
 public class AddEdgeState extends State {
 	
@@ -23,8 +24,7 @@ public class AddEdgeState extends State {
 		}
 		else {
 			if (this.origin == guiVertex) {
-				this.editor.showConfirmDialog("Please choose two different vertices to connect. "  + 
-			      "It's not possible to add an edge connecting the same vertex.");
+				this.editor.showConfirmDialog(Texts.ERROR_SELECT_TWO_DIFFERENT_VERTICES_TO_CONNECT);
 			} else {
 				try {
 				    this.editor.addEdge(this.origin.getVertex(), event.getGuiVertex().getVertex());
@@ -33,7 +33,7 @@ public class AddEdgeState extends State {
 				    // finally, change to a new AddEdgeState. otherwise, you would insert a new Edge from the origin vertex.
 				    this.changeState(new AddEdgeState(this.editor));
 				} catch (RuntimeException re) {
-					this.editor.showConfirmDialog("EasyGraph catched a Runtime Exception. The Message of it is: " + re.getMessage());
+					this.editor.showConfirmDialog(Texts.ERROR_RUNTIME_CATCHED + re.getMessage());
 				}
 			}
 		}

@@ -12,7 +12,7 @@
    <children>
       <Pane id="speedSlider" fx:id="toolboxPane" prefHeight="674.0" prefWidth="200.0">
          <children>
-            <VBox fx:id="vbox" layoutX="39.0" layoutY="31.0" spacing="14.0">
+            <VBox fx:id="editBox" layoutX="39.0" layoutY="31.0" spacing="14.0">
                <children>
                   <Button id="moveElementButton" mnemonicParsing="false" onAction="#handleSelectClick" prefHeight="50.0" prefWidth="123.0" text="move Element">
                      <graphic>
@@ -45,48 +45,77 @@
             
             <ComboBox fx:id="methodsBox" layoutX="38.0" layoutY="275.0" prefHeight="50.0" prefWidth="123.0" promptText="Algorithm" />
             
-            <Button id="playButton" layoutX="38.0" layoutY="384.0" mnemonicParsing="false" onAction="#handlePlayClick" prefHeight="50.0" prefWidth="55.0">
-               <graphic>
-                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="file:resources/images/start.png" />
-                     </image>
-                  </ImageView>
-               </graphic></Button>
-            <Button id="pauseButton" layoutX="108.0" layoutY="384.0" mnemonicParsing="false" onAction="#handlePauseClick" prefHeight="50.0" prefWidth="55.0">
-               <graphic>
-                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="file:resources/images/pause.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-            <Button id="backwardButton" layoutX="38.0" layoutY="454.0" mnemonicParsing="false" onAction="#handleBackwardClick" prefHeight="50.0" prefWidth="55.0" textAlignment="RIGHT">
-               <graphic>
-                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="file:resources/images/backward.png" />
-                     </image>
-                  </ImageView>
-               </graphic></Button>
-            <Button id="forwardButton" layoutX="108.0" layoutY="454.0" mnemonicParsing="false" onAction="#handleForwardClick" prefHeight="50.0" prefWidth="55.0">
-               <graphic>
-                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="file:resources/images/forward.png" />
-                     </image>
-                  </ImageView>
-               </graphic></Button>
-            <Button id="resetButton" layoutX="38.0" layoutY="526.0" mnemonicParsing="false" onAction="#handleResetClick" prefHeight="50.0" prefWidth="123.0" textAlignment="CENTER">
-               <graphic>
-                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="file:resources/images/reset.png" />
-                     </image></ImageView>
-               </graphic></Button>
-            <Slider layoutX="39.0" layoutY="618.0" prefHeight="15.0" prefWidth="123.0" showTickLabels="true" showTickMarks="true" value="1.0" />
-            <Text id="sliderText" layoutX="83.0" layoutY="615.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Speed" textAlignment="CENTER" />
+            <VBox fx:id="playBox" layoutX="38.0" layoutY="384.0" spacing="0.0">
+               <children>
+	            <Button id="playButton" mnemonicParsing="false" onAction="#handlePlayClick" prefHeight="50.0" prefWidth="55.0">
+	               <graphic>
+	                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+	                     <image>
+	                        <Image url="file:resources/images/start.png" />
+	                     </image>
+	                  </ImageView>
+	               </graphic>
+	             </Button>
+             </children>
+           </VBox>
+           <VBox fx:id="pauseBox" disable="true" layoutX="108.0" layoutY="384.0" spacing="0.0">
+             <children>
+	            <Button id="pauseButton" mnemonicParsing="false" onAction="#handlePauseClick" prefHeight="50.0" prefWidth="55.0">
+	               <graphic>
+	                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+	                     <image>
+	                        <Image url="file:resources/images/pause.png" />
+	                     </image>
+	                  </ImageView>
+	               </graphic>
+	            </Button>
+	          </children>
+	        </VBox>
+	        <VBox fx:id="backwardBox" disable="true" layoutX="38.0" layoutY="454.0" spacing="0.0">
+               <children>
+	            <Button id="backwardButton" mnemonicParsing="false" onAction="#handleBackwardClick" prefHeight="50.0" prefWidth="55.0" textAlignment="RIGHT">
+	               <graphic>
+	                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+	                     <image>
+	                        <Image url="file:resources/images/backward.png" />
+	                     </image>
+	                  </ImageView>
+	               </graphic>
+	            </Button>
+	          </children>
+	        </VBox>
+	        <VBox fx:id="forwardBox" disable="true" layoutX="108.0" layoutY="454.0" spacing="0.0">
+               <children>
+	            <Button id="forwardButton" mnemonicParsing="false" onAction="#handleForwardClick" prefHeight="50.0" prefWidth="55.0">
+	               <graphic>
+	                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+	                     <image>
+	                        <Image url="file:resources/images/forward.png" />
+	                     </image>
+	                  </ImageView>
+	               </graphic>
+	             </Button>
+	          </children>
+	        </VBox>
+	        <VBox fx:id="resetBox" disable="true" layoutX="38.0" layoutY="526.0" spacing="0.0">
+               <children>
+                  <Button id="resetButton" mnemonicParsing="false" onAction="#handleResetClick" prefHeight="50.0" prefWidth="123.0" textAlignment="CENTER">
+	               <graphic>
+	                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+	                     <image>
+	                        <Image url="file:resources/images/reset.png" />
+	                     </image>
+	                   </ImageView>
+	               </graphic>
+	             </Button>
+              </children>
+            </VBox>
+            <VBox fx:id="speedBox" layoutX="38.0" layoutY="600.0" spacing="0.0">
+               <children>
+                 <Text id="sliderText" strokeType="OUTSIDE" strokeWidth="0.0" text="Speed" textAlignment="CENTER" />
+                 <Slider id="speedSlider" blockIncrement="1.0" majorTickUnit="1.0" max="5.0" min="1.0" minorTickCount="1" prefHeight="15.0" prefWidth="123.0" showTickLabels="true" showTickMarks="true" value="3.0" />
+               </children>
+            </VBox>
          </children>
       </Pane>
    </children>

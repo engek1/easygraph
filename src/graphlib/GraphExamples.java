@@ -13,7 +13,6 @@ public class GraphExamples<V,E> {
 
 	@AlgorithmMethod
 	public int kruskal(Graph<V,E> g){
-		System.out.println("starting kruskal ...");
 		if (g.isDirected()) throw new RuntimeException("We need an undirected graph!");
 		// Returns the number of connected components
 		// Finds the minimum spanning forrest:
@@ -65,15 +64,11 @@ public class GraphExamples<V,E> {
 				c1.clear();
 			}
 		}		
-		System.out.println("kruskal done.");
 		return num;
 	}
 	
 	
-
-	@AlgorithmMethod(needsDijkstraFlag = true)
 	public void findGateways(Graph<V,E> g, boolean dijkstra){
-		System.out.println("starting findGateways ...");
 		// if 'v' and 'w' are vertices of 'g' then 
 		// 'v' has a attribute 'w'. The the value of 
 		// this attribute is (say) 'u'. Then 'u' has 
@@ -101,19 +96,16 @@ public class GraphExamples<V,E> {
 			if ( dijkstra) dijkstra(g,v);
 			else bfs(g,v);
 		}
-		System.out.println("findGateways done.");
 	}
 	
 
 	@AlgorithmMethod(needsStartVertex = true)
 	public void dijkstra(Graph<V,E> g, Vertex<V> s){
-		System.out.println("starting dijkstra ...");
 		HeapPriorityQueue<Double,Vertex<V>> hq = new HeapPriorityQueue<>();
 		Iterator<Vertex<V>> it = g.vertices();
 		while (it.hasNext()){
 			Vertex<V> v = it.next();
 			v.set(Property.DISTANCE,Double.POSITIVE_INFINITY);
-			EasyGraph.setDiscovered(v);
 			Locator<Double,Vertex<V>> loc = hq.insert((Double)v.get(Property.DISTANCE),v);
 			v.set(Property.PQLOCATOR, loc);
 			s.set(v,null);
@@ -129,6 +121,7 @@ public class GraphExamples<V,E> {
 			else eit  = g.incidentEdges(v);
 			while(eit.hasNext()){
 				Edge<E> e  = eit.next();
+				EasyGraph.setDiscovered(e);
 				double weight =1.0; // if no weight is entered
 				if (e.has(Property.WEIGHT)) weight = (Double)e.get(Property.WEIGHT);
 				Vertex<V> u = g.opposite(e, v);
@@ -138,16 +131,18 @@ public class GraphExamples<V,E> {
 					hq.replaceKey((Locator<Double,Vertex<V>>)u.get(Property.PQLOCATOR), newDist);
 					// now set as best gateway (until now) v
 					// i.e v is the gateway from u to s.
-					if(v==s) s.set(u,u);
+					if(v==s) {
+						s.set(u,u);
+						EasyGraph.setSelected(u);
+					}
 					else {
 						s.set(u,s.get(v));
-						EasyGraph.setSelected(s);
+						EasyGraph.setSelected((Vertex)s.get(v));
 					}				
 				}
 			}
 			
 		}
-		System.out.println("dijkstra done.");
 	}
 	
 	
@@ -178,9 +173,7 @@ public class GraphExamples<V,E> {
 	}
 	
 
-	@AlgorithmMethod(needsStartVertex = true)
 	public void bfs(Graph<V,E> g, Vertex<V> v){
-		System.out.println("starting bfs ...");
 		// add the attribute v to all vertices w
 		// the value of this attribute is the first
 		// vertex on a shortest path from w to v
@@ -201,9 +194,7 @@ public class GraphExamples<V,E> {
 					li.addFirst(u);			
 				}
 			}
-			
 		}
-		System.out.println("bfs done.");
 	}
 	
 	public  LinkedList<Vertex<V>> findPath(
