@@ -11,7 +11,9 @@ import easygraph.events.EdgeRightClickEvent;
 import easygraph.events.VertexLeftPressedEvent;
 import easygraph.events.VertexRightClickEvent;
 import easygraph.guielements.EdgeDialog;
+import easygraph.guielements.GuiVertex;
 import easygraph.guielements.VertexDialog;
+import easygraph.model.EGProperty;
 
 public class SelectState extends State {
 
@@ -56,11 +58,14 @@ public class SelectState extends State {
 		    }
 		});
 		cm.getItems().add(cmDelete);
-		// add "set as start-vertex action delete" action
-		MenuItem cmAsStartVertex = new MenuItem("as Startvertex");
+
+    	GuiVertex guiVertex = (GuiVertex) event.getVertex().get(EGProperty.EG_GUI_REFERENCE);
+    	boolean isStartV = guiVertex.isStartVertex();
+		String itemText = isStartV ? "remove as Startvertex" : "set as Startvertex";
+		MenuItem cmAsStartVertex = new MenuItem(itemText);
 		cmAsStartVertex.setOnAction(new EventHandler<ActionEvent>() {
 		    public void handle(ActionEvent e) {
-		    	// TODO @webel3: set vertex as start-vertex 
+		    	guiVertex.setAsStartVertex(!isStartV);
 		    }
 		});
 		cm.getItems().add(cmAsStartVertex);

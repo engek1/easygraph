@@ -8,6 +8,7 @@ import easygraph.events.PaneMouseReleasedEvent;
 import easygraph.guielements.GuiEdge;
 import easygraph.guielements.GuiVertex;
 import easygraph.model.EGProperty;
+import easygraph.utils.Config;
 import graphlib.Edge;
 import graphlib.Vertex;
 
@@ -28,14 +29,14 @@ public class MoveVertexState extends State {
 		double eventX = event.getMouseEvent().getX();
 		double eventY = event.getMouseEvent().getY();
 		
-		double coordX = eventX - GuiVertex.RADIUS;
-		double coordY = eventY - GuiVertex.RADIUS;
+		double coordX = eventX - Config.VERTEX_RADIUS;
+		double coordY = eventY - Config.VERTEX_RADIUS;
 
-		if (coordX < GuiVertex.RADIUS) {
-			coordX = GuiVertex.RADIUS;
+		if (coordX < Config.VERTEX_RADIUS) {
+			coordX = Config.VERTEX_RADIUS;
 		}
-		if (coordY < GuiVertex.RADIUS) {
-			coordY = GuiVertex.RADIUS;
+		if (coordY < Config.VERTEX_RADIUS) {
+			coordY = Config.VERTEX_RADIUS;
 		}
 		
 		// TODO: prevent maximum sizes exceeded.

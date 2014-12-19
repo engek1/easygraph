@@ -5,14 +5,20 @@ import javafx.scene.paint.Color;
 public class Config {
 	
 	private static final double GUI_PADDING = 30;
-	private static final String GUI_COLOR_UNMARKED = "#6495ED"; // cornflower blue
-	private static final String GUI_COLOR_MARKED = "#FF4000";
+	private static final String GUI_COLOR_UNMARKED = "#466aa8"; // dark blue
+	private static final String GUI_COLOR_MARKED = "#FF4000"; // red
 	
 	private static final String FONT_FAMILY = "Verdana";
 	private static final double FONT_SIZE = 15.0;
 	private static final String FONT_COLOR = "#333333";
 	
 	private static final String ALGORITHM_CLASS_NAME = "graphlib.GraphExamples";
+	
+	// VERTEX
+	public static final double VERTEX_BORDER_WIDTH = 2.0;
+	public static final Color DEFAULT_VERTEX_COLOR = Color.WHITE;
+	public static final Color START_VERTEX_COLOR = Color.valueOf("#ffcf7c"); // hellorange
+	public static final int VERTEX_RADIUS = 20;
 
 	
 	public static double getPadding() {

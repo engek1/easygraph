@@ -19,29 +19,33 @@ import javafx.scene.text.Text;
 
 public class GuiVertex extends StackPane implements Repaintable {
 
-	public static final int RADIUS = 20;
+
 	private Vertex<?> vertex;
-	
+
 	private Ellipse ellipse;
 	private Text text;
-	
+
 	public GuiVertex(Vertex<?> v) {
 		this.vertex = v;
 		v.set(EGProperty.EG_GUI_REFERENCE, this);
 		this.init();
 	}
-	
+
 	private void init() {
 		
 		// TODO : add another ellipse for 'startVertex' vertices and handle this one additionally in methods
 				
 		// use an ellipse to make border visible
 		ellipse = new Ellipse();
-		ellipse.setRadiusX(GuiVertex.RADIUS);
-		ellipse.setRadiusY(GuiVertex.RADIUS);
+		ellipse.setRadiusX(Config.VERTEX_RADIUS);
+		ellipse.setRadiusY(Config.VERTEX_RADIUS);
 		ellipse.setFill(Color.WHITE);
 		ellipse.setStroke(Config.getUnmarkColor());
-		ellipse.setStrokeWidth(2.0);
+		ellipse.setStrokeWidth(Config.VERTEX_BORDER_WIDTH);
+		
+		if(isStartVertex()){
+			setAsStartVertex(true);
+		}
 		
 		// use a Text for the string representation of the value stored in vertex
 		
@@ -65,8 +69,8 @@ public class GuiVertex extends StackPane implements Repaintable {
 		// sort of ugly --- substract the radius of the circle from the x/y position
 		// reason is that the StackPane is positioned with the left top corner, but
 		// should be positioned with its center, so correct the layout
-		this.setLayoutX(coordX - GuiVertex.RADIUS);
-		this.setLayoutY(coordY - GuiVertex.RADIUS);
+		this.setLayoutX(coordX - Config.VERTEX_RADIUS);
+		this.setLayoutY(coordY - Config.VERTEX_RADIUS);
 		
 		// add the text and the ellipse to the StackPane:
 		// text has to be 2nd param, otherwise the ellipse would cover the text
@@ -108,7 +112,7 @@ public class GuiVertex extends StackPane implements Repaintable {
 	public Vertex<?> getVertex() {
 		return vertex;
 	}
-	
+
 	@Override
 	public void mark() {
 		this.mark(Config.getMarkColor());
@@ -137,6 +141,26 @@ public class GuiVertex extends StackPane implements Repaintable {
 		mark(color);
 		// TODO paint other gui properties...
 	}
-	
-	
+
+	public void setAsStartVertex(boolean bool) {
+		if (bool) {
+			ellipse.setFill(Config.START_VERTEX_COLOR);
+			this.vertex.set(EGProperty.EG_IS_START_VERTEX, true);
+		} else {
+			ellipse.setFill(Config.DEFAULT_VERTEX_COLOR);
+			this.vertex.destroy(EGProperty.EG_IS_START_VERTEX);
+		}
+	}
+
+	public boolean isStartVertex() {
+		if (this.vertex.has(EGProperty.EG_IS_START_VERTEX)) {
+			boolean bool = (boolean) this.vertex
+					.get(EGProperty.EG_IS_START_VERTEX);
+			return bool;
+		} else {
+			return false;
+		}
+
+	}
+
 }
