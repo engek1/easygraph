@@ -8,7 +8,9 @@ Arbeitsjournal - Projekt1 - easyGraph - Team WEW
 - Bugfixing
 - Speichern / Laden implementiert
 - Samples Graphen
- - Kennzeichnung von Start Vertices
+- Kennzeichnung von Start Vertices
+- Vertex/Edge Edit Dialog implementiert 
+- ToolboxView angepasst und justiert 
 ============================================================================
 12.12.2014 webel3 / wengm17 / engek1
 
