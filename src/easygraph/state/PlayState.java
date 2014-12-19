@@ -42,9 +42,8 @@ public class PlayState extends State {
 				public void run() {
 					System.out.println("TimerTask running...");
 					if (!PlayState.this.autoPlay.get() || !PlayState.this.editor.hasForwardSteps()) {
-						this.cancel();
+						Platform.runLater(() -> this.cancel());
 						System.out.println("No AutoPlay or No ForwardSteps found, cancelling...");
-						PlayState.this.changeState(new SelectState(PlayState.this.editor));
 					} else {
 						Platform.runLater(() -> PlayState.this.editor.forward());
 					}

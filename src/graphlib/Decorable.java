@@ -1,11 +1,13 @@
 package graphlib;
 
+import java.io.Serializable;
+
 /**
  * Classes implementing the decorable interface allow to attach 
  * attribute - value pairs to its instances.
  * @author ps
  */
-public interface Decorable {
+public interface Decorable extends Serializable {
 	
 	/**
 	 * retrieves the value of the attribute 'attr' an error is thrown

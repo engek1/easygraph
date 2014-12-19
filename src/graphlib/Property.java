@@ -15,5 +15,6 @@ public class Property {
 	public static final String PQLOCATOR = "PQLOCATOR";
 	public static final String WEIGHT = "WEIGHT";
 	public static final String MSF = "MSF";
+	public static final String CLUSTER = "CLUSTER";
 
 }

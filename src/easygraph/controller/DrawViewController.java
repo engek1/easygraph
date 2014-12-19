@@ -68,6 +68,9 @@ public class DrawViewController extends BaseController {
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	void showGraph(Graph<?, ?> graph) {
+
+		// first, remove all previous gui children
+		drawPane.getChildren().clear();
 		
 		// add vertices to the gui
 		Iterator<?> vIt = graph.vertices();
@@ -112,6 +115,14 @@ public class DrawViewController extends BaseController {
 
 	public void removeVertex(GuiVertex guiVertex) {
 		drawPane.getChildren().remove(guiVertex);
+	}
+	
+	public double getWidth() {
+		return drawPane.getWidth();
+	}
+	
+	public double getHeight() {
+		return drawPane.getHeight();
 	}
 	
 }

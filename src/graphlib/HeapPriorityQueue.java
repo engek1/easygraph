@@ -3,6 +3,7 @@
  */
 package graphlib;
 
+import java.io.Serializable;
 import java.lang.management.ManagementFactory;
 import java.lang.management.ThreadMXBean;
 import java.util.Arrays;
@@ -14,10 +15,10 @@ import java.util.Random;
  *
  */
 public class HeapPriorityQueue<K extends Comparable<? super K>, E> implements
-		PriorityQueue<K, E> {
+		PriorityQueue<K, E>, Serializable {
 	
 	private class PQLocator<K extends Comparable<? super K>, E> 
-			implements Locator<K,E>{
+			implements Locator<K,E>, Serializable {
 
 		private K key;
 		private E elem;

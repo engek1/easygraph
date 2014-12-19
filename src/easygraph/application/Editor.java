@@ -76,6 +76,16 @@ public class Editor extends Application implements GraphController {
 		launch();
 	}
 	
+	
+	
+	public void loadGraph(Graph<?, ?> g) {
+		Editor.graph = g;
+		if (!checkCoordinatesSanity()) {
+			adjustVerticesToCircle();
+		}
+		this.editorController.showGraph(Editor.graph);
+	}
+	
 
 	/**
 	 * Check if each vertex has X/Y coordinates so that it can be painted on the
@@ -390,6 +400,15 @@ public class Editor extends Application implements GraphController {
 	
 	public void setSpeed(long speed) {
 		this.speed = speed;
+	}
+	
+	
+	@Override
+	public void stop() {
+		try {
+			super.stop();
+			System.exit(0);
+		} catch (Exception e) {}
 	}
 	
 }

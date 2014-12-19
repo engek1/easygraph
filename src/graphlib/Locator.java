@@ -3,6 +3,8 @@
  */
 package graphlib;
 
+import java.io.Serializable;
+
 /**
  * Locator allow to store (key,Object) pairs, where the keys have 
  * to implement Comparable inteface. 
@@ -11,7 +13,7 @@ package graphlib;
  * @param <E> The type of the element stored at this position
  */
 public interface Locator<K extends Comparable<? super K>,E> 
-				extends Position<E> {
+				extends Position<E>, Serializable {
 	/**
 	 * @return the key object stored at this locator
 	 */

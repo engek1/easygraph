@@ -1,5 +1,6 @@
 package graphlib;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -14,7 +15,7 @@ import java.util.Map.Entry;
  * @param <V> the type of the elements stored at the vertices of this graph
  * @param <E> the type of the elements stored at the edges of this graph
  */
-public class IncidenceListGraph<V,E> implements Graph<V, E> {
+public class IncidenceListGraph<V,E> implements Graph<V, E>, Serializable {
 
 	private HashSet <ILGVertex> vertices = new HashSet<ILGVertex>();
 	private HashSet<ILGEdge> edges = new HashSet<ILGEdge>();
@@ -333,7 +334,7 @@ public class IncidenceListGraph<V,E> implements Graph<V, E> {
 	}
 
 
-	private class ILGVertex extends IGLDecorable implements Vertex<V>{
+	private class ILGVertex extends IGLDecorable implements Vertex<V>, Serializable {
 		private V element;
 		private IncidenceListGraph<V,E> thisGraph = IncidenceListGraph.this;
 		private HashMap<ILGVertex,ILGEdge> iEdges;
@@ -361,7 +362,7 @@ public class IncidenceListGraph<V,E> implements Graph<V, E> {
 
 	}
 	
-	private class ILGEdge extends IGLDecorable implements Edge<E>{
+	private class ILGEdge extends IGLDecorable implements Edge<E>, Serializable {
 		private E element;
 		private Object thisGraph = IncidenceListGraph.this;
 		private ILGVertex from;
@@ -394,7 +395,7 @@ public class IncidenceListGraph<V,E> implements Graph<V, E> {
 	
 	private class IGLDecorable implements Decorable {
 		private HashMap<Object,Object> attrs = new HashMap<Object,Object>(2);
-		private final Object DUMMY = new Object();
+		private final Object DUMMY = new Serializable(){};
 		@Override
 		public Object get(Object attr) {
 			Object ret = attrs.get(attr);

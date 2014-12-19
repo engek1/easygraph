@@ -1,4 +1,7 @@
 package graphlib;
+
+import java.io.Serializable;
+
 /**
  * Edges of a graph. The edge object can be retrieved with 
  * the element() method. 
@@ -7,4 +10,4 @@ package graphlib;
  * @author ps
  * @param <E> the type of the edge elements.
  */
-public interface Edge<E> extends Position<E>, Decorable {}
+public interface Edge<E> extends Position<E>, Decorable, Serializable {}

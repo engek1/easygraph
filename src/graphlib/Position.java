@@ -3,6 +3,8 @@
  */
 package graphlib;
 
+import java.io.Serializable;
+
 /**
 /**
  * @author ps
@@ -12,7 +14,7 @@ package graphlib;
  *
  * @param <E> the type of the objects returned by a position 
  */
-public interface Position<E> {
+public interface Position<E> extends Serializable {
 	/**
 	 * @return the object stored at this position;
 	 */

@@ -1,5 +1,6 @@
 package graphlib;
 
+import java.io.Serializable;
 import java.util.Iterator;
 
 /**
@@ -8,7 +9,7 @@ import java.util.Iterator;
  * @param <V> the type of the vertex elements of this graph 
  * @param <E> the type of the edge elements of this graph
  */
-public interface Graph <V,E> {
+public interface Graph <V,E> extends Serializable {
 	
 	/**
 	 * @return an arbitrary vertex of this graph 

@@ -1,4 +1,7 @@
 package graphlib;
+
+import java.io.Serializable;
+
 /**
  * Vertices of a graph. The vertex object can be retrieved with 
  * the element() method. 
@@ -8,4 +11,4 @@ package graphlib;
  *
  * @param <V> the type of the vertex elements.
  */
-public interface Vertex<V> extends Position<V>, Decorable {}
+public interface Vertex<V> extends Position<V>, Decorable, Serializable {}

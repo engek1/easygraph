@@ -1,14 +1,29 @@
 package easygraph.controller;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.Iterator;
+
+import javafx.application.Platform;
+import javafx.fxml.FXML;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 import easygraph.application.Editor;
+import easygraph.examplegraphs.Samples;
 import easygraph.guielements.GuiEdge;
 import easygraph.guielements.GuiVertex;
 import easygraph.guielements.Texts;
+import easygraph.model.EGProperty;
+import graphlib.Decorable;
 import graphlib.Edge;
 import graphlib.Graph;
+import graphlib.IncidenceListGraph;
 import graphlib.Vertex;
-import javafx.application.Platform;
-import javafx.fxml.FXML;
 
 /**
  * 
@@ -16,10 +31,11 @@ import javafx.fxml.FXML;
  *
  */
 public class EditorLayoutController extends BaseController {
-		
+	
+	private Samples samples = new Samples();
+	
 	@FXML
 	private ToolboxViewController toolboxViewController;
-	
 	
 	@FXML
 	private DrawViewController drawViewController;
@@ -47,52 +63,65 @@ public class EditorLayoutController extends BaseController {
 		this.drawViewController.setEditor(editor);
 	}
 	
+	public DrawViewController getDrawViewController() {
+		return this.drawViewController;
+	}
+	
 	
 	@FXML
 	private void save() {
-		System.out.println("-- SAVE clicked.");
+		FileOutputStream fout = null;
+		ObjectOutputStream oos = null;
 		
-		/*
-		System.out.println("number of vertices in graph before 'save': " + this.getEditor().getGraph().numberOfVertices());
-		
-		try {			
-			File file = new File("C:\\Development\\graph.gr");			
-			FileOutputStream fout = new FileOutputStream(file);
-			ObjectOutputStream oos = new ObjectOutputStream(fout);
-			oos.writeObject(this.getEditor().getGraph());
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+		try {
+			FileChooser fileChooser = new FileChooser();
+			fileChooser.setTitle("Save IncidenceListGraph Resource File");
+			fileChooser.setInitialFileName("edited-graph.graph");
+			fileChooser.getExtensionFilters().add(new ExtensionFilter("Graph", "*.graph"));		
+			
+			File file = fileChooser.showSaveDialog(this.getEditor().getPrimaryStage());
+			fout = new FileOutputStream(file);
+			oos = new ObjectOutputStream(fout);
+			oos.writeObject(this.prepareGraphForSave());
 		} catch (IOException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				fout.close();
+				oos.close();
+			} catch (IOException e) {}
 		}
-		*/
-
 	}
-	
+
 	
 	@FXML
 	private void open() {
-		System.out.println("-- OPEN clicked.");
+		FileInputStream fin = null;
+		ObjectInputStream ois = null;
 		
-		/*
 		try {
-			FileInputStream fin = new FileInputStream("C:\\Development\\graph.gr");
-			ObjectInputStream ois = new ObjectInputStream(fin);
-			IncidenceListGraph<?, ?> graph = (IncidenceListGraph<?, ?>) ois.readObject();
+			FileChooser fileChooser = new FileChooser();
+			fileChooser.setTitle("Open IncidenceListGraph Resource File");
+			fileChooser.getExtensionFilters().add(new ExtensionFilter("Graph", "*.graph"));
 			
-			System.out.println("number of vertices in graph after 'open': " + graph.numberOfVertices());
+			File file = fileChooser.showOpenDialog(this.getEditor().getPrimaryStage());
 			
+			fin = new FileInputStream(file);
+			ois = new ObjectInputStream(fin);
 			
-		} catch (FileNotFoundException e) {
+			this.getEditor().loadGraph((IncidenceListGraph<?, ?>) ois.readObject());
+			
+		} catch (IOException | ClassNotFoundException e) {
 			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
+		} finally {
+			try {
+				fin.close();
+				ois.close();
+			} catch (Exception e) {}
 		}
-		*/
 	}
 	
+
 	@FXML
 	private void quit() {
 		try {
@@ -106,22 +135,22 @@ public class EditorLayoutController extends BaseController {
 	
 	@FXML
 	private void exampleOne() {
-		System.out.println("-- EXAMPLE-1 clicked.");
+		this.getEditor().loadGraph(this.samples.getExampleOne());
 	}
 	
 	@FXML
 	private void exampleTwo() {
-		System.out.println("-- EXAMPLE-2 clicked.");
+		this.getEditor().loadGraph(this.samples.getExampleTwo());
 	}
 	
 	@FXML
 	private void exampleThree() {
-		System.out.println("-- EXAMPLE-3 clicked.");
+		this.getEditor().loadGraph(this.samples.getExampleThree());
 	}
 	
 	@FXML
 	private void exampleFour() {
-		System.out.println("-- EXAMPLE-4 clicked.");
+		this.getEditor().loadGraph(this.samples.getExampleFour());
 	}
 	
 	@FXML
@@ -136,7 +165,28 @@ public class EditorLayoutController extends BaseController {
 
 	public void removeVertex(GuiVertex guiVertex) {
 		drawViewController.removeVertex(guiVertex);
+	}
+	
+	
+	private Graph<?, ?> prepareGraphForSave() {
+		Graph<?, ?> graph = this.getEditor().getGraph();
 		
+		Iterator<?> itV = graph.vertices();
+		while (itV.hasNext()) {
+			Decorable elem = (Decorable) itV.next();
+			if (elem.has(EGProperty.EG_GUI_REFERENCE)) {
+				elem.destroy(EGProperty.EG_GUI_REFERENCE);
+			}
+		}
+		
+		Iterator<?> itE = graph.edges();
+		while (itE.hasNext()) {
+			Decorable elem = (Decorable) itE.next();
+			if (elem.has(EGProperty.EG_GUI_REFERENCE)) {
+				elem.destroy(EGProperty.EG_GUI_REFERENCE);
+			}
+		}
+		return graph;
 	}
 
 }
