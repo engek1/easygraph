@@ -1,6 +1,10 @@
 package easygraph.guielements;
 
+import easygraph.model.EGProperty;
+import graphlib.Edge;
+
 import java.util.Optional;
+
 import javafx.geometry.Insets;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
@@ -11,21 +15,28 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 
+@SuppressWarnings("rawtypes")
 public class EdgeDialog extends Dialog {
-
+	private Edge<?> edge;
 	final ButtonType buttonSave = new ButtonType("OK", ButtonData.OK_DONE);
 	final ButtonType buttonCancle = new ButtonType("Close", ButtonData.CANCEL_CLOSE);
 	final TextField weight = new TextField();
 	private GridPane grid = new GridPane();
 
-	public EdgeDialog() {
+	public EdgeDialog(Edge<?> edge) {
+		this.edge = edge;
+		
 		this.setTitle("Edit");
 		this.setHeaderText("Edit edge attributs");
 		this.setGraphic(new ImageView(new Image("file:resources/images/settings.png")));
 
 		// Set Dialog field background texts 
 		weight.setPromptText("weight");
-		// anzeige wert der original edge weight.setText(""); 
+		
+		// anzeige wert der original edge
+		if (edge.has(EGProperty.WEIGHT)) {
+			weight.setText("" + edge.get(EGProperty.WEIGHT));
+		}
 				
 		// Create a custom dialog
 		grid.setHgap(10);
@@ -43,14 +54,19 @@ public class EdgeDialog extends Dialog {
 		this.getDialogPane().getButtonTypes().addAll(buttonSave, buttonCancle);	
 	}
 
+	
+	@SuppressWarnings("unchecked")
 	public void showIt() {
 		Optional<ButtonType> result = this.showAndWait();
 		if (result.get().getButtonData() == ButtonData.OK_DONE) {
-			// to do update edge value 
-			
 			// Check if user changed attribute
 			if(!this.weight.getText().equals("")) {
-				System.out.println("Changed edge weight to: " + this.weight.getText());
+				
+				try {
+					double input = Double.valueOf(this.weight.getText());
+					this.edge.set(EGProperty.WEIGHT, input);
+					System.out.println("Changed edge weight to: " + this.weight.getText());
+				} catch (NumberFormatException nfe) {}
 			}
 		}
 	}

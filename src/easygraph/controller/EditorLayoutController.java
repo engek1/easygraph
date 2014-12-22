@@ -2,7 +2,6 @@ package easygraph.controller;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -19,6 +18,7 @@ import easygraph.guielements.GuiEdge;
 import easygraph.guielements.GuiVertex;
 import easygraph.guielements.Texts;
 import easygraph.model.EGProperty;
+import easygraph.utils.Config;
 import graphlib.Decorable;
 import graphlib.Edge;
 import graphlib.Graph;
@@ -65,6 +65,12 @@ public class EditorLayoutController extends BaseController {
 	
 	public DrawViewController getDrawViewController() {
 		return this.drawViewController;
+	}
+	
+	@FXML
+	private void newFile() {
+		IncidenceListGraph<String,String> graph = new IncidenceListGraph<String,String> (false);
+		this.getEditor().loadGraph(graph);
 	}
 	
 	
@@ -156,6 +162,14 @@ public class EditorLayoutController extends BaseController {
 	@FXML
 	private void aboutUs() {
 		System.out.println("-- ABOUT clicked.");
+	}
+	
+	@FXML
+	private void arrangeInCircle() {
+		double width = drawViewController.getWidth() - 2 * Config.VERTEX_RADIUS;
+		double height = drawViewController.getHeight() - 2 * Config.VERTEX_RADIUS;
+		this.getEditor().adjustVerticesToCircle(width, height);
+		this.showGraph(this.getEditor().getGraph());
 	}
 
 	public void removeEdge(GuiEdge guiEdge) {

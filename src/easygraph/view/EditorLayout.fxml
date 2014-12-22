@@ -13,7 +13,7 @@
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
-                  <MenuItem id="menuNew" mnemonicParsing="false" text="New">
+                  <MenuItem id="menuNew" mnemonicParsing="false" onAction="#newFile" text="New">
                      <graphic>
                         <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -62,7 +62,7 @@
           </Menu>
             <Menu mnemonicParsing="false" text="Graph">
               <items>
-                <MenuItem id="menuArrangeGraph" mnemonicParsing="false" text="Arrange in a circle">
+                <MenuItem id="menuArrangeGraph" mnemonicParsing="false" onAction="#arrangeInCircle" text="Arrange in a circle">
                      <graphic>
                         <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                            <image>

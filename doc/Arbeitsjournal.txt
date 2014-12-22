@@ -3,6 +3,11 @@ Arbeitsjournal - Projekt1 - easyGraph - Team WEW
 ----------------------------------------------------------------------------
 
 ============================================================================
+22.12.2014 webel3
+
+- Vertex- und Edge Editor Dialog fertiggestellt
+- Fehlende Menufunktionen ("New", "arrange in circle") implementiert
+============================================================================
 19.12.2014 webel3 / wengm17 / engek1
 
 - Bugfixing

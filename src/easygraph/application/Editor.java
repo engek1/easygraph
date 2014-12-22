@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Stack;
 
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -150,6 +149,9 @@ public class Editor extends Application implements GraphController {
 	 * Call the vertices adjustment method with pre-defined size parameters.
 	 */
 	public void adjustVerticesToCircle() {
+		
+		
+		
 		this.adjustVerticesToCircle(SIZE_X, SIZE_Y);
 	}
 
@@ -286,7 +288,6 @@ public class Editor extends Application implements GraphController {
 			
 			if (v.has(EGProperty.EG_IS_START_VERTEX)) {
 				if ((boolean)v.get(EGProperty.EG_IS_START_VERTEX) == true) {
-					System.out.println("START_VERTEX IS: " + v.element());
 					return v;
 				}
 			}
@@ -354,7 +355,8 @@ public class Editor extends Application implements GraphController {
 		step.apply();
 		
 		// make changes on UI as well. Important let it run in the JavaFx thread when called from outside.
-		Platform.runLater(() -> this.repaint(step.getObject()));
+		//Platform.runLater(() -> this.repaint(step.getObject()));
+		this.repaint(step.getObject());
 				
 		FORWARD_STEP_INDEX--;
 	}

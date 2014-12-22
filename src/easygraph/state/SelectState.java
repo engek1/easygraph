@@ -44,7 +44,7 @@ public class SelectState extends State {
 		cmEdit.setOnAction(new EventHandler<ActionEvent>() {
 		    public void handle(ActionEvent e) {
 		    	// show dialog
-		    	VertexDialog dialog = new VertexDialog();
+		    	VertexDialog dialog = new VertexDialog(event.getVertex());
 		    	dialog.showIt();
 		    }
 		});
@@ -86,7 +86,7 @@ public class SelectState extends State {
 		cmEdit.setOnAction(new EventHandler<ActionEvent>() {
 		    public void handle(ActionEvent e) {
 		    	// show dialog
-		    	EdgeDialog dialog = new EdgeDialog();
+		    	EdgeDialog dialog = new EdgeDialog(event.getEdge());
 		    	dialog.showIt();
 		    }
 		});

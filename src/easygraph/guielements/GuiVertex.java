@@ -5,6 +5,7 @@ import easygraph.events.VertexLeftClickEvent;
 import easygraph.events.VertexLeftPressedEvent;
 import easygraph.events.VertexRightClickEvent;
 import easygraph.model.EGProperty;
+import easygraph.utils.ClassChecker;
 import easygraph.utils.Config;
 import graphlib.Vertex;
 import javafx.event.EventHandler;
@@ -49,10 +50,10 @@ public class GuiVertex extends StackPane implements Repaintable {
 		
 		Object obj = this.vertex.element();
 		
-		if (obj != null && (obj.getClass().isPrimitive() || obj instanceof String) ) {
-			text = new Text(obj.toString());
-		} else if (this.vertex.has(EGProperty.EG_NAME)) {
+		if (this.vertex.has(EGProperty.EG_NAME)) {
 			text = new Text((String)this.vertex.get(EGProperty.EG_NAME));
+		} else if (ClassChecker.isDisplayable(obj)) {
+			text = new Text(obj.toString());
 		} else {
 			text = new Text(Editor.getIdentifier());
 		}
