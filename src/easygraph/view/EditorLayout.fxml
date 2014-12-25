@@ -62,6 +62,65 @@
           </Menu>
             <Menu mnemonicParsing="false" text="Graph">
               <items>
+                <Menu mnemonicParsing="false" text="Example">
+                  <items>
+                    <MenuItem id="menuExample1" mnemonicParsing="false" onAction="#exampleOne" text="Example 1 (mini graph)">
+                           <graphic>
+                              <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="file:resources/images/greenBall.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <accelerator>
+                              <KeyCodeCombination alt="UP" code="DIGIT1" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                           </accelerator>
+                        </MenuItem>
+                        <MenuItem id="menuExample2" mnemonicParsing="false" onAction="#exampleTwo" text="Example 2 (small graph)">
+                           <graphic>
+                              <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="file:resources/images/orangeBall.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <accelerator>
+                              <KeyCodeCombination alt="UP" code="DIGIT2" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                           </accelerator>
+                        </MenuItem>
+                        <MenuItem id="menuExample3" mnemonicParsing="false" onAction="#exampleThree" text="Example 3 (komplex graph)">
+                           <graphic>
+                              <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="file:resources/images/blueBall.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <accelerator>
+                              <KeyCodeCombination alt="UP" code="DIGIT3" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                           </accelerator>
+                        </MenuItem>
+                        <MenuItem id="menuExample4" mnemonicParsing="false" onAction="#exampleFour" text="Example 4 (big graph)">
+                           <graphic>
+                              <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="file:resources/images/redBall.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <accelerator>
+                              <KeyCodeCombination alt="UP" code="DIGIT4" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                           </accelerator>
+                        </MenuItem>
+                  </items>
+                     <graphic>
+                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="file:resources/images/examples.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                </Menu>
                 <MenuItem id="menuArrangeGraph" mnemonicParsing="false" onAction="#arrangeInCircle" text="Arrange in a circle">
                      <graphic>
                         <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
@@ -76,54 +135,6 @@
                   </MenuItem>
               </items>
             </Menu>
-          <Menu mnemonicParsing="false" text="Example">
-            <items>
-              <MenuItem id="menuExample1" mnemonicParsing="false" onAction="#exampleOne" text="Example 1 (small graph)">
-                     <graphic>
-                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="file:resources/images/greenBall.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                     <accelerator>
-                        <KeyCodeCombination alt="UP" code="DIGIT1" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
-                     </accelerator></MenuItem>
-                  <MenuItem id="menuExample2" mnemonicParsing="false" onAction="#exampleTwo" text="Example 2 (big graph)">
-                     <graphic>
-                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="file:resources/images/orangeBall.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                     <accelerator>
-                        <KeyCodeCombination alt="UP" code="DIGIT2" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
-                     </accelerator></MenuItem>
-                  <MenuItem id="menuExample3" mnemonicParsing="false" onAction="#exampleThree" text="Example 3 (negativ edges)">
-                     <graphic>
-                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="file:resources/images/blueBall.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                     <accelerator>
-                        <KeyCodeCombination alt="UP" code="DIGIT3" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
-                     </accelerator></MenuItem>
-                  <MenuItem id="menuExample4" mnemonicParsing="false" onAction="#exampleFour" text="Example 4 (undirected edges)">
-                     <graphic>
-                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="file:resources/images/redBall.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                     <accelerator>
-                        <KeyCodeCombination alt="UP" code="DIGIT4" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
-                     </accelerator></MenuItem>
-            </items>
-          </Menu>
           <Menu mnemonicParsing="false" text="Help">
             <items>
               <MenuItem id="menuAbout" mnemonicParsing="false" onAction="#aboutUs" text="About the project...">
