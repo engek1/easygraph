@@ -73,8 +73,10 @@ public class GuiEdge extends Line implements Repaintable {
 	
 	private void setText(){
 		if(!this.edge.has(EGProperty.WEIGHT)){
-			this.edge.set(EGProperty.WEIGHT, 1);
+			this.edge.set(EGProperty.WEIGHT, 1.0);
 		}
+		// TODO : for the GUI, show the double value as an integer without "1.0" notation
+		// WARNING : it cannot be an integer because of the GraphExamples which expects a Double value!
 		String txt = String.valueOf(this.edge.get(EGProperty.WEIGHT));
 		this.text.setText(txt);
 	}
