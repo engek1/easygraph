@@ -51,12 +51,13 @@ public class EdgeDialog extends Dialog {
 		this.getDialogPane().setContent(grid);
 		
 		// Set the button types
-		this.getDialogPane().getButtonTypes().addAll(buttonSave, buttonCancle);	
+		this.getDialogPane().getButtonTypes().addAll(buttonSave, buttonCancle);
 	}
 
 	
 	@SuppressWarnings("unchecked")
 	public void showIt() {
+		weight.requestFocus();
 		Optional<ButtonType> result = this.showAndWait();
 		if (result.get().getButtonData() == ButtonData.OK_DONE) {
 			// Check if user changed attribute
@@ -65,6 +66,7 @@ public class EdgeDialog extends Dialog {
 				try {
 					double input = Double.valueOf(this.weight.getText());
 					this.edge.set(EGProperty.WEIGHT, input);
+					((GuiEdge) this.edge.get(EGProperty.EG_GUI_REFERENCE)).repaint();
 					System.out.println("Changed edge weight to: " + this.weight.getText());
 				} catch (NumberFormatException nfe) {}
 			}

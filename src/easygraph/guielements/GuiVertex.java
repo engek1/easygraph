@@ -23,8 +23,8 @@ public class GuiVertex extends StackPane implements Repaintable {
 
 	private Vertex<?> vertex;
 
-	private Ellipse ellipse;
-	private Text text;
+	private Ellipse ellipse = new Ellipse();
+	private Text text = new Text();
 
 	public GuiVertex(Vertex<?> v) {
 		this.vertex = v;
@@ -35,7 +35,6 @@ public class GuiVertex extends StackPane implements Repaintable {
 	private void init() {
 						
 		// use an ellipse to make border visible
-		ellipse = new Ellipse();
 		ellipse.setRadiusX(Config.VERTEX_RADIUS);
 		ellipse.setRadiusY(Config.VERTEX_RADIUS);
 		ellipse.setFill(Color.WHITE);
@@ -46,18 +45,7 @@ public class GuiVertex extends StackPane implements Repaintable {
 			setAsStartVertex(true);
 		}
 		
-		// use a Text for the string representation of the value stored in vertex
-		
-		Object obj = this.vertex.element();
-		
-		if (this.vertex.has(EGProperty.EG_NAME)) {
-			text = new Text((String)this.vertex.get(EGProperty.EG_NAME));
-		} else if (ClassChecker.isDisplayable(obj)) {
-			text = new Text(obj.toString());
-		} else {
-			text = new Text(Editor.getIdentifier());
-		}
-		
+		this.setText();
 		text.setFont(Font.font(Config.getFontFamily(), FontWeight.BOLD, Config.getFontSize()));
 		text.setFill(Config.getUnmarkColor());
 				
@@ -133,11 +121,15 @@ public class GuiVertex extends StackPane implements Repaintable {
 
 	@Override
 	public void repaint() {
-		Color color = Config.getMarkColor();
+		Color color;
 		if (vertex.has(EGProperty.EG_COLOR)) {
 			color = (Color) vertex.get(EGProperty.EG_COLOR);
+		}else{
+			color =  Config.getUnmarkColor();
+			vertex.set(EGProperty.EG_COLOR, color);
 		}
 		mark(color);
+		this.setText();
 	}
 
 	public void setAsStartVertex(boolean bool) {
@@ -159,6 +151,20 @@ public class GuiVertex extends StackPane implements Repaintable {
 			return false;
 		}
 
+	}
+
+	private void setText() {
+		// use a Text for the string representation of the value stored in vertex
+		Object obj = this.vertex.element();
+		String txt;
+		if (this.vertex.has(EGProperty.EG_NAME)) {
+			txt = (String) this.vertex.get(EGProperty.EG_NAME);
+		} else if (ClassChecker.isDisplayable(obj)) {
+			txt = obj.toString();
+		} else {
+			txt = Editor.getIdentifier();
+		}
+		text.setText(txt);
 	}
 
 }

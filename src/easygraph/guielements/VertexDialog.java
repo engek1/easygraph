@@ -1,7 +1,6 @@
 package easygraph.guielements;
 
 import easygraph.model.EGProperty;
-import easygraph.utils.ClassChecker;
 import graphlib.Vertex;
 
 import java.util.Optional;
@@ -59,6 +58,7 @@ public class VertexDialog extends Dialog {
 	
 	@SuppressWarnings("unchecked")
 	public void showIt() {
+		name.requestFocus();
 		Optional<ButtonType> result = this.showAndWait();
 		if (result.get().getButtonData() == ButtonData.OK_DONE) {
 			// to do update vertex value
@@ -67,6 +67,7 @@ public class VertexDialog extends Dialog {
 			if(!this.name.getText().equals("")) {
 				System.out.println("Changed vertex name to: " + this.name.getText());
 				this.vertex.set(EGProperty.EG_NAME, this.name.getText());
+				((GuiVertex) this.vertex.get(EGProperty.EG_GUI_REFERENCE)).repaint();
 			}
 		}
 	}

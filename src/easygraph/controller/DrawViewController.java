@@ -75,10 +75,8 @@ public class DrawViewController extends BaseController {
 		// add vertices to the gui
 		Iterator<?> vIt = graph.vertices();
 		while (vIt.hasNext()) {
-			Vertex<?> v = (Vertex<?>) vIt.next();
-			GuiVertex elem = new GuiVertex(v);
-			drawPane.getChildren().add(elem);
-			//elem.toFront();
+			Vertex<?> vertex = (Vertex<?>) vIt.next();
+			addVertex(vertex);
 		}
 		
 		// add edges to the gui
@@ -86,9 +84,7 @@ public class DrawViewController extends BaseController {
 		while (eIt.hasNext()) {
 			Edge e = (Edge) eIt.next();
 			Vertex<?>[] endVertices = graph.endVertices(e);
-			GuiEdge elem = new GuiEdge(e, endVertices[0], endVertices[1]);
-			drawPane.getChildren().add(elem);
-			elem.toBack();
+			addEdge(e,endVertices[0], endVertices[1]);
 		}
 	}
 
@@ -103,6 +99,7 @@ public class DrawViewController extends BaseController {
 		GuiEdge guiEdge = new GuiEdge(newEdge, fromVertex, toVertex);
 		Platform.runLater(new Runnable() {
 			public void run() {
+				drawPane.getChildren().add(guiEdge.getText());
 				drawPane.getChildren().add(guiEdge);
 				guiEdge.toBack();
 			}
@@ -110,6 +107,7 @@ public class DrawViewController extends BaseController {
 	}
 
 	public void removeEdge(GuiEdge guiEdge) {
+		drawPane.getChildren().remove(guiEdge.getText());
 		drawPane.getChildren().remove(guiEdge);
 	}
 
