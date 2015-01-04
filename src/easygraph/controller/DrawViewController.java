@@ -68,7 +68,7 @@ public class DrawViewController extends BaseController {
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	void showGraph(Graph<?, ?> graph) {
-
+		
 		// first, remove all previous gui children
 		drawPane.getChildren().clear();
 		
@@ -84,7 +84,7 @@ public class DrawViewController extends BaseController {
 		while (eIt.hasNext()) {
 			Edge e = (Edge) eIt.next();
 			Vertex<?>[] endVertices = graph.endVertices(e);
-			addEdge(e,endVertices[0], endVertices[1]);
+			addEdge(e,endVertices[0], endVertices[1], graph.isDirected());
 		}
 	}
 
@@ -95,10 +95,11 @@ public class DrawViewController extends BaseController {
 	}
 
 	
-	void addEdge(Edge<?> newEdge, Vertex<?> fromVertex, Vertex<?> toVertex) {
-		GuiEdge guiEdge = new GuiEdge(newEdge, fromVertex, toVertex);
+	void addEdge(Edge<?> newEdge, Vertex<?> fromVertex, Vertex<?> toVertex, boolean isDirected) {
+		GuiEdge guiEdge = new GuiEdge(newEdge, fromVertex, toVertex, isDirected);
 		Platform.runLater(new Runnable() {
 			public void run() {
+				drawPane.getChildren().add(guiEdge.getArrow());
 				drawPane.getChildren().add(guiEdge.getText());
 				drawPane.getChildren().add(guiEdge);
 				guiEdge.toBack();
@@ -107,6 +108,7 @@ public class DrawViewController extends BaseController {
 	}
 
 	public void removeEdge(GuiEdge guiEdge) {
+		drawPane.getChildren().remove(guiEdge.getArrow());
 		drawPane.getChildren().remove(guiEdge.getText());
 		drawPane.getChildren().remove(guiEdge);
 	}

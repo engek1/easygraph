@@ -13,6 +13,7 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
+import javafx.scene.shape.Polygon;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
@@ -23,6 +24,8 @@ public class GuiEdge extends Line implements Repaintable {
 	private Vertex<?> origin;
 	private Vertex<?> destination;
 	private Text text = new Text();
+	private final boolean isDirected;
+	private Polygon arrow = new Polygon();
 	
 	private EventHandler<MouseEvent> eventHandler = new EventHandler<MouseEvent>() {
 		@Override
@@ -40,11 +43,11 @@ public class GuiEdge extends Line implements Repaintable {
 		}
     };
 	
-	
-	public GuiEdge(Edge<?> edge, Vertex<?> origin, Vertex<?> destination) {
+	public GuiEdge(Edge<?> edge, Vertex<?> origin, Vertex<?> destination, boolean isDirected) {
 		this.edge = edge;
 		this.origin = origin;
 		this.destination = destination;
+		this.isDirected = isDirected;
 		edge.set(EGProperty.EG_GUI_REFERENCE, this);
 		init();
 	}
@@ -68,39 +71,66 @@ public class GuiEdge extends Line implements Repaintable {
 		
 		this.setText();
 		
+		this.markDirection();
+		
 		this.setCoordinates();
 	}
 	
+	private void markDirection() {
+		if(this.isDirected){
+	        arrow.getPoints().addAll(new Double[]{
+	                    0.0, 10.0,
+	                    -10.0, -10.0,
+	                    10.0, -10.0});
+	        arrow.setFill(Config.getUnmarkColor());
+		}
+	}
+
 	private void setText(){
 		if(!this.edge.has(EGProperty.WEIGHT)){
 			this.edge.set(EGProperty.WEIGHT, 1.0);
 		}
 		// TODO : for the GUI, show the double value as an integer without "1.0" notation
 		// WARNING : it cannot be an integer because of the GraphExamples which expects a Double value!
-		String txt = String.valueOf(this.edge.get(EGProperty.WEIGHT));
+		double w = (double) this.edge.get(EGProperty.WEIGHT);
+		int i = (int)w;
+		String txt = String.valueOf(i);
 		this.text.setText(txt);
 	}
 
 	public void setCoordinates() {
-		double originX = (double)this.origin.get(EGProperty.EG_COORDINATE_X);
-		double originY = (double)this.origin.get(EGProperty.EG_COORDINATE_Y);
-		this.setStartX(originX);
-		this.setStartY(originY);
+		double startX = (double)this.origin.get(EGProperty.EG_COORDINATE_X);
+		double startY = (double)this.origin.get(EGProperty.EG_COORDINATE_Y);
+		this.setStartX(startX);
+		this.setStartY(startY);
 		
-		double destinationX = (double)this.destination.get(EGProperty.EG_COORDINATE_X);
-		double destinationY = (double)this.destination.get(EGProperty.EG_COORDINATE_Y);
-		this.setEndX(destinationX);
-		this.setEndY(destinationY);
-		
+		double endX = (double)this.destination.get(EGProperty.EG_COORDINATE_X);
+		double endY = (double)this.destination.get(EGProperty.EG_COORDINATE_Y);
+		this.setEndX(endX);
+		this.setEndY(endY);
 		
 		// middle of origin and destination
-		double textX = (originX+destinationX)/2;
-		double textY = (originY+destinationY)/2;
+		double textX = (startX+endX)/2;
+		double textY = (startY+endY)/2;
 		
 		// adjust position by the size of the text
 		Bounds bounds = this.text.getBoundsInParent();
 		this.text.setLayoutX(textX - (bounds.getWidth()/2) );
 		this.text.setLayoutY(textY + (bounds.getHeight()/4) );
+		
+		if(isDirected){
+			//compute angle
+			double rad = Math.atan2(endY - startY, endX - startX);
+			double angle = rad * 180 / 3.14;
+	        arrow.setRotate(angle - 90);
+	        
+	        // compute correction
+	        double y = Math.sin(rad) * (Config.VERTEX_RADIUS + 10.0);
+	        double x = Math.cos(rad) * (Config.VERTEX_RADIUS + 10.0);
+
+	        arrow.setTranslateX(endX - x);
+	        arrow.setTranslateY(endY - y);
+		}
 		
 	}
 
@@ -112,6 +142,7 @@ public class GuiEdge extends Line implements Repaintable {
 	@Override
 	public void mark(Color color) {
 		this.setStroke(color);
+		this.arrow.setFill(color);
 		this.effectProperty();
 	}
 
@@ -138,5 +169,9 @@ public class GuiEdge extends Line implements Repaintable {
 	
 	public Text getText(){
 		return this.text;
+	}
+
+	public Polygon getArrow() {
+		return this.arrow;
 	}
 }

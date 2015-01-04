@@ -216,7 +216,7 @@ public class Editor extends Application implements GraphController {
 	public void addEdge(Vertex fromVertex, Vertex toVertex) {
 		Edge<?> newEdge = Editor.graph.insertEdge(fromVertex, toVertex, null);
 		newEdge.set(EGProperty.EG_NAME, "none");
-		editorController.addEdge(newEdge, fromVertex, toVertex);
+		editorController.addEdge(newEdge, fromVertex, toVertex, graph.isDirected());
 	}
 	
 	

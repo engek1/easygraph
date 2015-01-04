@@ -53,8 +53,8 @@ public class EditorLayoutController extends BaseController {
 		drawViewController.addVertex(vertex);
 	}
 
-	public void addEdge(Edge<?> edge, Vertex<?> fromVertex, Vertex<?> toVertex) {
-		drawViewController.addEdge(edge, fromVertex, toVertex);
+	public void addEdge(Edge<?> edge, Vertex<?> fromVertex, Vertex<?> toVertex, boolean isDirected) {
+		drawViewController.addEdge(edge, fromVertex, toVertex, isDirected);
 	}
 	
 	public void distributeEditor(Editor editor) {
@@ -68,11 +68,16 @@ public class EditorLayoutController extends BaseController {
 	}
 	
 	@FXML
-	private void newFile() {
+	private void newGraph() {
 		IncidenceListGraph<String,String> graph = new IncidenceListGraph<String,String> (false);
 		this.getEditor().loadGraph(graph);
 	}
 	
+	@FXML
+	private void newGraphDirected(){
+		IncidenceListGraph<String,String> graph = new IncidenceListGraph<String,String> (true);
+		this.getEditor().loadGraph(graph);
+	}
 	
 	@FXML
 	private void save() {
