@@ -43,6 +43,7 @@ public class GraphExamples<V, E> {
 					.get(Property.CLUSTER);
 			if (cluster1 != cluster2) {
 				e.set(Property.MSF, null);
+				EasyGraph.setSelected(e);
 				// merge the two clusters
 				// make sure that cluster2 is the smaller
 				if (cluster1.size() > cluster2.size()) {

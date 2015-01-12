@@ -196,6 +196,9 @@ public class EditorLayoutController extends BaseController {
 			if (elem.has(EGProperty.EG_GUI_REFERENCE)) {
 				elem.destroy(EGProperty.EG_GUI_REFERENCE);
 			}
+			if (elem.has(EGProperty.EG_COLOR)) {
+				elem.destroy(EGProperty.EG_COLOR);
+			}
 		}
 		
 		Iterator<?> itE = graph.edges();
@@ -203,6 +206,9 @@ public class EditorLayoutController extends BaseController {
 			Decorable elem = (Decorable) itE.next();
 			if (elem.has(EGProperty.EG_GUI_REFERENCE)) {
 				elem.destroy(EGProperty.EG_GUI_REFERENCE);
+			}
+			if (elem.has(EGProperty.EG_COLOR)) {
+				elem.destroy(EGProperty.EG_COLOR);
 			}
 		}
 		return graph;
