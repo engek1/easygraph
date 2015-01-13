@@ -43,7 +43,7 @@ public class GraphExamples<V, E> {
 					.get(Property.CLUSTER);
 			if (cluster1 != cluster2) {
 				e.set(Property.MSF, null);
-				EasyGraph.setSelected(e);
+				EasyGraph.setSelected(e);				
 				// merge the two clusters
 				// make sure that cluster2 is the smaller
 				if (cluster1.size() > cluster2.size()) {
@@ -118,6 +118,8 @@ public class GraphExamples<V, E> {
 			// now make the relaxation step for all
 			// neighbours:
 			Iterator<Edge<E>> eIt;
+			EasyGraph.setSelected(u);
+			if (u.has(Property.VISITED)) EasyGraph.setSelected((Edge)u.get(Property.VISITED));
 			if (g.isDirected())
 				eIt = g.incidentInEdges(u); // backwards!
 			else
@@ -133,6 +135,7 @@ public class GraphExamples<V, E> {
 				if (newDist < (Double) z.get(Property.DISTANCE)) {
 					z.set(Property.DISTANCE, newDist); // new distance of z (can be
 												// changed later!)
+					z.set(Property.VISITED, e);
 					z.set(s, u); // gateway (will eventually be changed later!)
 					pq.replaceKey(
 							(Locator<Double, Vertex<V>>) z.get(Property.PQLOCATOR),
