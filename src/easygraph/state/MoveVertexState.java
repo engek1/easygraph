@@ -50,7 +50,20 @@ public class MoveVertexState extends State {
 		this.guiVertex.unmark();
 		
 		// update all connecting edges
-		Iterator<?> it = this.editor.getGraph().incidentEdges((Vertex) this.guiVertex.getVertex());
+		Vertex v = (Vertex) this.guiVertex.getVertex();
+		if(this.editor.getGraph().isDirected()){
+			moveEdges(this.editor.getGraph().incidentInEdges(v));
+			moveEdges(this.editor.getGraph().incidentOutEdges(v));
+		}else{
+			moveEdges(this.editor.getGraph().incidentEdges(v));
+		}
+		
+		// finally, leave the drag-n-drop State and change to a SelectState.
+		this.changeState(new SelectState(this.editor));;
+	}
+
+	
+	private void moveEdges(Iterator<?> it){
 		while (it.hasNext()) {
 			Edge<?> e = (Edge<?>) it.next();
 			if (e.has(EGProperty.EG_GUI_REFERENCE)) {
@@ -58,9 +71,5 @@ public class MoveVertexState extends State {
 				ge.setCoordinates();
 			}
 		}
-		
-		// finally, leave the drag-n-drop State and change to a SelectState.
-		this.changeState(new SelectState(this.editor));;
 	}
-
 }
