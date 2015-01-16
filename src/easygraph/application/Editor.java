@@ -6,8 +6,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Stack;
 
-import javax.swing.event.ListSelectionEvent;
-
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
