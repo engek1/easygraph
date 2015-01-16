@@ -6,6 +6,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Stack;
 
+import javax.swing.event.ListSelectionEvent;
+
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -208,14 +210,17 @@ public class Editor extends Application implements GraphController {
 		newVertex.set(EGProperty.EG_COORDINATE_X, x);
 		newVertex.set(EGProperty.EG_COORDINATE_Y, y);
 		newVertex.set(EGProperty.EG_NAME, Editor.getIdentifier());
+		newVertex.set(EGProperty.EG_COLOR, Config.getUnmarkColor());
 		editorController.addVertex(newVertex);
 	}
+	
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public void addEdge(Vertex fromVertex, Vertex toVertex) {
 		Edge<?> newEdge = Editor.graph.insertEdge(fromVertex, toVertex, null);
 		newEdge.set(EGProperty.EG_NAME, "none");
+		newEdge.set(EGProperty.EG_COLOR, Config.getUnmarkColor());
 		editorController.addEdge(newEdge, fromVertex, toVertex, graph.isDirected());
 	}
 	
@@ -331,14 +336,10 @@ public class Editor extends Application implements GraphController {
 		Step<? extends Decorable> step = FORWARD_STEPS.get(FORWARD_STEP_INDEX);
 		
 		// add backward step to history 
-		// FIXME check if originally the property was not set.
 		BACKWARD_STEPS.push(step.origin());
 		
 		// make changes on model
 		step.apply();
-		
-		// make changes on UI as well. Important let it run in the JavaFx thread when called from outside.
-		//Platform.runLater(() -> this.repaint(step.getObject()));
 		this.repaint(step.getObject());
 		
 		// finally increase the index
@@ -350,15 +351,13 @@ public class Editor extends Application implements GraphController {
 	 * Decrease the step-index.
 	 */
 	public void backward() {
-		
-		Step<? extends Decorable> step = BACKWARD_STEPS.pop();
-		step.apply();
-		
-		// make changes on UI as well. Important let it run in the JavaFx thread when called from outside.
-		//Platform.runLater(() -> this.repaint(step.getObject()));
-		this.repaint(step.getObject());
-				
-		FORWARD_STEP_INDEX--;
+		if (BACKWARD_STEPS.size() > 0) {
+			Step<? extends Decorable> step = BACKWARD_STEPS.pop();
+			step.apply();
+			
+			this.repaint(step.getObject());
+			FORWARD_STEP_INDEX--;
+		}
 	}
 	
 	public void reset() {

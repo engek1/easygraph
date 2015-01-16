@@ -1,3 +1,4 @@
+
 package easygraph.guielements;
 
 import easygraph.application.Editor;
@@ -29,6 +30,7 @@ public class GuiVertex extends StackPane implements Repaintable {
 	public GuiVertex(Vertex<?> v) {
 		this.vertex = v;
 		v.set(EGProperty.EG_GUI_REFERENCE, this);
+		v.set(EGProperty.EG_COLOR, Config.getUnmarkColor());
 		this.init();
 	}
 
@@ -93,7 +95,6 @@ public class GuiVertex extends StackPane implements Repaintable {
 				event.consume();
 			}
 		});
-		
 	}
 
 	public Vertex<?> getVertex() {

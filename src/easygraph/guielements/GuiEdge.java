@@ -49,6 +49,7 @@ public class GuiEdge extends Line implements Repaintable {
 		this.destination = destination;
 		this.isDirected = isDirected;
 		edge.set(EGProperty.EG_GUI_REFERENCE, this);
+		edge.set(EGProperty.EG_COLOR, Config.getUnmarkColor());
 		init();
 	}
 	
