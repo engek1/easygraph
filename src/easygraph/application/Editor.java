@@ -412,4 +412,8 @@ public class Editor extends Application implements GraphController {
 		} catch (Exception e) {}
 	}
 	
+	
+	public void openHyperlink(){
+		getHostServices().showDocument(Config.GITHUB_LINK);
+	}
 }

@@ -22,6 +22,7 @@ public class Config {
 	public static final Color START_VERTEX_COLOR = Color.valueOf("#ffcf7c"); // hellorange
 	public static final int VERTEX_RADIUS = 20;
 
+	public static final String GITHUB_LINK = "https://github.com/engek1/easygraph";
 	
 	public static double getPadding() {
 		return Config.GUI_PADDING;

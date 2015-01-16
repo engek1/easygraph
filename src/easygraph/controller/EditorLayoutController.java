@@ -166,7 +166,7 @@ public class EditorLayoutController extends BaseController {
 	
 	@FXML
 	private void aboutUs() {
-		System.out.println("-- ABOUT clicked.");
+		getEditor().openHyperlink();
 	}
 	
 	@FXML
