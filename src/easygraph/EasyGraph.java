@@ -32,7 +32,7 @@ public class EasyGraph {
 	
 	public static void setDiscovered(Edge<?> edge, Color color) {
 		GUI.getForwardSteps().add(new Step<Edge<?>>(edge, EGProperty.EG_COLOR, color));
-			}
+	}
 
 	
 	public static void setDiscovered(Vertex<?> vertex) {
