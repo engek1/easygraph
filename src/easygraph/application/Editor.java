@@ -377,6 +377,7 @@ public class Editor extends Application implements GraphController {
 				GuiVertex gv = (GuiVertex) v.get(EGProperty.EG_GUI_REFERENCE);
 				gv.unmark();
 			}
+			v.set(EGProperty.EG_COLOR, Config.getUnmarkColor());
 		}
 	}
 	
@@ -388,6 +389,7 @@ public class Editor extends Application implements GraphController {
 				GuiEdge ge = (GuiEdge) e.get(EGProperty.EG_GUI_REFERENCE);
 				ge.unmark();
 			}
+			e.set(EGProperty.EG_COLOR, Config.getUnmarkColor());
 		}
 	}
 	
