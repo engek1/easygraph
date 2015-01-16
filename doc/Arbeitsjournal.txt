@@ -1,8 +1,16 @@
 ﻿----------------------------------------------------------------------------
 Arbeitsjournal - Projekt1 - easyGraph - Team WEW 
 ----------------------------------------------------------------------------
+============================================================================
+16.01.2015 webel3 / wengm17 / engek1
 
+- Testings: Fehlersuche und Behebung von Problemen
+- Fertigstellen der Projekt Dokumentation
+- Upload von der Projekt Dokumente ins Github Repository 
+============================================================================
+14.01.2015 webel3 / wengm17 / engek1
 
+- Projektpräsentation
 ============================================================================
 25.12.2014 wengm17
 
